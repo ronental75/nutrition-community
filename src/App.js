@@ -35,18 +35,18 @@ function LandingPage({ lang }) {
       </header>
 
       {categories.map((category) => (
-        <div key={category.he} className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">
+        <div key={category.he} className="mb-8">
+          <h2 className="text-xl font-semibold mb-4 border-b pb-1">
             {isHebrew ? category.he : category.en}
           </h2>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {posts
               .filter((post) => post.category.he === category.he)
               .map((post, idx) => (
                 <li key={idx}>
                   <Link
                     to={`/${lang}/${post.slug}`}
-                    className="block p-4 border rounded-xl shadow hover:bg-gray-50"
+                    className="block bg-white border rounded-xl shadow-md hover:shadow-lg transition p-4"
                   >
                     {isHebrew ? post.he : post.en}
                   </Link>
@@ -100,8 +100,6 @@ function PostPage({ slug, lang }) {
 
   return (
     <div dir="rtl" className="w-full px-0 sm:px-0 py-6 text-right">
-      <h1 className="text-3xl font-bold mb-6 px-4 sm:px-6">{lang === "he" ? post.he : post.en}</h1>
-
       {/* Load HTML in iframe */}
       <div className="mb-8">
         <iframe
