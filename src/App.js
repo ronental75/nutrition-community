@@ -74,13 +74,6 @@ function LandingPage({ lang }) {
 
 function PostPage({ slug, lang }) {
   const post = posts.find((p) => p.slug === slug);
-  const [html, setHtml] = useState("");
-
-  useEffect(() => {
-    fetch(post.file)
-      .then((res) => res.text())
-      .then(setHtml);
-  }, [post.file]);
 
   useEffect(() => {
     const disqus_config = function () {
@@ -108,15 +101,22 @@ function PostPage({ slug, lang }) {
   return (
     <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-right">
       <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
-      <div className="overflow-hidden">
-      <div className="px-4 sm:px-6">
-        <div
-          className="prose prose-lg rtl mb-8 max-w-full break-words"
-          dangerouslySetInnerHTML={{ __html: html }}
+
+      {/* Load HTML in iframe */}
+      <div className="mb-8">
+        <iframe
+          src={post.file}
+          className="w-full max-w-3xl mx-auto rounded-lg shadow"
+          style={{
+            height: "1000px",
+            border: "none",
+            padding: "16px",
+            overflow: "auto",
+            background: "#fff",
+          }}
+          title={post.slug}
         />
       </div>
-    </div>
-
 
       {/* Disqus embed */}
       <div id="disqus_thread" className="mt-12" />
@@ -148,4 +148,4 @@ export default function App() {
       </Routes>
     </Router>
   );
-} 
+}
