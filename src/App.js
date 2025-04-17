@@ -23,7 +23,7 @@ function LandingPage({ lang }) {
   const categories = Array.from(new Set(posts.map((p) => JSON.stringify(p.category)))).map(JSON.parse);
 
   return (
-    <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-3xl mx-auto p-6">
+    <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">
           {isHebrew ? "תכנים לקהילת תזונה" : "Nutrition Community Content"}
@@ -106,7 +106,7 @@ function PostPage({ slug, lang }) {
   }, [slug]);
 
   return (
-    <div dir="rtl" className="max-w-3xl mx-auto p-6 text-right">
+    <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
       <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
       <div
         className="prose prose-lg rtl mb-8"
