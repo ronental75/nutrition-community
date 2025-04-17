@@ -1,37 +1,145 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 const posts = [
   {
-    title: "חלבון – מרכיב חיוני לבריאות ולכושר",
-    url: "https://ring-bike-686.notion.site/1d7cf8832caf80c2ad4be31bffc6babb", // Replace with real Notion URL
+    slug: "protein",
+    he: "חלבון – מרכיב חיוני לבריאות ולכושר",
+    en: "Protein – A Key Nutrient for Health and Fitness",
+    file: "/posts/protein.html",
+    category: {
+      he: "תזונה",
+      en: "Nutrition"
+    }    
   },
   {
-    title: "השילוש הקדוש: תזונה, פעילות גופנית ושינה",
-    url: "https://notion.so/your-trinity-post-url",
-  },
-  // Add more posts here
+    slug: "health-triad",
+    he: "השילוש הקדוש: תזונה, פעילות גופנית ושינה",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/health-triad.html",
+    category: "אורח חיים בריא"
+  }
 ];
 
-export default function Home() {
+function LandingPage({ lang }) {
+  const isHebrew = lang === "he";
+  const categories = Array.from(new Set(posts.map((p) => p.category)));
+
   return (
-    <div dir="rtl" className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4 text-right">
-        תכנים לקהילת תזונה
-      </h1>
-      <ul className="space-y-3">
-        {posts.map((post, idx) => (
-          <li key={idx}>
-            <a
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block p-4 border rounded-xl shadow hover:bg-gray-50 text-right"
-            >
-              {post.title}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-3xl mx-auto p-6">
+      <header className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">
+          {isHebrew ? "תכנים לקהילת תזונה" : "Nutrition Community Content"}
+        </h1>
+        <div className="flex gap-2">
+          <Link to="/he" className="px-3 py-1 rounded-full border text-sm hover:bg-gray-100">Heb</Link>
+          /
+          <Link to="/en" className="px-3 py-1 rounded-full border text-sm hover:bg-gray-100">En</Link>
+        </div>
+      </header>
+
+      {categories.map((category) => (
+        <div key={category} className="mb-6">
+          <h2 className="text-xl font-semibold mb-2">
+            {isHebrew ? category.he : category.en}
+          </h2>
+          <ul className="space-y-2">
+            {posts
+              .filter((post) => post.category === category)
+              .map((post, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={`/${lang}/${post.slug}`}
+                    className="block p-4 border rounded-xl shadow hover:bg-gray-50"
+                  >
+                    {isHebrew ? post.he : post.en}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ))}
     </div>
+  );
+}
+
+function PostPage({ slug, lang }) {
+  const post = posts.find((p) => p.slug === slug);
+  const [html, setHtml] = useState("");
+
+  useEffect(() => {
+    fetch(post.file)
+      .then((res) => res.text())
+      .then(setHtml);
+  }, [post.file]);
+
+  return (
+    <div dir="rtl" className="max-w-3xl mx-auto p-6 text-right">
+      <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
+      <div
+        className="prose prose-lg rtl mb-8"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+
+      {/* Disqus embed */}
+      <div id="disqus_thread"></div>
+      <script>
+        {`
+          var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = '${slug}';
+          };
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://eatsmartlivestrong.disqus.com/admin/moderate/all';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        `}
+      </script>
+
+      {/* Feedback Form Embed (Google Forms or similar) */}
+      <div className="mt-12">
+        <h2 className="text-xl font-semibold mb-2">
+          {lang === "he" ? "משוב על הפוסט" : "Feedback"}
+        </h2>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfsdibZGQi3LeuByt6DPYnAtnEJg8m1FcJ7ikchXNJJ9UDahg/viewform?embedded=true" 
+          width="100%"
+          height="600"
+          frameBorder="0"
+          marginHeight="0"
+          marginWidth="0"
+          title="Feedback Form"
+        >
+          טוען טופס…
+        </iframe>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage lang="he" />} />
+        <Route path="/he" element={<LandingPage lang="he" />} />
+        <Route path="/en" element={<LandingPage lang="en" />} />
+        {posts.map((post) => (
+          <Route
+            key={post.slug + "-he"}
+            path={`/he/${post.slug}`}
+            element={<PostPage slug={post.slug} lang="he" />}
+          />
+        ))}
+        {posts.map((post) => (
+          <Route
+            key={post.slug + "-en"}
+            path={`/en/${post.slug}`}
+            element={<PostPage slug={post.slug} lang="en" />}
+          />
+        ))}
+      </Routes>
+    </Router>
   );
 }
