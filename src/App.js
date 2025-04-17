@@ -56,7 +56,7 @@ function LandingPage({ lang }) {
         </div>
       ))}
 
-      {/* Footer Feedback Form
+      {/* Footer Feedback Form */}
       <footer className="mt-16 border-t pt-8">
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSfsdibZGQi3LeuByt6DPYnAtnEJg8m1FcJ7ikchXNJJ9UDahg/viewform?embedded=true"
@@ -67,7 +67,7 @@ function LandingPage({ lang }) {
           marginWidth="0"
           title="Feedback Form"
         />
-      </footer> */}
+      </footer>
     </div>
   );
 }
@@ -106,7 +106,7 @@ function PostPage({ slug, lang }) {
   }, [slug]);
 
   return (
-    <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
+    <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-right">
       <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
       <div
         className="prose prose-lg rtl mb-8"
