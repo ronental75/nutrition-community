@@ -7,7 +7,7 @@ const posts = [
     he: "חלבון – מרכיב חיוני לבריאות ולכושר",
     en: "Protein – A Key Nutrient for Health and Fitness",
     file: "/posts/protein.html",
-    category: { he: "תזונה", en: "Nutrition" }
+    category: { he: "תזוןה", en: "Nutrition" }
   },
   {
     slug: "health-triad",
@@ -108,10 +108,12 @@ function PostPage({ slug, lang }) {
   return (
     <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-right">
       <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
-      <div
-        className="prose prose-lg rtl mb-8"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <div className="overflow-hidden">
+        <div
+          className="prose prose-lg rtl mb-8 max-w-none px-4 sm:px-6"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      </div>
 
       {/* Disqus embed */}
       <div id="disqus_thread" className="mt-12" />
