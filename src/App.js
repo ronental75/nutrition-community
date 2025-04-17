@@ -109,11 +109,14 @@ function PostPage({ slug, lang }) {
     <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-right">
       <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
       <div className="overflow-hidden">
+      <div className="px-4 sm:px-6">
         <div
-          className="prose prose-lg rtl mb-8 max-w-none px-4 sm:px-6"
+          className="prose prose-lg rtl mb-8 max-w-full break-words"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
+    </div>
+
 
       {/* Disqus embed */}
       <div id="disqus_thread" className="mt-12" />
@@ -145,4 +148,4 @@ export default function App() {
       </Routes>
     </Router>
   );
-}
+} 

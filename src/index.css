@@ -5,3 +5,10 @@
   direction: rtl;
   text-align: right;
 }
+.prose * {
+  box-sizing: border-box;
+  max-width: 100% !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
