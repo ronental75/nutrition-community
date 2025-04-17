@@ -7,23 +7,20 @@ const posts = [
     he: "חלבון – מרכיב חיוני לבריאות ולכושר",
     en: "Protein – A Key Nutrient for Health and Fitness",
     file: "/posts/protein.html",
-    category: {
-      he: "תזונה",
-      en: "Nutrition"
-    }    
+    category: { he: "תזונה", en: "Nutrition" }
   },
   {
     slug: "health-triad",
     he: "השילוש הקדוש: תזונה, פעילות גופנית ושינה",
     en: "The Health Triad: Nutrition, Exercise & Sleep",
     file: "/posts/health-triad.html",
-    category: "אורח חיים בריא"
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
   }
 ];
 
 function LandingPage({ lang }) {
   const isHebrew = lang === "he";
-  const categories = Array.from(new Set(posts.map((p) => p.category)));
+  const categories = Array.from(new Set(posts.map((p) => JSON.stringify(p.category)))).map(JSON.parse);
 
   return (
     <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-3xl mx-auto p-6">
@@ -33,19 +30,18 @@ function LandingPage({ lang }) {
         </h1>
         <div className="flex gap-2">
           <Link to="/he" className="px-3 py-1 rounded-full border text-sm hover:bg-gray-100">Heb</Link>
-          /
           <Link to="/en" className="px-3 py-1 rounded-full border text-sm hover:bg-gray-100">En</Link>
         </div>
       </header>
 
       {categories.map((category) => (
-        <div key={category} className="mb-6">
+        <div key={category.he} className="mb-6">
           <h2 className="text-xl font-semibold mb-2">
             {isHebrew ? category.he : category.en}
           </h2>
           <ul className="space-y-2">
             {posts
-              .filter((post) => post.category === category)
+              .filter((post) => post.category.he === category.he)
               .map((post, idx) => (
                 <li key={idx}>
                   <Link
@@ -59,6 +55,19 @@ function LandingPage({ lang }) {
           </ul>
         </div>
       ))}
+
+      {/* Footer Feedback Form
+      <footer className="mt-16 border-t pt-8">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSfsdibZGQi3LeuByt6DPYnAtnEJg8m1FcJ7ikchXNJJ9UDahg/viewform?embedded=true"
+          width="100%"
+          height="600"
+          frameBorder="0"
+          marginHeight="0"
+          marginWidth="0"
+          title="Feedback Form"
+        />
+      </footer> */}
     </div>
   );
 }
@@ -73,6 +82,29 @@ function PostPage({ slug, lang }) {
       .then(setHtml);
   }, [post.file]);
 
+  useEffect(() => {
+    const disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = slug;
+    };
+
+    const d = document;
+    const s = d.createElement('script');
+    s.src = 'https://eatsmartlivestrong.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    s.async = true;
+
+    const disqusDiv = d.getElementById('disqus_thread');
+    if (disqusDiv) {
+      disqusDiv.innerHTML = '';
+      disqusDiv.appendChild(s);
+    }
+
+    return () => {
+      if (disqusDiv) disqusDiv.innerHTML = '';
+    };
+  }, [slug]);
+
   return (
     <div dir="rtl" className="max-w-3xl mx-auto p-6 text-right">
       <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
@@ -82,38 +114,7 @@ function PostPage({ slug, lang }) {
       />
 
       {/* Disqus embed */}
-      <div id="disqus_thread"></div>
-      <script>
-        {`
-          var disqus_config = function () {
-            this.page.url = window.location.href;
-            this.page.identifier = '${slug}';
-          };
-          (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://eatsmartlivestrong.disqus.com/admin/moderate/all';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-          })();
-        `}
-      </script>
-
-      {/* Feedback Form Embed (Google Forms or similar) */}
-      <div className="mt-12">
-        <h2 className="text-xl font-semibold mb-2">
-          {lang === "he" ? "משוב על הפוסט" : "Feedback"}
-        </h2>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfsdibZGQi3LeuByt6DPYnAtnEJg8m1FcJ7ikchXNJJ9UDahg/viewform?embedded=true" 
-          width="100%"
-          height="600"
-          frameBorder="0"
-          marginHeight="0"
-          marginWidth="0"
-          title="Feedback Form"
-        >
-          טוען טופס…
-        </iframe>
-      </div>
+      <div id="disqus_thread" className="mt-12" />
     </div>
   );
 }
