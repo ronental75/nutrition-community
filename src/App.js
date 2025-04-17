@@ -99,27 +99,28 @@ function PostPage({ slug, lang }) {
   }, [slug]);
 
   return (
-    <div dir="rtl" className="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-right">
-      <h1 className="text-3xl font-bold mb-6">{lang === "he" ? post.he : post.en}</h1>
+    <div dir="rtl" className="w-full px-0 sm:px-0 py-6 text-right">
+      <h1 className="text-3xl font-bold mb-6 px-4 sm:px-6">{lang === "he" ? post.he : post.en}</h1>
 
       {/* Load HTML in iframe */}
       <div className="mb-8">
         <iframe
           src={post.file}
-          className="w-full max-w-3xl mx-auto rounded-lg shadow"
+          className="w-full rounded-none shadow-none"
           style={{
             height: "1000px",
             border: "none",
-            padding: "16px",
-            overflow: "auto",
-            background: "#fff",
+            padding: 0,
+            margin: 0,
+            display: "block",
+            width: "100vw",
           }}
           title={post.slug}
         />
       </div>
 
       {/* Disqus embed */}
-      <div id="disqus_thread" className="mt-12" />
+      <div id="disqus_thread" className="mt-12 px-4 sm:px-6" />
     </div>
   );
 }
