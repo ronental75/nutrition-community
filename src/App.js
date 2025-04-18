@@ -7,13 +7,69 @@ const posts = [
     he: "חלבון – מרכיב חיוני לבריאות ולכושר",
     en: "Protein – A Key Nutrient for Health and Fitness",
     file: "/posts/protein.html",
-    category: { he: "תזוןה", en: "Nutrition" }
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
   },
   {
-    slug: "health-triad",
-    he: "השילוש הקדוש: תזונה, פעילות גופנית ושינה",
+    slug: "mediterranean-diet",
+    he: "דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי",
     en: "The Health Triad: Nutrition, Exercise & Sleep",
-    file: "/posts/health-triad.html",
+    file: "/posts/mediterranean-diet.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "diet-guide",
+    he: "עושים סדר בדיאטות – מה באמת עובד?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/diet-guide.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "pre-workout-strategy",
+    he: "ירידה במשקל או הגדלת השרירים?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/pre-workout-strategy.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "nutrition-for-runners",
+    he: "איך לאכול נכון בריצות – לפי המאמר Nutrition Recommendations for Distance Running?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/nutrition-for-runners.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "strength-training-nutrition",
+    he: "תזונה בזמן ואחרי אימון כוח – איך לתמוך בתהליך ולמקסם תוצאות?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/strength-training-nutrition.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "muscle-growth-tips",
+    he: "טיפים מעשיים להגדלת מסת השריר!",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/muscle-growth-tips.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "pre-strength-nutrition",
+    he: "תזונה לפני אימון כוח – איך להכין את הגוף לביצועים מיטביים?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/pre-strength-nutrition.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "sports-nutrition-guide",
+    he: "תזונת ספורט חכמה: איך להתאים תזונה להצלחה באימונים?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/sports-nutrition-guide.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "high-heart-rate-fat-burn",
+    he: "שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??", 
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/high-heart-rate-fat-burn.html",
     category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
   }
 ];
@@ -26,19 +82,19 @@ function LandingPage({ lang }) {
     <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">
-          {isHebrew ? "תכנים לקהילת תזונה" : "Nutrition Community Content"}
+          {isHebrew ? "Eat smart , Live strong" : "Nutrition Community Content"}
         </h1>
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <Link to="/he" className="px-3 py-1 rounded-full border text-sm hover:bg-gray-100">Heb</Link>
           <Link to="/en" className="px-3 py-1 rounded-full border text-sm hover:bg-gray-100">En</Link>
-        </div>
+        </div> */}
       </header>
 
       {categories.map((category) => (
         <div key={category.he} className="mb-8">
-          <h2 className="text-xl font-semibold mb-4 border-b pb-1">
+          {/* <h2 className="text-xl font-semibold mb-4 border-b pb-1">
             {isHebrew ? category.he : category.en}
-          </h2>
+          </h2> */}
           <ul className="space-y-3">
             {posts
               .filter((post) => post.category.he === category.he)
