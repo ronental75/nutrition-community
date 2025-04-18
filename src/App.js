@@ -10,6 +10,13 @@ const posts = [
     category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
   },
   {
+    slug: "protein-guide-full",
+    he: "כל מה שרציתם לדעת על חלבון – הרחבה חשובה!",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/protein-guide-full.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
     slug: "mediterranean-diet",
     he: "דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי",
     en: "The Health Triad: Nutrition, Exercise & Sleep",
@@ -70,6 +77,48 @@ const posts = [
     he: "שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??", 
     en: "The Health Triad: Nutrition, Exercise & Sleep",
     file: "/posts/high-heart-rate-fat-burn.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "fat-in-weight-loss",
+    he: "שומן – חבר או אויב בתהליך הירידה במשקל?",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/fat-in-weight-loss.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "tee-and-weight-loss-plan",
+    he: "איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/tee-and-weight-loss-plan.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "garlic-antioxidants-health",
+    he: "לא על השום לבדו!",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/garlic-antioxidants-health.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "dietary-fiber-guide",
+    he: "כל מה שצריך לדעת על סיבים תזונתיים ",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/dietary-fiber-guide.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "quality-sleep-tips",
+    he: "טיפים מעשיים לשינה איכותית",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/quality-sleep-tips.html",
+    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+  },
+  {
+    slug: "holy-triad-nutrition-sleep-fitness",
+    he: "השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה",
+    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    file: "/posts/holy-triad-nutrition-sleep-fitness.html",
     category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
   }
 ];
