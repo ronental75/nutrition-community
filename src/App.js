@@ -24,7 +24,7 @@ const posts = [
     slug: "protein-guide-full",
     he: "כל מה שרציתם לדעת על חלבון – הרחבה חשובה!",
     summary: "מה באמת חשוב לדעת על צריכת חלבון? מיתוסים, מחקרים והמלצות עדכניות.",
-    image: "/images/image_02.jpg",
+    image: "/images/protein-guide-full.jpg",
     file: "/posts/protein-guide-full.html",
     categories: ["תזונה", "ספורט"]
   },

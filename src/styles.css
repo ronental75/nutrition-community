@@ -23,8 +23,8 @@
     border-color: #2563eb;
   }
   .responsive-image {
-    width: 100%;
-    height: auto;
+    width: 600px;
+    height: 300px;
     display: block;
   }
   
