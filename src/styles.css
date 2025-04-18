@@ -6,18 +6,25 @@
     border: 1px solid #d1d5db;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: background-color 0.2s;
     background-color: #ffffff;
     color: #1f2937;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
   
   .button:hover {
-    background-color: #f3f4f6;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
   }
   
   .button-active {
     background-color: #2563eb;
     color: #ffffff;
     border-color: #2563eb;
+  }
+  .responsive-image {
+    width: 100%;
+    height: auto;
+    display: block;
   }
   

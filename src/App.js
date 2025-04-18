@@ -16,7 +16,7 @@ const posts = [
     slug: "protein",
     he: "חלבון – מרכיב חיוני לבריאות ולכושר",
     summary: "למה חלבון כל כך חשוב? ואיך הוא תומך בבניית שריר, התאוששות ובריאות כללית.",
-    image: "/images/image_01.jpg",
+    image: "/images/protein.jpg",
     file: "/posts/protein.html",
     categories: ["תזונה", "ספורט"]
   },
@@ -198,7 +198,7 @@ function LandingPage({ lang }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredPosts.map((post) => (
           <Link to={`/${lang}/${post.slug}`} key={post.slug} className="block border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white">
-            <img src={post.image} alt={post.he} className="w-full h-48 object-cover" />
+            <img src={post.image} alt={post.he} className="responsive-image" />
             <div className="p-4 text-right">
               <h2 className="text-lg font-semibold mb-2">{post.he}</h2>
               <p className="text-sm text-gray-600 mb-2">{post.summary}</p>
