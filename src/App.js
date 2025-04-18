@@ -1,136 +1,190 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import './styles.css';
+
+const categories = [
+  { key: "all", label: "הכל" },
+  { key: "תזונה", label: "תזונה" },
+  { key: "דיאטה", label: "דיאטה" },
+  { key: "ספורט", label: "ספורט" },
+  { key: "אורח חיים בריא", label: "אורח חיים בריא" },
+];
+
 
 const posts = [
   {
     slug: "protein",
     he: "חלבון – מרכיב חיוני לבריאות ולכושר",
-    en: "Protein – A Key Nutrient for Health and Fitness",
+    summary: "למה חלבון כל כך חשוב? ואיך הוא תומך בבניית שריר, התאוששות ובריאות כללית.",
+    image: "/images/image_01.jpg",
     file: "/posts/protein.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["תזונה", "ספורט"]
   },
   {
     slug: "protein-guide-full",
     he: "כל מה שרציתם לדעת על חלבון – הרחבה חשובה!",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "מה באמת חשוב לדעת על צריכת חלבון? מיתוסים, מחקרים והמלצות עדכניות.",
+    image: "/images/image_02.jpg",
     file: "/posts/protein-guide-full.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["תזונה", "ספורט"]
   },
   {
     slug: "mediterranean-diet",
     he: "דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "הכרת עקרונות הדיאטה הים-תיכונית, תועלותיה הבריאותיות והמלצות מותאמות.",
+    image: "/images/image_03.jpg",
     file: "/posts/mediterranean-diet.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["דיאטה", "תזונה"]
   },
   {
     slug: "diet-guide",
     he: "עושים סדר בדיאטות – מה באמת עובד?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "ניתוח גישות שונות לירידה במשקל – היתרונות, החסרונות והאמת שמאחוריהן.",
+    image: "/images/image_04.jpg",
     file: "/posts/diet-guide.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["דיאטה"]
   },
   {
     slug: "pre-workout-strategy",
     he: "ירידה במשקל או הגדלת השרירים?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "איך להתאים תזונה לפי מטרת האימון: חיטוב או היפרטרופיה.",
+    image: "/images/image_05.jpg",
     file: "/posts/pre-workout-strategy.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["ספורט", "דיאטה"]
   },
   {
     slug: "nutrition-for-runners",
     he: "איך לאכול נכון בריצות – לפי המאמר Nutrition Recommendations for Distance Running?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "המלצות תזונתיות מבוססות מחקר לרצי סיבולת לפי סוג אימון ומרחק.",
+    image: "/images/image_06.jpg",
     file: "/posts/nutrition-for-runners.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["ספורט"]
   },
   {
     slug: "strength-training-nutrition",
     he: "תזונה בזמן ואחרי אימון כוח – איך לתמוך בתהליך ולמקסם תוצאות?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "איך לתמוך בבניית שריר והתאוששות באמצעות תזונה מותאמת לאימון.",
+    image: "/images/image_07.jpg",
     file: "/posts/strength-training-nutrition.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["ספורט"]
   },
   {
     slug: "muscle-growth-tips",
     he: "טיפים מעשיים להגדלת מסת השריר!",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "מה נדרש כדי להשיג היפרטרופיה אפקטיבית? שילוב נכון של אימון ותזונה.",
+    image: "/images/image_08.jpg",
     file: "/posts/muscle-growth-tips.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["ספורט"]
   },
   {
     slug: "pre-strength-nutrition",
     he: "תזונה לפני אימון כוח – איך להכין את הגוף לביצועים מיטביים?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "איך לתכנן תזונה לפני אימון כוח – פחמימות, קפאין ועיתוי אכילה.",
+    image: "/images/image_09.jpg",
     file: "/posts/pre-strength-nutrition.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["ספורט"]
   },
   {
     slug: "sports-nutrition-guide",
     he: "תזונת ספורט חכמה: איך להתאים תזונה להצלחה באימונים?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "מדריך להתאמת תזונה לפי סוג האימון והמטרה – כוח, קרדיו והיברידי.",
+    image: "/images/image_10.jpg",
     file: "/posts/sports-nutrition-guide.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["תזונה", "ספורט"]
   },
   {
     slug: "high-heart-rate-fat-burn",
-    he: "שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??", 
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    he: "שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??",
+    summary: "איך אימון עצים בדופק גבוה שורף יותר שומן ומשפר את הכושר.",
+    image: "/images/image_11.jpg",
     file: "/posts/high-heart-rate-fat-burn.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["ספורט"]
   },
   {
     slug: "fat-in-weight-loss",
     he: "שומן – חבר או אויב בתהליך הירידה במשקל?",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "הבדלים בין סוגי שומן והשפעתם על ירידה במשקל ובריאות כללית.",
+    image: "/images/image_12.jpg",
     file: "/posts/fat-in-weight-loss.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["דיאטה"]
   },
   {
     slug: "tee-and-weight-loss-plan",
     he: "איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "מדריך לחישוב BMR ו-TEE לבניית תפריט מדויק לפי מטרה.",
+    image: "/images/image_12.jpg",
     file: "/posts/tee-and-weight-loss-plan.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["דיאטה"]
   },
   {
     slug: "garlic-antioxidants-health",
     he: "לא על השום לבדו!",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "שום כנוגד חמצון עוצמתי – מנגנון פעולה, תועלות וטיפים לצריכה.",
+    image: "/images/image_13.jpg",
     file: "/posts/garlic-antioxidants-health.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["אורח חיים בריא"]
   },
   {
     slug: "dietary-fiber-guide",
-    he: "כל מה שצריך לדעת על סיבים תזונתיים ",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    he: "כל מה שצריך לדעת על סיבים תזונתיים",
+    summary: "תפקידי הסיבים בתזונה, יתרונותם לעיכול, שובע וירידה במשקל.",
+    image: "/images/image_14.jpg",
     file: "/posts/dietary-fiber-guide.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["תזונה"]
   },
   {
     slug: "quality-sleep-tips",
     he: "טיפים מעשיים לשינה איכותית",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "איך לשפר את איכות השינה, להפחית סטרס ולשמור על תפקוד מיטבי.",
+    image: "/images/image_15.jpg",
     file: "/posts/quality-sleep-tips.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["אורח חיים בריא"]
   },
   {
     slug: "holy-triad-nutrition-sleep-fitness",
     he: "השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה",
-    en: "The Health Triad: Nutrition, Exercise & Sleep",
+    summary: "שילוב בין תזונה, פעילות גופנית ושינה לאיזון מטבולי ובריאות אופטימלית.",
+    image: "/images/image_16.jpg",
     file: "/posts/holy-triad-nutrition-sleep-fitness.html",
-    category: { he: "אורח חיים בריא", en: "Healthy Lifestyle" }
+    categories: ["אורח חיים בריא", "תזונה", "ספורט"]
   }
 ];
 
+
+function CategoryButtons({ selectedCategory, setSelectedCategory }) {
+  return (
+    <div className="flex flex-wrap justify-center gap-2 mb-6">
+      {categories.map((cat) => {
+        const isActive = selectedCategory === cat.key;
+        return (
+          <button
+            key={cat.key}
+            onClick={() => setSelectedCategory(cat.key)}
+            className={`button ${isActive ? 'button-active' : ''}`}
+          >
+            {cat.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+
+
+
 function LandingPage({ lang }) {
   const isHebrew = lang === "he";
-  const categories = Array.from(new Set(posts.map((p) => JSON.stringify(p.category)))).map(JSON.parse);
+  const [selectedCategory, setSelectedCategory] = useState("תזונה");
+
+  const filteredPosts = selectedCategory === "all"
+    ? posts
+    : posts.filter((post) => post.categories.includes(selectedCategory));
 
   return (
-    <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
-      <header className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">
+    <div dir={isHebrew ? "rtl" : "ltr"} className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+      <header className="flex flex-col sm:flex-row justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold mb-4 sm:mb-0">
           {isHebrew ? "Eat smart , Live strong" : "Nutrition Community Content"}
         </h1>
         {/* <div className="flex gap-2">
@@ -139,92 +193,39 @@ function LandingPage({ lang }) {
         </div> */}
       </header>
 
-      {categories.map((category) => (
-        <div key={category.he} className="mb-8">
-          {/* <h2 className="text-xl font-semibold mb-4 border-b pb-1">
-            {isHebrew ? category.he : category.en}
-          </h2> */}
-          <ul className="space-y-3">
-            {posts
-              .filter((post) => post.category.he === category.he)
-              .map((post, idx) => (
-                <li key={idx}>
-                  <Link
-                    to={`/${lang}/${post.slug}`}
-                    className="block bg-white border rounded-xl shadow-md hover:shadow-lg transition p-4"
-                  >
-                    {isHebrew ? post.he : post.en}
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-      ))}
+      <CategoryButtons selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
 
-
-      {/* Footer Feedback Form
-      <footer className="mt-16 border-t pt-8">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSfsdibZGQi3LeuByt6DPYnAtnEJg8m1FcJ7ikchXNJJ9UDahg/viewform?embedded=true"
-          width="100%"
-          height="600"
-          frameBorder="0"
-          marginHeight="0"
-          marginWidth="0"
-          title="Feedback Form"
-        />
-      </footer> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {filteredPosts.map((post) => (
+          <Link to={`/${lang}/${post.slug}`} key={post.slug} className="block border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white">
+            <img src={post.image} alt={post.he} className="w-full h-48 object-cover" />
+            <div className="p-4 text-right">
+              <h2 className="text-lg font-semibold mb-2">{post.he}</h2>
+              <p className="text-sm text-gray-600 mb-2">{post.summary}</p>
+              <span className="text-blue-600 text-sm">למאמר המלא...</span>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
 
-function PostPage({ slug, lang }) {
+function PostPage({ slug }) {
   const post = posts.find((p) => p.slug === slug);
 
-  useEffect(() => {
-    const disqus_config = function () {
-      this.page.url = window.location.href;
-      this.page.identifier = slug;
-    };
-
-    const d = document;
-    const s = d.createElement('script');
-    s.src = 'https://eatsmartlivestrong.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    s.async = true;
-
-    const disqusDiv = d.getElementById('disqus_thread');
-    if (disqusDiv) {
-      disqusDiv.innerHTML = '';
-      disqusDiv.appendChild(s);
-    }
-
-    return () => {
-      if (disqusDiv) disqusDiv.innerHTML = '';
-    };
-  }, [slug]);
+  if (!post) return <div className="p-6 text-center">Post not found</div>;
 
   return (
-    <div dir="rtl" className="w-full px-0 sm:px-0 py-6 text-right">
-      {/* Load HTML in iframe */}
-      <div className="mb-8">
+    <div dir="rtl" className="w-full px-4 sm:px-6 py-6 text-right">
+      <div className="w-full max-w-7xl mx-auto">
         <iframe
           src={post.file}
-          className="w-full rounded-none shadow-none"
-          style={{
-            height: "1000px",
-            border: "none",
-            padding: 0,
-            margin: 0,
-            display: "block",
-            width: "100vw",
-          }}
+          className="w-full rounded-lg"
+          style={{ height: "100vh", width: "100%", border: "none" }}
           title={post.slug}
         />
       </div>
-
-      {/* Disqus embed */}
-      <div id="disqus_thread" className="mt-12 px-4 sm:px-6" />
     </div>
   );
 }
@@ -237,18 +238,10 @@ export default function App() {
         <Route path="/he" element={<LandingPage lang="he" />} />
         <Route path="/en" element={<LandingPage lang="en" />} />
         {posts.map((post) => (
-          <Route
-            key={post.slug + "-he"}
-            path={`/he/${post.slug}`}
-            element={<PostPage slug={post.slug} lang="he" />}
-          />
+          <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
         ))}
         {posts.map((post) => (
-          <Route
-            key={post.slug + "-en"}
-            path={`/en/${post.slug}`}
-            element={<PostPage slug={post.slug} lang="en" />}
-          />
+          <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
         ))}
       </Routes>
     </Router>
