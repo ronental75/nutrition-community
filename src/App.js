@@ -102,8 +102,13 @@ function LandingPage({ lang }) {
     >
       <header className="flex flex-col sm:flex-row justify-between items-center mb-6">
       <h1 className="page-title">
-  {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
-</h1>
+        {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
+      </h1>
+      <p className="page-subtitle">
+        {isHebrew
+          ? 'טיפים, מחקרים ומידע מקצועי על אורח חיים בריא'
+          : 'Tips, research, and professional info about healthy living'}
+      </p>
         {/* Language selection links can be added here if needed */}
       </header>
 
