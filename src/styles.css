@@ -177,7 +177,7 @@ body {
   /* Dropdown menu */
   .menu-dropdown {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 100%;
     margin-top: 0.5rem;
     width: 10rem;
@@ -186,7 +186,24 @@ body {
     border-radius: 0.375rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     z-index: 50;
+    opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeDown 0.2s ease-out forwards;
   }
+  @keyframes fadeDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .menu-dropdown {
+      width: 100%; /* Makes the dropdown full width on small screens */
+      left: 0;
+    }
+  }
+  
   
   .menu-wrapper {
     position: relative;

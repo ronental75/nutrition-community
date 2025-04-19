@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles.css';
 import About from './About';
+import Contact from './contact';
+
 
 const categories = [
   // { key: "all", label: "הכל" },
@@ -231,6 +233,8 @@ export default function App() {
         <Route path="/he" element={<LandingPage lang="he" />} />
         <Route path="/en" element={<LandingPage lang="en" />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+
 
         {posts.map((post) => (
           <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
