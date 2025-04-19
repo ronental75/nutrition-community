@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles.css';
 
+
 const categories = [
   { key: "all", label: "הכל" },
   { key: "תזונה", label: "תזונה" },
@@ -10,17 +11,38 @@ const categories = [
   { key: "אורח חיים בריא", label: "אורח חיים בריא" },
 ];
 
-function createPost(baseName, title, categories) {
-  const slug = baseName;
+async function extractSummaryFromHTML(filePath) {
+  try {
+    const response =await   fetch(filePath);
+    const html = await  response.text();
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    const paragraphs = Array.from(doc.querySelectorAll('p'));
+    const lines = paragraphs.map(p => p.textContent.trim()).filter(Boolean).slice(0, 4);
+
+    return lines.join(' ');
+  } catch (error) {
+    console.error(`Error extracting summary from ${filePath}:`, error);
+    return '';
+  }
+}
+
+function createPost(slug, title, categories) {
+  const filePath = `/posts/${slug}.html`;
+  const summary =  extractSummaryFromHTML(filePath);
+
   return {
     slug,
     he: title,
-    summary: '', // To be populated after fetching HTML content
+    summary,
     image: `/images/${slug}.jpg`,
-    file: `/posts/${slug}.html`,
-    categories,
+    file: filePath,
+    categories
   };
 }
+
 
 const posts = [
   createPost('protein', 'חלבון – מרכיב חיוני לבריאות ולכושר', ['תזונה', 'ספורט']),
@@ -69,10 +91,10 @@ function LandingPage({ lang }) {
   const isHebrew = lang === 'he';
   const [selectedCategory, setSelectedCategory] = useState('תזונה');
 
-  const filteredPosts =
-    selectedCategory === 'all'
-      ? posts
-      : posts.filter((post) => post.categories.includes(selectedCategory));
+  const filteredPosts = selectedCategory === "all"
+  ? posts
+  : posts.filter((post) => post.categories?.includes(selectedCategory));
+
 
   return (
     <div
@@ -156,30 +178,6 @@ export default function App() {
   );
 }
 
-async function extractSummaryFromHTML(filePath) {
-  try {
-    const response = await fetch(filePath);
-    const html = await response.text();
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-
-    const paragraphs = Array.from(doc.querySelectorAll('p'));
-    const lines = paragraphs.map(p => p.textContent.trim()).filter(Boolean).slice(0, 4);
-
-    return lines.join(' ');
-  } catch (error) {
-    console.error(`Error extracting summary from ${filePath}:`, error);
-    return '';
-  }
-}
 
 
-async function populateSummaries(postsArray) {
-  for (const post of postsArray) {
-    post.summary = await extractSummaryFromHTML(post.file);
-  }
-}
 
-// Usage
-populateSummaries(posts);

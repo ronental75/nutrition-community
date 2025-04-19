@@ -1,9 +1,23 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
+
 module.exports = {
-    content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          sans: ['"Segoe UI"', '"Helvetica Neue"', 'sans-serif'],
+        },
+        colors: {
+          gray: {
+            900: '#111827',
+            800: '#1f2937',
+          },
+          blue: {
+            600: '#2563eb',
+          },
+        },
+      },
     },
-    plugins: [require('@tailwindcss/typography')],
-}
+    variants: {},
+    plugins: [],
+  };
   
