@@ -128,7 +128,7 @@ const posts = [
     slug: "dietary-fiber-guide",
     he: "כל מה שצריך לדעת על סיבים תזונתיים",
     summary: "תפקידי הסיבים בתזונה, יתרונותם לעיכול, שובע וירידה במשקל.",
-    image: "/images/image_14.jpg",
+    image: "/images/dietary-fiber-guide.jpg",
     file: "/posts/dietary-fiber-guide.html",
     categories: ["תזונה"]
   },
