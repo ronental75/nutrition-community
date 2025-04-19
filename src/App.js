@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles.css';
+import About from './pages/About';
 
 const categories = [
   // { key: "all", label: "הכל" },
@@ -126,12 +127,19 @@ function LandingPage({ lang }) {
     </button>
 
     {menuOpen && (
-      <div className="menu-dropdown">
-        <a href="#about" className="menu-item">
-          {isHebrew ? 'אודות' : 'About'}
-        </a>
-      </div>
-    )}
+  <div className="menu-dropdown">
+    <Link to="/about" className="menu-item">
+      {isHebrew ? 'אודות' : 'About'}
+    </Link>
+    <Link to="/contact" className="menu-item">
+      {isHebrew ? 'צור קשר' : 'Contact'}
+    </Link>
+    {/* <Link to="/faq" className="menu-item">
+      {isHebrew ? 'שאלות נפוצות' : 'FAQ'}
+    </Link> */}
+  </div>
+)}
+
   </div>
 </td>
 
@@ -222,6 +230,8 @@ export default function App() {
         <Route path="/" element={<LandingPage lang="he" />} />
         <Route path="/he" element={<LandingPage lang="he" />} />
         <Route path="/en" element={<LandingPage lang="en" />} />
+        <Route path="/about" element={<About />} />
+
         {posts.map((post) => (
           <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
         ))}
