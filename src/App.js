@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles.css';
 
-
 const categories = [
   { key: "all", label: "הכל" },
   { key: "תזונה", label: "תזונה" },
