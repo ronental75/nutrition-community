@@ -34,16 +34,16 @@ body {
   }
 
   .page-title {
-    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size */
+    font-size: clamp(1rem, 5vw, 2.5rem);  /* ✅ Responsive font size */
+    font-weight: 700;
+    color: #2E86C1;
     text-align: center;
-    color: #2E86C1; /* A calm blue, change if needed */
-    font-weight: bold;
     margin: 0.5rem 0;
-    white-space: nowrap; /* Prevent line break */
+    white-space: nowrap;          /* ✅ Force one line */
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis if it overflows */
-    max-width: 100%;
+    text-overflow: ellipsis;      /* ✅ Show … if too long */
   }
+  
   .page-subtitle {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: #6c757d; /* Subtle grey */
