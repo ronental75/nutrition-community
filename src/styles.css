@@ -32,3 +32,16 @@ body {
     height: auto;
     border-radius: 8px;
   }
+
+  .page-title {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size */
+    text-align: center;
+    color: #2E86C1; /* A calm blue, change if needed */
+    font-weight: bold;
+    margin: 20px auto;
+    white-space: nowrap; /* Prevent line break */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if it overflows */
+    max-width: 100%;
+  }
+  

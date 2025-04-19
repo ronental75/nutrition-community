@@ -20,8 +20,8 @@ async function extractSummaryFromHTML(filePath) {
 
     const paragraphs = Array.from(doc.querySelectorAll('p'));
     const lines = paragraphs.map(p => p.textContent.trim()).filter(Boolean).slice(0, 2);
-
-    return lines.join(' ');
+    const all_lines=lines.join(' ') + '...';
+    return all_lines;
   } catch (error) {
     console.error(`Error extracting summary from ${filePath}:`, error);
     return '';
@@ -101,9 +101,9 @@ function LandingPage({ lang }) {
       className="max-w-6xl mx-auto px-4 sm:px-6 py-6"
     >
       <header className="flex flex-col sm:flex-row justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold mb-4 sm:mb-0">
-          {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
-        </h1>
+      <h1 className="page-title">
+  {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
+</h1>
         {/* Language selection links can be added here if needed */}
       </header>
 
