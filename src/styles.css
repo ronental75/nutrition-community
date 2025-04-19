@@ -34,11 +34,11 @@ body {
   }
 
   .page-title {
-    font-size: clamp(1rem, 5vw, 2.5rem);  /* ✅ Responsive font size */
-    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);  /* ✅ Responsive font size */
+    font-weight: auto;
     color: #2E86C1;
     text-align: center;
-    margin: 0.5rem 0;
+    margin: 0;
     white-space: nowrap;          /* ✅ Force one line */
     overflow: hidden;
     text-overflow: ellipsis;      /* ✅ Show … if too long */

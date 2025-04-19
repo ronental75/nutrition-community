@@ -151,7 +151,7 @@ function LandingPage({ lang }) {
 
 
 
-      <header className="flex flex-col sm:flex-row justify-between items-center mb-6">
+      <header className="flex flex-col sm:flex-row justify-between items-center mb-10">
       <h1 className="page-title">
         {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
       </h1>
