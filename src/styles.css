@@ -127,14 +127,19 @@ body {
   }
   
   .top-bar-text h2 {
-    font-size: clamp(1.4rem, 4vw, 2rem); /* ⬅ Responsive font */
+    font-size: clamp(1rem, 5vw, 2.5rem); /* ✅ Responsive, fits in one line */
     font-weight: 700;
     color: #1e3a8a;
     margin: 0;
-    white-space: nowrap;       /* ⬅ Force single line */
-    overflow: hidden;          /* ⬅ Hide overflow if needed */
-    text-overflow: ellipsis;   /* ⬅ Add ... if it overflows */
+    white-space: nowrap;       /* ✅ Single line only */
+    overflow: hidden;
+    text-overflow: ellipsis;   /* Optional if text is too long */
+    width: 65%; /* More space for the text */
+  text-align: right;
+  vertical-align: middle;
+  padding-right: 1rem;
   }
+  
   
   
   /* Spacer column */
