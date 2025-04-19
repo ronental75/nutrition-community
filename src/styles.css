@@ -187,6 +187,7 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     z-index: 50;
     opacity: 0;
+    text-align: right; /* Align text to the right */
   transform: translateY(-10px);
   animation: fadeDown 0.2s ease-out forwards;
   }
@@ -201,7 +202,7 @@ body {
     .menu-dropdown {
       width: 100%; /* Makes the dropdown full width on small screens */
       left: 0;
-      min-width: 200px;
+      min-width: 100px;
 
     }
   }
@@ -215,7 +216,7 @@ body {
   
   .menu-item {
     display: block;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0rem;
     color: #374151;
     text-decoration: none;
     font-size: 0.95rem;
