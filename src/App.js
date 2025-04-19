@@ -86,20 +86,55 @@ function CategoryButtons({ selectedCategory, setSelectedCategory }) {
 
 
 
+
 function LandingPage({ lang }) {
   const isHebrew = lang === 'he';
   const [selectedCategory, setSelectedCategory] = useState('תזונה');
+  const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
 
-  const filteredPosts = selectedCategory === "תזונה"
-  ? posts
-  : posts.filter((post) => post.categories?.includes(selectedCategory));
-
+  const filteredPosts =
+    selectedCategory === 'תזונה'
+      ? posts
+      : posts.filter((post) =>
+          post.categories?.includes(selectedCategory)
+        );
 
   return (
     <div
       dir={isHebrew ? 'rtl' : 'ltr'}
       className="max-w-6xl mx-auto px-4 sm:px-6 py-6"
     >
+      {/* ✅ Top Bar */}
+      <div className="flex justify-between items-center border-b py-3 relative">
+        {/* Right – Welcome text */}
+        <span className="text-gray-700 text-lg font-medium">
+          {isHebrew ? 'ברוכים הבאים ל' : 'Welcome to'}
+        </span>
+
+        {/* Left – Hamburger menu & dropdown */}
+        <div className="relative">
+          <button
+            className="text-2xl focus:outline-none"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            &#9776;
+          </button>
+
+          {/* Inline Dropdown */}
+          {menuOpen && (
+            <div className="absolute top-full left-0 mt-2 w-32 bg-white border rounded shadow z-10">
+              <a
+                href="#about"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                {isHebrew ? 'אודות' : 'About'}
+              </a>
+              {/* You can add more items here */}
+            </div>
+          )}
+        </div>
+      </div>
+
       <header className="flex flex-col sm:flex-row justify-between items-center mb-6">
       <h1 className="page-title">
         {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
