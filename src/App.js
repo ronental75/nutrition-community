@@ -100,40 +100,56 @@ function LandingPage({ lang }) {
         );
 
   return (
-    <div
-      dir={isHebrew ? 'rtl' : 'ltr'}
-      className="max-w-6xl mx-auto px-4 sm:px-6 py-6"
+<div
+  dir={isHebrew ? 'rtl' : 'ltr'}
+  className="top-bar-wrapper"
+>
+  <div className="top-bar">
+    <table className="top-bar-table">
+      <tbody>
+        <tr>
+          {/* Right: Welcome text */}
+          <td className="top-bar-text">
+            <h2>{isHebrew ? 'ברוכים הבאים ל' : 'Welcome to'}</h2>
+          </td>
+
+          {/* Middle: Spacer */}
+          <td className="top-bar-spacer"></td>
+
+          <td className="top-bar-menu">
+  <div className="menu-wrapper">
+    <button
+      className="menu-button"
+      onClick={() => setMenuOpen(!menuOpen)}
     >
-      {/* ✅ Top Bar */}
-      <div className="flex justify-between items-center border-b py-3 relative">
-        {/* Right – Welcome text */}
-        <span className="text-gray-700 text-lg font-medium">
-          {isHebrew ? 'ברוכים הבאים ל' : 'Welcome to'}
-        </span>
+      &#9776;
+    </button>
 
-        {/* Left – Hamburger menu & dropdown */}
-        <div className="relative">
-          <button
-            className="text-2xl focus:outline-none"
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
-            &#9776;
-          </button>
-
-          {/* Inline Dropdown */}
-          {menuOpen && (
-            <div className="absolute top-full left-0 mt-2 w-32 bg-white border rounded shadow z-10">
-              <a
-                href="#about"
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-              >
-                {isHebrew ? 'אודות' : 'About'}
-              </a>
-              {/* You can add more items here */}
-            </div>
-          )}
-        </div>
+    {menuOpen && (
+      <div className="menu-dropdown">
+        <a href="#about" className="menu-item">
+          {isHebrew ? 'אודות' : 'About'}
+        </a>
       </div>
+    )}
+  </div>
+</td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    {/* Dropdown outside table so it doesn’t shift layout
+    {menuOpen && (
+      <div className="menu-dropdown">
+        <a href="#about" className="menu-item">
+          {isHebrew ? 'אודות' : 'About'}
+        </a>
+      </div>
+    )} */}
+  </div>
+
+
 
       <header className="flex flex-col sm:flex-row justify-between items-center mb-6">
       <h1 className="page-title">
