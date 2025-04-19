@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles.css';
-import About from './pages/About';
+import About from './About';
 
 const categories = [
   // { key: "all", label: "הכל" },
