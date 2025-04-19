@@ -118,7 +118,7 @@ body {
   
   /* Welcome text column */
   .top-bar-text {
-    width: 45%;
+    width: 60%;
     text-align: right;
     vertical-align: middle;
     padding-right: 1rem;
@@ -139,12 +139,12 @@ body {
   
   /* Spacer column */
   .top-bar-spacer {
-    width: 10%;
+    width: 2%;
   }
   
   /* Menu column */
   .top-bar-menu {
-    width: 45%;
+    width: 38%;
     text-align: left;
     vertical-align: middle;
     padding-left: 1rem;
