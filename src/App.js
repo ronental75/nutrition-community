@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles.css';
 
 const categories = [
-  { key: "all", label: "הכל" },
+  // { key: "all", label: "הכל" },
   { key: "תזונה", label: "תזונה" },
   { key: "דיאטה", label: "דיאטה" },
   { key: "ספורט", label: "ספורט" },
@@ -90,7 +90,7 @@ function LandingPage({ lang }) {
   const isHebrew = lang === 'he';
   const [selectedCategory, setSelectedCategory] = useState('תזונה');
 
-  const filteredPosts = selectedCategory === "all"
+  const filteredPosts = selectedCategory === "תזונה"
   ? posts
   : posts.filter((post) => post.categories?.includes(selectedCategory));
 
