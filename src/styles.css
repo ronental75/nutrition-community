@@ -118,11 +118,12 @@ body {
   
   /* Welcome text column */
   .top-bar-text {
-    font-size: 2rem;
-    font-weight: 700;
+    width: 45%;
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 1rem;
     color: #1e3a8a;
-    margin: 0;
-    text-align: center;
+
   }
   
   .top-bar-text h2 {
@@ -138,12 +139,12 @@ body {
   
   /* Spacer column */
   .top-bar-spacer {
-    width: 30%;
+    width: 10%;
   }
   
   /* Menu column */
   .top-bar-menu {
-    width: 35%;
+    width: 45%;
     text-align: left;
     vertical-align: middle;
     padding-left: 1rem;
