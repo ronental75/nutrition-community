@@ -19,7 +19,7 @@ async function extractSummaryFromHTML(filePath) {
     const doc = parser.parseFromString(html, 'text/html');
 
     const paragraphs = Array.from(doc.querySelectorAll('p'));
-    const lines = paragraphs.map(p => p.textContent.trim()).filter(Boolean).slice(0, 2);
+    const lines = paragraphs.map(p => p.textContent.trim()).filter(Boolean).slice(0,1);
     const all_lines=lines.join(' ') + '...';
     return all_lines;
   } catch (error) {
