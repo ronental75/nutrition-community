@@ -1,16 +1,25 @@
 .button {
-  width: 9rem;
-  padding: 0.5rem 1rem;
-  text-align: center;
-  border-radius: 9999px;
-  border: 1px solid #d1d5db;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  background-color: #ffffff;
-  color: #1f2937;
-}
-
+    min-width: 6rem;
+    padding: 0.25rem 0.75rem;
+    text-align: center;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    background-color: #ffffff;
+    color: #1f2937;
+  }
+  hr {
+    border-top: 1px solid #e5e7eb;
+    margin-top: 0.5rem;
+  }
+  .flex {
+    display: flex;
+  }
+  .justify-center {
+    justify-content: center;
+  }
 .button:hover {
   background-color: #2563eb;
 }
@@ -178,6 +187,7 @@ body {
   .menu-dropdown {
     position: absolute;
     left: 0;
+    inset-inline-start: 0;
     top: 100%;
     margin-top: 0.5rem;
     width: 10rem;

@@ -70,14 +70,17 @@
 
   function CategoryButtons({ selectedCategory, setSelectedCategory }) {
     return (
-      <div className="flex flex-wrap justify-center gap-2 mb-6">
-        {categories.map((cat) => {
+      <div
+      className="flex justify-center flex-wrap gap-2 my-6"
+      style={{ direction: 'ltr' }} // 🔥 Force LTR layout for centering  
+      >      
+      {categories.map((cat) => {
           const isActive = selectedCategory === cat.key;
           return (
             <button
               key={cat.key}
               onClick={() => setSelectedCategory(cat.key)}
-              className={`button ${isActive ? 'button-active' : ''}`}
+              className={`button ${isActive ? 'button-active' : ''}text-sm px-3 py-1`}
             >
               {cat.label}
             </button>
@@ -110,13 +113,13 @@
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
          <div className="menu-wrapper" >
       <button
-        className="menu-button"
+        // className="menu-button"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         &#9776;
       </button>
       {menuOpen && (
-    <div className="menu-dropdown">
+    <div className="menu-dropdown" >
       <Link to="/about" className="menu-item">
         {isHebrew ? 'אודות' : 'About'}
       </Link>
@@ -133,29 +136,29 @@
 
 
 
-        <header className="flex flex-col sm:flex-row justify-between items-center mb-10">
-        <h1 className="page-title">
-          {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
-        </h1>
-        <p className="page-subtitle">
-          {isHebrew
-            ? 'טיפים, מחקרים ומידע מקצועי על אורח חיים בריא'
-            : 'Tips, research, and professional info about healthy living'}
-        </p>
-          {/* Language selection links can be added here if needed */}
-        </header>
+    <header className="flex-col items-center text-center mb-10">
+  <h1 className="page-title">
+    {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
+  </h1>
+  <p className="page-subtitle mt-2">
+    {isHebrew
+      ? 'טיפים, מחקרים ומידע מקצועי על אורח חיים בריא'
+      : 'Tips, research, and professional info about healthy living'}
+  </p>
+</header>
 
         <CategoryButtons
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
+        <hr className="border-gray-300 mx-4" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredPosts.map((post) => (
             <div
               key={post.slug}
-              className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white"
-            >
+              className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white mt-8"
+              >
               <img
                 src={post.image}
                 alt={post.he}
@@ -170,6 +173,8 @@
                 >
                   למאמר המלא...
                 </Link>
+                <hr className="border-gray-300 mx-4" />
+
               </div>
             </div>
           ))}
