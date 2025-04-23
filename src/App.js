@@ -4,6 +4,13 @@
   import About from './About';
   import Contact from './contact';
   import classNames from 'classnames';
+  import LikeDislike from './LikeDislike';
+  
+  
+  
+
+
+  
 
 
   const categories = [
@@ -113,6 +120,7 @@
 
 
     <div className="top-bar-wrapper" dir="rtl">
+
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
          <div className="menu-wrapper" >
       <button
@@ -200,8 +208,17 @@
             style={{ height: "95vh", width: "100%", border: "none" }}
             title={post.slug}
           />
+        <div
+          className="w-full mt-4 pr-6"
+          dir="rtl"
+        >
+          <LikeDislike slug={post.slug} />
         </div>
-      </div>
+</div>
+
+
+        </div>
+
     );
   }
 
