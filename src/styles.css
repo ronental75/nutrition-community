@@ -22,12 +22,14 @@
   }
 .button:hover {
   background-color: #2563eb;
+  color: white;
+  font-weight: bold;
 }
 
 .button-active {
-  background-color: #2563eb;
-  color: #ffffff;
-  border-color: #2563eb;
+  background-color: #2563eb; /* Tailwind's blue-600 */
+  color: white;
+  font-weight: bold;
 }
 body {
     font-family: "Segoe UI", "Helvetica Neue", sans-serif;

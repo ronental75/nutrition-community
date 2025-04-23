@@ -3,15 +3,15 @@
   import './styles.css';
   import About from './About';
   import Contact from './contact';
-  
+  import classNames from 'classnames';
 
 
   const categories = [
     // { key: "all", label: "הכל" },
-    { key: "תזונה", label: "תזונה" },
-    { key: "דיאטה", label: "דיאטה" },
     { key: "ספורט", label: "ספורט" },
-    { key: "אורח חיים בריא", label: "אורח חיים בריא" },
+    { key: "דיאטה", label: "דיאטה" },
+    { key: "תזונה", label: "תזונה" },
+    { key: "אורח חיים בריא", label: "אורח חיים בריא" }
   ];
 
   async function extractSummaryFromHTML(filePath) {
@@ -48,6 +48,7 @@
 
 
   const posts = [
+    createPost('stack', 'תקועים על אותו משקל? זו לא אשמתכם – זה הגוף שלכם!', ['תזונה', 'דיאטה']),
     createPost('protein', 'חלבון – מרכיב חיוני לבריאות ולכושר', ['תזונה', 'ספורט']),
     createPost('protein-guide-full', 'כל מה שרציתם לדעת על חלבון – הרחבה חשובה!', ['תזונה', 'ספורט']),
     createPost('mediterranean-diet', 'דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי', ['דיאטה', 'תזונה']),
@@ -61,26 +62,28 @@
     createPost('high-heart-rate-fat-burn', 'שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??', ['ספורט']),
     createPost('fat-in-weight-loss', 'שומן – חבר או אויב בתהליך הירידה במשקל?', ['דיאטה']),
     createPost('tee-and-weight-loss-plan', 'איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל', ['דיאטה']),
+    createPost('holy-triad-nutrition-sleep-fitness', 'השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה', ['אורח חיים בריא', 'תזונה', 'ספורט']),
     createPost('garlic-antioxidants-health', 'לא על השום לבדו!', ['אורח חיים בריא']),
     createPost('dietary-fiber-guide', 'כל מה שצריך לדעת על סיבים תזונתיים', ['תזונה']),
     createPost('quality-sleep-tips', 'טיפים מעשיים לשינה איכותית', ['אורח חיים בריא']),
-    createPost('holy-triad-nutrition-sleep-fitness', 'השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה', ['אורח חיים בריא', 'תזונה', 'ספורט']),
   ];
 
 
   function CategoryButtons({ selectedCategory, setSelectedCategory }) {
     return (
       <div
-      className="flex justify-center flex-wrap gap-2 my-6"
-      style={{ direction: 'ltr' }} // 🔥 Force LTR layout for centering  
-      >      
-      {categories.map((cat) => {
+        className="flex justify-center flex-wrap gap-2 my-6"
+        style={{ direction: 'ltr' }}
+      >
+        {categories.map((cat) => {
           const isActive = selectedCategory === cat.key;
           return (
             <button
               key={cat.key}
               onClick={() => setSelectedCategory(cat.key)}
-              className={`button ${isActive ? 'button-active' : ''}text-sm px-3 py-1`}
+              className={classNames('button text-sm px-3 py-1', {
+                'button-active': isActive
+              })}
             >
               {cat.label}
             </button>
@@ -171,7 +174,7 @@
                   to={`/${lang}/${post.slug}`}
                   className="text-blue-600 text-sm"
                 >
-                  למאמר המלא...
+                  לפוסט המלא...
                 </Link>
                 <hr className="border-gray-300 mx-4" />
 
@@ -194,7 +197,7 @@
           <iframe
             src={post.file}
             className="w-full rounded-lg"
-            style={{ height: "100vh", width: "100%", border: "none" }}
+            style={{ height: "95vh", width: "100%", border: "none" }}
             title={post.slug}
           />
         </div>
