@@ -6,19 +6,13 @@
   import classNames from 'classnames';
   import LikeDislike from './LikeDislike';
   
-  
-  
-
-
-  
-
-
   const categories = [
     // { key: "all", label: "הכל" },
-    { key: "ספורט", label: "ספורט" },
-    { key: "דיאטה", label: "דיאטה" },
-    { key: "תזונה", label: "תזונה" },
-    { key: "אורח חיים בריא", label: "אורח חיים בריא" }
+    { key: "אורח חיים בריא", label: "אורח חיים בריא" },
+
+    { key: "ספורט", label: "פעילות גופנית" },
+    // { key: "דיאטה", label: "דיאטה" },
+    { key: "תזונה", label: "תזונה" }
   ];
 
   async function extractSummaryFromHTML(filePath) {
@@ -55,21 +49,21 @@
 
 
   const posts = [
-    createPost('stack', 'תקועים על אותו משקל? זו לא אשמתכם – זה הגוף שלכם!', ['תזונה', 'דיאטה']),
+    createPost('stack', 'תקועים על אותו משקל? זו לא אשמתכם – זה הגוף שלכם!', ['תזונה']),
     createPost('protein', 'חלבון – מרכיב חיוני לבריאות ולכושר', ['תזונה', 'ספורט']),
     createPost('protein-guide-full', 'כל מה שרציתם לדעת על חלבון – הרחבה חשובה!', ['תזונה', 'ספורט']),
-    createPost('mediterranean-diet', 'דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי', ['דיאטה', 'תזונה']),
-    createPost('diet-guide', 'עושים סדר בדיאטות – מה באמת עובד?', ['דיאטה']),
-    createPost('pre-workout-strategy', 'ירידה במשקל או הגדלת השרירים?', ['ספורט', 'דיאטה']),
+    createPost('mediterranean-diet', 'דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי', ['תזונה']),
+    createPost('diet-guide', 'עושים סדר בדיאטות – מה באמת עובד?', ['תזונה']),
+    createPost('pre-workout-strategy', 'ירידה במשקל או הגדלת השרירים?', ['ספורט']),
     createPost('nutrition-for-runners', 'איך לאכול נכון בריצות – לפי המאמר Nutrition Recommendations for Distance Running?', ['ספורט']),
     createPost('strength-training-nutrition', 'תזונה בזמן ואחרי אימון כוח – איך לתמוך בתהליך ולמקסם תוצאות?', ['ספורט']),
     createPost('muscle-growth-tips', 'טיפים מעשיים להגדלת מסת השריר!', ['ספורט']),
     createPost('pre-strength-nutrition', 'תזונה לפני אימון כוח – איך להכין את הגוף לביצועים מיטביים?', ['ספורט']),
     createPost('sports-nutrition-guide', 'תזונת ספורט חכמה: איך להתאים תזונה להצלחה באימונים?', ['תזונה', 'ספורט']),
     createPost('high-heart-rate-fat-burn', 'שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??', ['ספורט']),
-    createPost('fat-in-weight-loss', 'שומן – חבר או אויב בתהליך הירידה במשקל?', ['דיאטה']),
-    createPost('tee-and-weight-loss-plan', 'איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל', ['דיאטה']),
-    createPost('holy-triad-nutrition-sleep-fitness', 'השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה', ['אורח חיים בריא', 'תזונה', 'ספורט']),
+    createPost('fat-in-weight-loss', 'שומן – חבר או אויב בתהליך הירידה במשקל?', ['תזונה']),
+    createPost('tee-and-weight-loss-plan', 'איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל', ['תזונה']),
+    createPost('holy-triad-nutrition-sleep-fitness', 'השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה', ['אורח חיים בריא']),
     createPost('garlic-antioxidants-health', 'לא על השום לבדו!', ['אורח חיים בריא']),
     createPost('dietary-fiber-guide', 'כל מה שצריך לדעת על סיבים תזונתיים', ['תזונה']),
     createPost('quality-sleep-tips', 'טיפים מעשיים לשינה איכותית', ['אורח חיים בריא']),
