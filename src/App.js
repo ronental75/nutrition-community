@@ -160,35 +160,61 @@
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" >
+        <div className="max-w-5xl mx-auto px-4 mt-10">
+        <div className="space-y-4">
           {filteredPosts.map((post) => (
-            <div
+            <Link
               key={post.slug}
-              className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white mt-8"
-              >
-              <img
-                src={post.image}
-                alt={post.he}
-                className="w-full h-auto object-cover"
-              />
-              <div className="p-4 text-right">
-                <h2 className="text-lg font-semibold mb-2">{post.he}</h2>
-                <p className="text-sm text-gray-600 mb-2">{post.summary}</p>
-                <Link
-                  to={`/${lang}/${post.slug}`}
-                  className="text-blue-600 text-sm"
-                >
-                  לפוסט המלא...
-                </Link>
-                <hr className="border-gray-300 mx-4" />
-
+              to={`/${lang}/${post.slug}`}
+              style={{
+                display: 'flex',
+                flexDirection: 'row-reverse',
+                alignItems: 'flex-start',
+                gap: '1rem',
+                border: '1px solid #e5e7eb',
+                borderRadius: '0.5rem',
+                padding: '0.75rem',
+                backgroundColor: 'white',
+                boxShadow: '0 1px 4px rgba(0, 0, 0, 0.08)',
+                textDecoration: 'none',
+                color: 'inherit',
+                transition: 'box-shadow 0.2s ease-in-out'
+              }}
+              onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)'}
+              onMouseLeave={e => e.currentTarget.style.boxShadow = '0 1px 4px rgba(0, 0, 0, 0.08)'}
+            >
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={post.image}
+                  alt={post.he}
+                  style={{
+                    width: '130px',
+                    height: 'auto',
+                    maxHeight: '120px',
+                    objectFit: 'cover',
+                    borderRadius: '0.5rem',
+                    display: 'block',
+                    marginTop: '30px'
+                  }}
+                />
               </div>
-            </div>
+              <div style={{ textAlign: 'right', flex: 1 }}>
+                <h2 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.25rem', lineHeight: '1.4' }}>{post.he}</h2>
+                <p style={{ fontSize: '0.85rem', color: '#374151', marginBottom: '0.25rem', lineHeight: '1.5', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+                  {post.summary}
+                </p>
+                <span style={{ color: '#2563eb', fontSize: '0.8rem', fontWeight: 500 }}>
+                  לפוסט המלא...
+                </span>
+              </div>
+              </Link>
           ))}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
 
   function PostPage({ slug }) {
     const post = posts.find((p) => p.slug === slug);
