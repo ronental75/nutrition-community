@@ -6,16 +6,23 @@
   import classNames from 'classnames';
   import LikeDislike from './LikeDislike';
   import AnimatedBanner from './AnimatedBanner';
+  import SubmitPost from './SubmitPost'; // 👈 add this at the top
+
 
   
   const categories = [
     // { key: "all", label: "הכל" },
     { key: "אורח חיים בריא", label: "אורח חיים בריא" },
-
     { key: "ספורט", label: "פעילות גופנית" },
     // { key: "דיאטה", label: "דיאטה" },
     { key: "תזונה", label: "תזונה" }
   ];
+
+  const categoryIcons = {
+    'תזונה': '🥗',
+    'ספורט': '🏋️',
+    'אורח חיים בריא': '🌿'
+  };
 
   async function extractSummaryFromHTML(filePath) {
     try {
@@ -104,15 +111,13 @@
     const isHebrew = lang === 'he';
     const [selectedCategory, setSelectedCategory] = useState('תזונה');
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
-    const bannerText = "🔥  הנחה מיוחדת לליווי זוגות לאורח חיים בריא - מוזמנים ליצור קשר ⏰";
+    const bannerText = "🔥ליווי תזונתי לאורך חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
 
-    const filteredPosts =
-      selectedCategory === 'תזונה'
-        ? posts
-        : posts.filter((post) =>
-            post.categories?.includes(selectedCategory)
-          );
+    const filteredPosts = posts.filter((post) =>
+      post.categories?.includes(selectedCategory)
+    );
+
 
     return (
       
@@ -128,7 +133,12 @@
         &#9776;
       </button>
       {menuOpen && (
+        
     <div className="menu-dropdown"  >
+      <Link to="/submit" className="menu-item">
+        {isHebrew ? 'שלחו פוסט' : 'About'}
+      </Link>
+
       <Link to="/about" className="menu-item">
         {isHebrew ? 'אודות' : 'About'}
       </Link>
@@ -175,7 +185,16 @@
                 />
               </div>
               <div className="post-content">
-                <h2 className="post-title">{post.he}</h2>
+              <div className="post-tags">
+  {post.categories.map(cat => (
+    <span key={cat} className="tag">
+      {categoryIcons[cat]} {cat}
+    </span>
+  ))}
+</div>
+              {/* <h2 className="post-title">
+              {post.categories?.map((cat) => categoryIcons[cat]).join(' ')} {post.he}
+              </h2> */}
                 <p className="post-summary">
                   {post.summary}
                 </p>
@@ -227,6 +246,7 @@
           <Route path="/en" element={<LandingPage lang="en" />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/submit" element={<SubmitPost />} />
 
 
           {posts.map((post) => (
