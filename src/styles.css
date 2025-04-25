@@ -113,8 +113,26 @@ body {
     
     max-width: 1024px;
     margin: 0 auto;
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
+    
   }
+
+  .top-section {
+    background: linear-gradient(to bottom, #e0f2fe, #ffffff); /* Light blue to white gradient */
+    /* padding: 2rem 1rem 1rem 1rem; */
+    margin-bottom: 1rem;
+    border-radius: 0 0 0 0;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 50;
+  }
+  
+  @media (min-width: 600px) {
+    .top-section {
+      padding: 1rem 1rem 1rem 1rem;
+    }
+  }
+  
   
   /* Top bar container */
   .top-bar {
@@ -557,8 +575,4 @@ body {
   font-size: 0.7rem;
   padding: 2px 8px;
   margin-left: 5px;
-}
-.category-buttons-container {
-  gap: 0.4rem;
-  margin: 0.5rem 0 1rem;
 }

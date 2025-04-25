@@ -111,7 +111,7 @@
     const isHebrew = lang === 'he';
     const [selectedCategory, setSelectedCategory] = useState('תזונה');
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
-    const bannerText = "🔥ליווי תזונתי לאורך חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
+    const bannerText = "🔥ליווי אישי לאורך חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
 
     const filteredPosts = posts.filter((post) =>
@@ -122,6 +122,7 @@
     return (
       
     <div className="top-bar-wrapper" dir="rtl" >
+      <div className="top-section">
       <div className="top-screen">
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
@@ -166,7 +167,7 @@
           setSelectedCategory={setSelectedCategory}
         />
                 <AnimatedBanner text={bannerText} />
-
+                </div>
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
         <div className="posts-container">
