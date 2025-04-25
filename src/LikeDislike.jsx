@@ -99,7 +99,7 @@ export default function LikeDislike({ slug }) {
   <span role="img" aria-label="like">👍</span> אהבתי ({counts.like})
 </button>
 
-<button
+{/* <button
   onClick={() => {
     updateReaction('dislike');
     animateButton('dislike');
@@ -112,7 +112,7 @@ export default function LikeDislike({ slug }) {
   }`}
 >
   <span role="img" aria-label="dislike">👎</span> לא אהבתי ({counts.dislike})
-</button>
+</button> */}
     </div>
   );
 }

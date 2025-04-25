@@ -188,7 +188,7 @@
                   src={post.image}
                   alt={post.he}
                   style={{
-                    width: '130px',
+                    width: '96px',
                     height: 'auto',
                     maxHeight: '120px',
                     objectFit: 'cover',
