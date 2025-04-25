@@ -26,7 +26,7 @@ function AnimatedBanner({
         .animated-banner {
           display: inline-block;
           white-space: nowrap;
-          animation: moveRightToLeft ${animationDuration} linear infinite;
+          animation: moveLeftToRight ${animationDuration} linear infinite;
         }
         
         .animated-banner span {
@@ -36,12 +36,12 @@ function AnimatedBanner({
           font-size: ${fontSize};
         }
         
-        @keyframes moveRightToLeft {
+        @keyframes moveLeftToRight {
           0% {
-            transform: translateX(100%);
+            transform: translateX(-100%);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translateX(100%);
           }
         }
       `}</style>
