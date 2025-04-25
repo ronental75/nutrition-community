@@ -4,7 +4,7 @@ function AnimatedBanner({
   text, 
   backgroundColor = '#f0f4f8', 
   textColor = '#2563eb',
-  fontSize = '1.1rem',
+  fontSize = '0.95rem', // Smaller default size
   fontWeight = '600',
   animationDuration = '20s'
 }) {
@@ -18,9 +18,10 @@ function AnimatedBanner({
           width: 100%;
           overflow: hidden;
           background-color: ${backgroundColor};
-          padding: 10px 0;
-          margin: 10px 0;
+          padding: 8px 0;
+          margin: 8px 0;
           border-radius: 4px;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
         }
         
         .animated-banner {
@@ -42,6 +43,13 @@ function AnimatedBanner({
           }
           100% {
             transform: translateX(100%);
+          }
+        }
+        
+        /* Responsive font size */
+        @media (min-width: 640px) {
+          .animated-banner span {
+            font-size: 1.1rem;
           }
         }
       `}</style>

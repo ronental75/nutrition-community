@@ -104,7 +104,7 @@
     const isHebrew = lang === 'he';
     const [selectedCategory, setSelectedCategory] = useState('תזונה');
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
-    const bannerText = "🔥 מבצע מיוחד! 🔥 הנחה מיוחדת לליווי זוגות לאורח חיים בריא - נותרו רק 3 מקומות אחרונים! מוזמנים ליצור קשר ⏰";
+    const bannerText = "🔥  הנחה מיוחדת לליווי זוגות לאורח חיים בריא - מוזמנים ליצור קשר ⏰";
 
 
     const filteredPosts =
@@ -159,62 +159,37 @@
 
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
-
-        <div className="max-w-5xl mx-auto px-4 mt-10">
+        <div className="posts-container">
         <div className="space-y-4">
           {filteredPosts.map((post) => (
             <Link
               key={post.slug}
               to={`/${lang}/${post.slug}`}
-              style={{
-                display: 'flex',
-                flexDirection: 'row-reverse',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                border: '1px solid #e5e7eb',
-                borderRadius: '0.5rem',
-                padding: '0.75rem',
-                backgroundColor: 'white',
-                boxShadow: '0 1px 4px rgba(0, 0, 0, 0.08)',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'box-shadow 0.2s ease-in-out'
-              }}
-              onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)'}
-              onMouseLeave={e => e.currentTarget.style.boxShadow = '0 1px 4px rgba(0, 0, 0, 0.08)'}
+              className="post-link"
             >
-              <div style={{ flexShrink: 0 }}>
+              <div>
                 <img
                   src={post.image}
                   alt={post.he}
-                  style={{
-                    width: '96px',
-                    height: 'auto',
-                    maxHeight: '120px',
-                    objectFit: 'cover',
-                    borderRadius: '0.5rem',
-                    display: 'block',
-                    marginTop: '30px'
-                  }}
+                  className="post-image"
                 />
               </div>
-              <div style={{ textAlign: 'right', flex: 1 }}>
-                <h2 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.25rem', lineHeight: '1.4' }}>{post.he}</h2>
-                <p style={{ fontSize: '0.85rem', color: '#374151', marginBottom: '0.25rem', lineHeight: '1.5', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+              <div className="post-content">
+                <h2 className="post-title">{post.he}</h2>
+                <p className="post-summary">
                   {post.summary}
                 </p>
-                <span style={{ color: '#2563eb', fontSize: '0.8rem', fontWeight: 500 }}>
+                <span className="post-read-more">
                   לפוסט המלא...
                 </span>
               </div>
-              </Link>
+            </Link>
           ))}
         </div>
       </div>
     </div>
   );
 }
-
 
   function PostPage({ slug }) {
     const post = posts.find((p) => p.slug === slug);
