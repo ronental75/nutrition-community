@@ -187,14 +187,14 @@
               <div className="post-content">
               <div className="post-tags">
   {post.categories.map(cat => (
-    <span key={cat} className="tag">
-      {categoryIcons[cat]} {cat}
+    <span key={cat} >
+      {/* {categoryIcons[cat]} {cat} */}
     </span>
   ))}
 </div>
-              {/* <h2 className="post-title">
+              <h2 className="post-title">
               {post.categories?.map((cat) => categoryIcons[cat]).join(' ')} {post.he}
-              </h2> */}
+              </h2>
                 <p className="post-summary">
                   {post.summary}
                 </p>
