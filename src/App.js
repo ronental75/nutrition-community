@@ -102,6 +102,8 @@
     const isHebrew = lang === 'he';
     const [selectedCategory, setSelectedCategory] = useState('תזונה');
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
+    const bannerText = "🔥 מבצע מיוחד! 🔥 הנחה מיוחדת לליווי זוגות לאורח חיים בריא - נותרו רק 3 מקומות אחרונים! הזדרזו ליצור קשר ⏰";
+
 
     const filteredPosts =
       selectedCategory === 'תזונה'
@@ -151,6 +153,8 @@
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
+                <AnimatedBanner text={bannerText} />
+
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
 
@@ -260,5 +264,44 @@
   }
 
 
-
+  function AnimatedBanner({ text }) {
+    return (
+      <div className="banner-container">
+        <div className="animated-banner">
+          <span>{text}</span>
+        </div>
+        <style jsx>{`
+          .banner-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: #f0f4f8;
+            padding: 10px 0;
+            margin: 10px 0;
+            border-radius: 4px;
+          }
+          
+          .animated-banner {
+            display: inline-block;
+            white-space: nowrap;
+            animation: moveRightToLeft 25s linear infinite;
+          }
+          
+          .animated-banner span {
+            padding: 5px;
+            font-weight: 500;
+            color: #2563eb;
+          }
+          
+          @keyframes moveRightToLeft {
+            0% {
+              transform: translateX(100%);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
+          }
+        `}</style>
+      </div>
+    );
+  }
 
