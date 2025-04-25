@@ -120,7 +120,17 @@ body {
     background-color: #f0f0f0;
   }
   /* Wrapper */
+  .top-screen {
+    position: sticky;
+    top: 0;
+    background: #ffffff; /* use white or your theme bg */
+    z-index: 50; /* Ensure it's above other content */
+    padding-bottom: 10px;
+    margin-bottom:30px ;
+  }
+  
 .top-bar-wrapper {
+    
     max-width: 1024px;
     margin: 0 auto;
     padding: 0.5rem 1rem;
@@ -128,6 +138,7 @@ body {
   
   /* Top bar container */
   .top-bar {
+    position: sticky;
     background-color: #f3f4f6; /* Tailwind gray-100 */
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
@@ -187,7 +198,7 @@ body {
   
   /* Dropdown menu */
   .menu-dropdown {
-    position: absolute;
+    position:absolute;
     left: 0;
     inset-inline-start: 0;
     top: 100%;

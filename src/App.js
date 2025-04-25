@@ -117,20 +117,20 @@
           );
 
     return (
-
-
-    <div className="top-bar-wrapper" dir="rtl">
+      
+    <div className="top-bar-wrapper" dir="rtl" >
+      <div className="top-screen">
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
          <div className="menu-wrapper" >
       <button
-        // className="menu-button"
+        className="menu-button"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         &#9776;
       </button>
       {menuOpen && (
-    <div className="menu-dropdown" >
+    <div className="menu-dropdown"  >
       <Link to="/about" className="menu-item">
         {isHebrew ? 'אודות' : 'About'}
       </Link>
@@ -141,14 +141,10 @@
     </div>
   )}
     </div>
-  
-
-  
-
 
 
     <header className="flex-col items-center text-center mb-10">
-  <h1 className="page-title">
+  <h1 className="page-title" >
     {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
   </h1>
   <p className="page-subtitle mt-2">
@@ -157,14 +153,14 @@
       : 'Tips, research, and professional info about healthy living'}
   </p>
 </header>
-
         <CategoryButtons
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        <hr className="border-gray-300 mx-4" />
+        {/* <hr className="border-gray-300 mx-4" /> */}
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" >
           {filteredPosts.map((post) => (
             <div
               key={post.slug}
@@ -218,7 +214,6 @@
 
 
         </div>
-
     );
   }
 
