@@ -124,8 +124,9 @@
     return (
       
     <div className="top-bar-wrapper" dir="rtl" >
+            <div className="top-screen">
       <div className="top-section">
-      <div className="top-screen">
+
       <div className="top-bar-buttons">
 
 
