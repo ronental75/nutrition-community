@@ -199,6 +199,7 @@
                   src={post.image}
                   alt={post.he}
                   className="post-image"
+                  loading="lazy"
                 />
               </div>
               <div className="post-content">
