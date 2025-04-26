@@ -1,0 +1,226 @@
+/* About Page Styles */
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    direction: rtl;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .about-content {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+  }
+  
+  .about-title {
+    color: #1e3a8a;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.75rem;
+  }
+  
+  /* Profile section */
+  .about-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-image {
+    margin-left: 1.5rem;
+  }
+  
+  .profile-photo {
+    width: 120px;    /* 👈 fixed width */
+  height: 160px;   /* 👈 fixed height */
+  object-fit: cover; /* 👈 crop nicely without stretching */
+    border-radius: 0%;
+    border: 3px solid #2563eb;
+  }
+  
+  .profile-intro {
+    flex: 1;
+  }
+  
+  .intro-text {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+  
+  .highlight-name {
+    color: #1e40af;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  
+  /* Philosophy section */
+  .about-philosophy {
+    text-align: center;
+    background-color: #f0f9ff;
+    border-right: 4px solid #2563eb;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .philosophy-text {
+    align-items: center;
+    font-size: 1.15rem;
+    margin: 0;
+  }
+  
+  .highlight-text {
+    color: #1e40af;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: #93c5fd;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    font-weight: 600;
+  }
+  
+  /* Background section */
+  .about-background {
+    margin-bottom: 2rem;
+  }
+  
+  .about-background p {
+    margin: 0.5rem 0;
+  }
+  
+  /* Services section */
+  .service-section {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+    color: #1e3a8a;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #93c5fd;
+  }
+  
+  .service-list, .education-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .service-item, .education-item {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .check-icon {
+    margin-left: 0.5rem;
+    color: #0f766e;
+  }
+  
+  /* Education section */
+  .education-section {
+    margin-bottom: 2rem;
+  }
+  
+  /* Contact section */
+  .contact-section {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .contact-button, .phone-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .contact-button {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .contact-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+  }
+  
+  .phone-button {
+    background-color: #10b981;
+    color: white;
+  }
+  
+  .phone-button:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+  }
+  
+  /* Return button */
+  .return-button-container {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .return-button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .return-button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 640px) {
+    .about-profile {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .profile-image {
+      margin: 0 0 1rem 0;
+    }
+    
+    .contact-buttons {
+      flex-direction: column;
+    }
+    
+    .contact-button, .phone-button {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+  }

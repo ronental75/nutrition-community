@@ -1,39 +1,84 @@
 import React from 'react';
+import './about.css'; // Import the CSS file
 
 export default function About() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-right" dir="rtl">
-    <div className="leading-relaxed text-[1.05rem] text-gray-800">
+    <div className="about-container">
+      <div className="about-content">
+        <h1 className="about-title">אודות</h1>
+        
+        <div className="about-profile">
+          <div className="profile-image">
+            <img src="/images/ronen.jpg" alt="רונן" className="profile-photo" />
+          </div>
+          <div className="profile-intro">
+            <p className="intro-text">
+              שמי <strong className="highlight-name">רונן</strong>, בן 49, עוסק בספורט באופן עקבי, מאמן ריצה ומלווה אנשים בתהליכי שינוי לאורח חיים בריא.
+            </p>
+          </div>
+        </div>
 
-        <p className="mb-2">
-          שמי <strong className="text-blue-800 font-semibold">רונן</strong>, בן 49, עוסק בספורט באופן עקבי, מאמן ריצה ומלווה אנשים בתהליכי שינוי לאורח חיים בריא.
-        </p>
+        <div className="about-philosophy">
+          <p className="philosophy-text">
+            מאמין ששינוי אמיתי מתחיל בהרגלים קטנים – כאלה שיוצרים{' '}
+            <br></br><strong className="highlight-text">
+              שגרה בריאה, מאוזנת ויציבה לאורך זמן
+            </strong>
+          </p>
+        </div>
 
-        <p className="mb-2">
-          מאמין ששינוי אמיתי מתחיל בהרגלים קטנים – כאלה שיוצרים{' '}
-          <strong className="text-blue-700 underline decoration-blue-300 decoration-2 underline-offset-2">
-            שגרה בריאה, מאוזנת ויציבה לאורך זמן
-          </strong>.
-        </p>
+        <div className="about-background">
+          <p>
+            ביום יום מנהל תחום מחקרי דאטה במכון סמואלי – מכון לחקר סרטן במרכז דוידוף שבבית החולים בילינסון.<br />
+            החיבור לעולם המחקר הרפואי נותן לי פרספקטיבה נוספת בתהליך הליווי לאורח חיים בריא.
+          </p>
+        </div>
 
-        <p className="mb-2">
-          ביום יום מנהל תחום מחקרי דאטה במכון סמואלי – מכון לחקר סרטן במרכז דוידוף שבבית החולים בילינסון.<br />
-          החיבור לעולם המחקר הרפואי נותן לי פרספקטיבה נוספת בתהליך הליווי לאורח חיים בריא.
-        </p>
+        <div className="service-section">
+          <h3 className="section-title">מה כולל הליווי?</h3>
+          <ul className="service-list">
+            <li className="service-item">
+              <span className="check-icon">✔️</span>
+              <strong>בניית תפריטי תזונה</strong> מותאמים אישית לפי מטרה והעדפה
+            </li>
+            <li className="service-item">
+              <span className="check-icon">✔️</span>
+              <strong>תוכניות אימון אישיות</strong> המשלבות ריצה, כוח ושיפור סיבולת
+            </li>
+            <li className="service-item">
+              <span className="check-icon">✔️</span>
+              ליווי שוטף עם תמיכה, מעקב והתאמות לאורך הדרך
+            </li>
+          </ul>
+        </div>
 
-        <h3 className="mt-6 font-semibold text-lg text-blue-900">מה כולל הליווי?</h3>
-        <p className="mt-1 mb-0">
-          ✔️ <strong>בניית תפריטי תזונה</strong> מותאמים אישית לפי מטרה והעדפה<br />
-          ✔️ <strong>תוכניות אימון אישיות</strong> המשלבות ריצה, כוח ושיפור סיבולת<br />
-          ✔️ ליווי שוטף עם תמיכה, מעקב והתאמות לאורך הדרך
-        </p>  
+        <div className="education-section">
+          <h3 className="section-title">הכשרות מקצועיות</h3>
+          <ul className="education-list">
+            <li className="education-item">
+              <span className="check-icon">✔️</span>
+              בוגר וינגייט - מדריכי ריצות ארוכות
+            </li>
+            <li className="education-item">
+              <span className="check-icon">✔️</span>
+              בוגר וינגייט במסלול המורחב לתזונת ספורט ולאורח חיים בריא (בהדרכת שגיא הלוי)
+            </li>
+          </ul>
+        </div>
 
-        <h3 className="mt-4 mb-0 font-semibold text-lg text-blue-900">הכשרות מקצועיות</h3>
-        <p className="mt-0">
-          ✔️ בוגר וינגייט - מדריכי ריצות ארוכות<br />
-          ✔️ בוגר וינגייט במסלול המורחב לתזונת ספורט ולאורח חיים בריא (בהדרכת שגיא הלוי)
-        </p>
+        <div className="contact-section">
+          <h3 className="section-title">צור קשר</h3>
+          <div className="contact-buttons">
+            <a href="/contact" className="contact-button">השאר פרטים</a>
+            <a href="tel:+9721234567" className="phone-button">התקשר עכשיו</a>
+          </div>
+        </div>
 
+        <div className="return-button-container">
+          <a href="/he" className="return-button">
+            חזרה לדף הראשי
+          </a>
+        </div>
       </div>
     </div>
   );
