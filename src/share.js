@@ -5,7 +5,7 @@ export default function Share() {
     if (navigator.share) {
       navigator.share({
         title: 'קהילת תזונה ואורח חיים בריא',
-        text: 'תראו איזה אתר מהמם שמצאתי!',
+        text: 'אתר מומלץ - פוסטים בנושא תזונה,ספורט ואורח חיים בריא!',
         url: window.location.href,
       })
       .then(() => console.log('Shared successfully'))
