@@ -7,6 +7,8 @@
   import LikeDislike from './LikeDislike';
   import AnimatedBanner from './AnimatedBanner';
   import SubmitPost from './SubmitPost'; // 👈 add this at the top
+  import Share from './share';
+
 
 
   
@@ -124,16 +126,21 @@
     <div className="top-bar-wrapper" dir="rtl" >
       <div className="top-section">
       <div className="top-screen">
+      <div className="top-bar-buttons">
+
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
-         <div className="menu-wrapper" >
-      <button
-        className="menu-button"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        &#9776;
-      </button>
-      {menuOpen && (
+      <div className="menu-wrapper">
+    <button
+      className="menu-button"
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      &#9776;
+    </button>
+    <div className="share-wrapper">
+    <Share />
+  </div>
+  </div>      {menuOpen && (
         
     <div className="menu-dropdown"  >
       <Link to="/submit" className="menu-item">
@@ -148,7 +155,9 @@
       </Link>
      
     </div>
-  )}
+  )
+  }
+
     </div>
 
 

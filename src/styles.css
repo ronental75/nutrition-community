@@ -188,7 +188,7 @@ body {
   /* Hamburger icon */
   .menu-button {
     font-size: 2rem;
-    color: #1e40af; /* Tailwind blue-700 */
+    color: #ffffff; /* Tailwind blue-700 */
     background: none;
     border: none;
     cursor: pointer;
@@ -231,11 +231,7 @@ body {
   }
   
   
-  .menu-wrapper {
-    position: relative;
-    display: inline-block;
-
-  }
+ 
   
   .menu-item {
     display: block;
@@ -576,3 +572,62 @@ body {
   padding: 2px 8px;
   margin-left: 5px;
 }
+.share-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.share-button:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+.top-bar-buttons {
+  position: relative;
+  background: #2563eb;
+  height: 50px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  display: flex;              /* 👈 FLEX! */
+  justify-content: space-between; /* 👈 Space between menu and share */
+  align-items: center;        /* 👈 Align vertically in the center */
+  direction: rtl;             /* 👈 Make sure the direction is RTL */
+  padding: 0 10px;            /* 👈 Add padding inside */
+}
+
+.menu-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.share-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .top-bar-buttons {
+    padding: 0.4rem 1rem;
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .share-wrapper, .menu-wrapper {
+    flex: none;
+  }
+}
+
