@@ -84,18 +84,34 @@
 
 <p><strong>אל תחכו לתוצאות – צרו אותן!</strong><br>
 כל אימון שאתם מבצעים, כל ארוחה שאתם מתכננים, וכל רגע מנוחה שאתם מאפשרים לעצמכם – מקרב אתכם למטרה. היו עקביים, תדחפו קדימה, והתוצאות יגיעו! 💪</p>
-<p style="text-align: center; margin-top: 2rem;">
-  <a href="/he" style="
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    background-color: #2563eb;
-    color: white;
-    border-radius: 9999px;
-    text-decoration: none;
-    font-weight: bold;
-  ">
-    חזרה לדף הראשי
-  </a>
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Return Button Example</title>
+  <style>
+    .return-button {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #2563eb;
+      color: white;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <a href="#" class="return-button" onclick="window.history.back(); return false;">חזרה לדף הראשי</a>
+  </div>
 </body>
 </html>
+
+
