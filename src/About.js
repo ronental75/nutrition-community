@@ -39,11 +39,13 @@ export default function About() {
           <ul className="service-list">
             <li className="service-item">
               <span className="check-icon">✔️</span>
-              <strong>בניית תפריטי תזונה</strong> מותאמים אישית לפי מטרה והעדפה
+              <strong>בניית תפריטי תזונה</strong> 
             </li>
+            {/* <span>מותאמים אישית לפי מטרה והעדפה</span> */}
             <li className="service-item">
               <span className="check-icon">✔️</span>
-              <strong>תוכניות אימון אישיות</strong> המשלבות ריצה, כוח ושיפור סיבולת
+              <strong>תוכניות אימון אישיות</strong>
+               {/* המשלבות ריצה, כוח ושיפור סיבולת */}
             </li>
             <li className="service-item">
               <span className="check-icon">✔️</span>
