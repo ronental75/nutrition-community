@@ -136,10 +136,10 @@
       onClick={() => setMenuOpen(!menuOpen)}
     >
       &#9776;
-    </button>
+    </button>  </div>
     <div className="share-wrapper">
     <Share />
-  </div>
+
   </div>      {menuOpen && (
         
     <div className="menu-dropdown"  >
