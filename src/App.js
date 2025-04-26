@@ -8,6 +8,9 @@
   import AnimatedBanner from './AnimatedBanner';
   import SubmitPost from './SubmitPost'; // 👈 add this at the top
   import Share from './share';
+  import TdeeCalculator from './TdeeCalculator';
+  // import Comments from './Comments';
+
 
 
 
@@ -147,7 +150,9 @@
       <Link to="/submit" className="menu-item">
         {isHebrew ? 'שלחו פוסט' : 'About'}
       </Link>
-
+      <Link to="/TdeeCalculator" className="menu-item">
+        {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
+      </Link>
       <Link to="/about" className="menu-item">
         {isHebrew ? 'אודות' : 'About'}
       </Link>
@@ -240,6 +245,8 @@
           dir="rtl"
         >
           <LikeDislike slug={post.slug} />
+          {/* <Comments slug={post.slug} /> */}
+
         </div>
 </div>
 
@@ -258,6 +265,7 @@
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/submit" element={<SubmitPost />} />
+          <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
 
 
           {posts.map((post) => (

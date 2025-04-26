@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ref, get, set } from 'firebase/database';
-import { db } from './firebase';
+
+
+import { dbRealtime } from './firebase'; // Correct import for likes
+import { ref, set, get, onValue } from "firebase/database";
+
 
 export default function LikeDislike({ slug }) {
   const [userIP, setUserIP] = useState('');
@@ -18,8 +21,8 @@ export default function LikeDislike({ slug }) {
 
   useEffect(() => {
     if (!userIP) return;
-    const countRef = ref(db, `likes/${slug}`);
-    const userRef = ref(db, `likes/${slug}/users/${userIP}`);
+    const countRef = ref(dbRealtime, `likes/${slug}`);
+    const userRef = ref(dbRealtime, `likes/${slug}/users/${userIP}`);
 
     get(countRef).then((snapshot) => {
       const data = snapshot.val() || {};
@@ -37,8 +40,8 @@ export default function LikeDislike({ slug }) {
   const updateReaction = async (newStatus) => {
     if (!userIP) return;
 
-    const countRef = ref(db, `likes/${slug}`);
-    const userRef = ref(db, `likes/${slug}/users/${userIP}`);
+    const countRef = ref(dbRealtime, `likes/${slug}`);
+    const userRef = ref(dbRealtime, `likes/${slug}/users/${userIP}`);
 
     const snapshot = await get(countRef);
     const data = snapshot.val() || { likeCount: 0, dislikeCount: 0 };
