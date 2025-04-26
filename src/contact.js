@@ -30,7 +30,8 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="community-button"
             >
-              הצטרף לקהילת Eat Smart, Live Strong
+              הצטרף לקהילת <br></br>
+              Eat Smart, Live Strong
             </a>
           </div>
         </div>
