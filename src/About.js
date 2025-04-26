@@ -71,7 +71,14 @@ export default function About() {
         <div className="contact-section">
           <h3 className="section-title">צור קשר</h3>
           <div className="contact-buttons">
-            <a href="/contact" className="contact-button">השאר פרטים</a>
+    <a
+      href="https://wa.me/972501234567"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="contact-button"
+    >
+      שלח הודעה 
+    </a>
             <a href="tel:+9721234567" className="phone-button">התקשר עכשיו</a>
           </div>
         </div>
