@@ -9,7 +9,7 @@ export default function About() {
         
         <div className="about-profile">
           <div className="profile-image">
-            <img src="\images\ronen.jpg" alt="רונן" className="profile-photo" />
+            <img src="/images/ronen.jpg" alt="רונן" className="profile-photo" />
           </div>
           <div className="profile-intro">
             <p className="intro-text">

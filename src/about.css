@@ -41,8 +41,8 @@
     width: 120px;    /* 👈 fixed width */
   height: 160px;   /* 👈 fixed height */
   object-fit: cover; /* 👈 crop nicely without stretching */
-    border-radius: 0%;
-    border: 3px solid #2563eb;
+    border-radius: 20%;
+    border: 2px solid #1909f4;
   }
   
   .profile-intro {
