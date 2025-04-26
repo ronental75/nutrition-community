@@ -1,0 +1,75 @@
+.contact-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    direction: rtl;
+  }
+  
+  .contact-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: right;
+  }
+  
+  .contact-title {
+    font-size: 2rem;
+    color: #2E86C1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .contact-details {
+    font-size: 1.05rem;
+    color: #1f2937;
+    line-height: 1.8;
+  }
+  
+  .contact-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .contact-link:hover {
+    text-decoration: underline;
+  }
+  
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    align-items: center;
+  }
+  
+  .whatsapp-button, .community-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .whatsapp-button {
+    background-color: #25D366;
+  }
+  
+  .whatsapp-button:hover {
+    background-color: #1DA851;
+    transform: translateY(-2px);
+  }
+  
+  .community-button {
+    background-color: #2563eb;
+  }
+  
+  .community-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+  }
+  

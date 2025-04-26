@@ -181,7 +181,8 @@
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-                <AnimatedBanner text={bannerText} />
+                <Link to="/contact" style={{ textDecoration: 'none' }}>
+                <AnimatedBanner text={bannerText} /></Link>
                 </div>
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
