@@ -116,7 +116,7 @@
     const isHebrew = lang === 'he';
     const [selectedCategory, setSelectedCategory] = useState('תזונה');
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
-    const bannerText = "🔥ליווי אישי לאורך חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
+    const bannerText = "🔥ליווי אישי לאורח חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
 
     const filteredPosts = posts.filter((post) =>
