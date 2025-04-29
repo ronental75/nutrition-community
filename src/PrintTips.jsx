@@ -28,9 +28,14 @@ export default function PrintTips() {
         <div className="contact-section no-print">
           <div className="contact-buttons">
             <button onClick={handlePrint} className="contact-button">שמור כ-PDF</button>
-            <button onClick={() => navigate('/he')} className="phone-button">חזרה לדף הראשי</button>
+            {/* <div className="return-button-container"> */}
+                <a href="/he" className="return-button">
+            חזרה לדף הראשי
+          </a>
+        {/* </div> */}
           </div>
         </div>
+        
       </div>
     </div>
   );
