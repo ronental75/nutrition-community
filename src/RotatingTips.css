@@ -1,0 +1,73 @@
+.tips-container {
+    max-width: auto;
+    margin: 0 auto;
+    background-color: white;
+    padding: 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4px;
+    direction: rtl;
+  }
+  
+  .tips-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #0d9488;
+  }
+  
+  .tips-content {
+    transition: opacity 0.5s;
+    min-height: 60px;
+  }
+  
+  .fade-in {
+    opacity: 1;
+  }
+  
+  .fade-out {
+    opacity: 0;
+  }
+  
+  .tips-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .tips-icon {
+    font-size: 32px;
+  }
+  
+  .tips-text {
+    flex: 1;
+  }
+  
+  .tips-category {
+    margin-bottom: 2px;
+    font-weight: bold;
+    color: #0d9488;
+  }
+  
+  .tips-message {
+    line-height: 1.5;
+  }
+  
+  .tips-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 8px;
+  }
+  
+  .tips-indicator {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #d1d5db;
+  }
+  
+  .tips-indicator-active {
+    background-color: #0d9488;
+  }

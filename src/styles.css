@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .button {
     min-width: 6rem;
     padding: 0.25rem 0.75rem;
@@ -838,26 +841,4 @@ body {
   margin-right: 6px;
   border-radius: 9999px;
   vertical-align: middle;
-}
-@media print {
-  .no-print {
-    display: none !important;
-  }
-
-  .about-container {
-    box-shadow: none;
-    background: white;
-    padding: 0;
-  }
-
-  .about-content {
-    padding: 1cm;
-    font-size: 18px;
-    line-height: 1.6;
-  }
-
-  .profile-image img {
-    max-height: 180px;
-    margin-bottom: 20px;
-  }
 }

@@ -11,7 +11,8 @@
   import Share from './share';
   import TdeeCalculator from './TdeeCalculator';
   import PrintTips from './PrintTips';
-
+  import BMICalculator from './BMICalculator';
+  import RotatingTips from './RotatingTips'
 
   // import Comments from './Comments';
 
@@ -153,13 +154,16 @@
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
       <div className="menu-wrapper">
+        
     <button
       className="menu-button"
       onClick={() => setMenuOpen(!menuOpen)}
     >
       &#9776;
-    </button>  </div>
+    </button> 
+     </div>
     <div className="share-wrapper">
+    
     <Share />
 
   </div>      {menuOpen && (
@@ -171,6 +175,9 @@
       <Link to="/TdeeCalculator" className="menu-item">
         {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
       </Link>
+      <Link to="/BMICalculator" className="menu-item">
+        {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
+      </Link>
       <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
 
       <Link to="/about" className="menu-item">
@@ -179,9 +186,11 @@
       <Link to="/contact" className="menu-item">
         {isHebrew ? 'צור קשר' : 'Contact'}
       </Link>
-     
+      
     </div>
+  
   )
+
   }
 
     </div>
@@ -204,6 +213,9 @@
                 <Link to="/contact" style={{ textDecoration: 'none' }}>
                 <AnimatedBanner text={bannerText} /></Link>
                 </div>
+                <div className="rotating-tips-wrapper">
+            <RotatingTips />
+          </div>
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
         <div className="posts-container">
@@ -304,6 +316,8 @@
           <Route path="/submit" element={<SubmitPost />} />
           <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
           <Route path="/print-tips" element={<PrintTips />} />
+          <Route path="/BMICalculator" element={<BMICalculator />} />
+
 
 
           {posts.map((post) => (
