@@ -247,3 +247,92 @@
       margin-bottom: 0.5rem;
     }
   }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  
+    .about-container {
+      background: white;
+      box-shadow: none;
+      padding: 0;
+    }
+  
+    .styled-poster {
+      border: none;
+      box-shadow: none;
+      padding: 1cm;
+    }
+  
+    .poster-title {
+      font-size: 28px;
+      color: black;
+      border: none;
+    }
+  
+    .tip-list-rtl li {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+  }
+  
+  
+  .tip-list {
+    list-style-type: decimal;
+    list-style-position: inside;
+    padding: 0;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .tip-list li {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+  /* טיפוגרפיה מרשימה לדף פוסטר */
+.styled-poster {
+    background: #fdfdfd;
+    border: 3px solid #2563eb;
+    border-radius: 12px;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.07);
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* כותרת מרשימה */
+  .poster-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 2rem;
+    border-bottom: 2px dashed #60a5fa;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* רשימה עם יישור לימין וספירה */
+  .tip-list-rtl {
+    list-style-type: decimal;
+    list-style-position: inside;
+    text-align: right;
+    direction: rtl;
+    font-size: 1.3rem;
+    color: #1f2937;
+    line-height: 2;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  /* הדגשת מילות מפתח */
+  .tip-list-rtl li span {
+    font-weight: bold;
+    color: #2563eb;
+  }
+  

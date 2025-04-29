@@ -800,3 +800,64 @@ body {
   }
 }
 
+.post-meta-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.post-meta-info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.post-date, .post-author {
+  color: #6b7280;
+}
+
+.post-meta-likes {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #ef4444; /* ❤️ צבע אדום ללייקים */
+}
+
+.post-meta-likes svg {
+  margin-left: 0.25rem;
+}
+.new-badge {
+  background-color: #34d399; /* ירוק יפה */
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  margin-right: 6px;
+  border-radius: 9999px;
+  vertical-align: middle;
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .about-container {
+    box-shadow: none;
+    background: white;
+    padding: 0;
+  }
+
+  .about-content {
+    padding: 1cm;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .profile-image img {
+    max-height: 180px;
+    margin-bottom: 20px;
+  }
+}

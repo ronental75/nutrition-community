@@ -5,10 +5,14 @@
   import Contact from './contact';
   import classNames from 'classnames';
   import LikeDislike from './LikeDislike';
+  import LikeDisplay from "./LikeDisplay";
   import AnimatedBanner from './AnimatedBanner';
   import SubmitPost from './SubmitPost'; // 👈 add this at the top
   import Share from './share';
   import TdeeCalculator from './TdeeCalculator';
+  import PrintTips from './PrintTips';
+
+
   // import Comments from './Comments';
 
 
@@ -47,41 +51,42 @@
     }
   }
 
-  function createPost(slug, title, categories) {
+  function createPost(slug, title, categories, date) {
     const filePath = `/posts/${slug}.html`;
-    const summary =  extractSummaryFromHTML(filePath);
-
+    const summary = extractSummaryFromHTML(filePath);
+  
     return {
       slug,
       he: title,
       summary,
       image: `/images/${slug}.jpg`,
       file: filePath,
-      categories
+      categories,
+      date: date || new Date().toISOString().split('T')[0], // אם אין, קח תאריך של היום
+      author: "רונן טל" // ✅ קבוע
     };
   }
 
 
   const posts = [
-    createPost('stack', 'תקועים על אותו משקל? זו לא אשמתכם – זה הגוף שלכם!', ['תזונה']),
-    createPost('setpoint2', 'מה הסוד לשינוי נקודת שיווי המשקל של הגוף?', ['תזונה']),
-    createPost('protein', 'חלבון – מרכיב חיוני לבריאות ולכושר', ['תזונה', 'ספורט']),
-    createPost('protein-guide-full', 'כל מה שרציתם לדעת על חלבון – הרחבה חשובה!', ['תזונה', 'ספורט']),
-    createPost('mediterranean-diet', 'דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי', ['תזונה']),
-    createPost('diet-guide', 'עושים סדר בדיאטות – מה באמת עובד?', ['תזונה']),
-    createPost('pre-workout-strategy', 'ירידה במשקל או הגדלת השרירים?', ['ספורט']),
-    createPost('nutrition-for-runners', 'איך לאכול נכון בריצות – לפי המאמר Nutrition Recommendations for Distance Running?', ['ספורט']),
-    createPost('strength-training-nutrition', 'תזונה בזמן ואחרי אימון כוח – איך לתמוך בתהליך ולמקסם תוצאות?', ['ספורט']),
-    createPost('muscle-growth-tips', 'טיפים מעשיים להגדלת מסת השריר!', ['ספורט']),
-    createPost('pre-strength-nutrition', 'תזונה לפני אימון כוח – איך להכין את הגוף לביצועים מיטביים?', ['ספורט']),
-    createPost('sports-nutrition-guide', 'תזונת ספורט חכמה: איך להתאים תזונה להצלחה באימונים?', ['תזונה', 'ספורט']),
-    createPost('high-heart-rate-fat-burn', 'שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??', ['ספורט']),
-    createPost('fat-in-weight-loss', 'שומן – חבר או אויב בתהליך הירידה במשקל?', ['תזונה']),
-    createPost('tee-and-weight-loss-plan', 'איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל', ['תזונה']),
-    createPost('holy-triad-nutrition-sleep-fitness', 'השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה', ['אורח חיים בריא']),
-    createPost('garlic-antioxidants-health', 'לא על השום לבדו!', ['אורח חיים בריא']),
-    createPost('dietary-fiber-guide', 'כל מה שצריך לדעת על סיבים תזונתיים', ['תזונה']),
-    createPost('quality-sleep-tips', 'טיפים מעשיים לשינה איכותית', ['אורח חיים בריא']),
+    createPost('stack', 'תקועים על אותו משקל? זו לא אשמתכם – זה הגוף שלכם!', ['תזונה'],'2025-04-21'),
+    createPost('setpoint2', 'מה הסוד לשינוי נקודת שיווי המשקל של הגוף?', ['תזונה'],'2025-04-28'),
+    createPost('protein', 'חלבון – מרכיב חיוני לבריאות ולכושר', ['תזונה', 'ספורט'],'2025-03-03'),
+    createPost('protein-guide-full', 'כל מה שרציתם לדעת על חלבון – הרחבה חשובה!', ['תזונה', 'ספורט'],'2025-03-04'),
+    createPost('mediterranean-diet', 'דיאטה הים-תיכונית – הדרך המאוזנת לבריאות, ביצועים ואיזון קלורי', ['תזונה'],'2025-03-06'),
+    createPost('diet-guide', 'עושים סדר בדיאטות – מה באמת עובד?', ['תזונה'],'2025-03-07'),
+    createPost('pre-workout-strategy', 'ירידה במשקל או הגדלת השרירים?', ['ספורט'],'2025-03-08'),
+    createPost('nutrition-for-runners','איך לאכול נכון בריצות – לפי המאמר Nutrition Recommendations for Distance Running?', ['ספורט'],'2025-03-12'),
+    createPost('strength-training-nutrition', 'תזונה בזמן ואחרי אימון כוח – איך לתמוך בתהליך ולמקסם תוצאות?', ['ספורט'],'2025-03-13'),
+    createPost('muscle-growth-tips', 'טיפים מעשיים להגדלת מסת השריר!', ['ספורט'],'2025-03-20'),
+    createPost('sports-nutrition-guide','תזונת ספורט חכמה: איך להתאים תזונה להצלחה באימונים?', ['תזונה', 'ספורט'],'2025-03-23'),
+    createPost('high-heart-rate-fat-burn', 'שריפת שומן מקסימלית: למה אימון בדופק גבוה הוא הנשק הסודי שלך??', ['ספורט'],'2025-03-28'),
+    createPost('fat-in-weight-loss', 'שומן – חבר או אויב בתהליך הירידה במשקל?', ['תזונה'],'2025-04-03'),
+    createPost('tee-and-weight-loss-plan', 'איך לחשב את ההוצאה הקלורית היומית ולבנות תפריט לירידה במשקל', ['תזונה'],'2025-04-10'),
+    createPost('holy-triad-nutrition-sleep-fitness', 'השילוש הקדוש לאורך חיים בריא : תזונה, פעילות גופנית ושינה', ['אורח חיים בריא'],'2025-04-11'),
+    createPost('garlic-antioxidants-health', 'לא על השום לבדו!', ['אורח חיים בריא'],'2025-04-14'),
+    createPost('dietary-fiber-guide', 'כל מה שצריך לדעת על סיבים תזונתיים', ['תזונה'],'2025-03-23'),
+    createPost('quality-sleep-tips', 'טיפים מעשיים לשינה איכותית', ['אורח חיים בריא'],'2025-03-24'),
   ];
 
 
@@ -109,8 +114,19 @@
     );
   }
 
-
-
+  function isNewPost(dateStr) {
+    const postDate = new Date(dateStr);
+    const now = new Date();
+    const diffInDays = (now - postDate) / (1000 * 60 * 60 * 24);
+    return diffInDays <= 7;
+  }
+  
+  function formatDate(dateStr) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateObj = new Date(dateStr);
+    return dateObj.toLocaleDateString('he-IL', options);
+  }
+  
 
 
   function LandingPage({ lang }) {
@@ -120,11 +136,12 @@
     const bannerText = "🔥ליווי אישי לאורח חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
 
-    const filteredPosts = posts.filter((post) =>
-      post.categories?.includes(selectedCategory)
-    );
-
-
+    const filteredPosts = (
+      selectedCategory === 'תזונה'
+        ? posts
+        : posts.filter((post) => post.categories?.includes(selectedCategory))
+    ).sort((a, b) => new Date(b.date) - new Date(a.date));
+    
     return (
       
     <div className="top-bar-wrapper" dir="rtl" >
@@ -154,6 +171,8 @@
       <Link to="/TdeeCalculator" className="menu-item">
         {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
       </Link>
+      <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
+
       <Link to="/about" className="menu-item">
         {isHebrew ? 'אודות' : 'About'}
       </Link>
@@ -211,18 +230,33 @@
     </span>
   ))}
 </div>
-              <h2 className="post-title">
-              {post.categories?.map((cat) => categoryIcons[cat]).join(' ')} {post.he}
-              </h2>
-                <p className="post-summary">
-                  {post.summary}
-                </p>
-                <span className="post-read-more">
-                  לפוסט המלא...
-                </span>
-              </div>
-            </Link>
-          ))}
+<h2 className="post-title">
+  {post.categories?.map((cat) => categoryIcons[cat]).join(' ')} {post.he}
+  {isNewPost(post.date) && <span className="new-badge">חדש!</span>}
+</h2>
+
+
+<div className="post-meta-wrapper">
+  <div className="post-meta-info">
+    <span className="post-date">{formatDate(post.date)}</span>
+    <span className="post-author">· {post.author}</span>
+  </div>
+  {/* <div className="post-meta-likes">
+    <LikeDisplay slug={post.slug} />
+  </div> */}
+</div>
+
+<p className="post-summary">
+  {post.summary}
+</p>
+
+<span className="post-read-more">
+  לפוסט המלא...
+</span>
+
+                </div>
+              </Link>
+            ))}
         </div>
       </div>
     </div>
@@ -269,6 +303,7 @@
           <Route path="/contact" element={<Contact />} />
           <Route path="/submit" element={<SubmitPost />} />
           <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
+          <Route path="/print-tips" element={<PrintTips />} />
 
 
           {posts.map((post) => (
