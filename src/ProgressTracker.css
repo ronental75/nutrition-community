@@ -1,0 +1,155 @@
+.tracker-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    direction: rtl;
+  }
+  
+  .tracker-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #0d9488;
+  }
+  
+  .tracker-subtitle {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .tracker-form {
+    margin-bottom: 24px;
+  }
+  
+  .tracker-inputs-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .tracker-input-group {
+    margin-bottom: 16px;
+  }
+  
+  .tracker-input-half {
+    flex: 1;
+  }
+  
+  .tracker-label {
+    display: block;
+    color: #4b5563;
+    margin-bottom: 8px;
+  }
+  
+  .tracker-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+  }
+  
+  .tracker-button {
+    width: 100%;
+    background-color: #0d9488;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .tracker-button:hover {
+    background-color: #0f766e;
+  }
+  
+  .tracker-skip {
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .tracker-skip-button {
+    color: #0d9488;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tracker-skip-button:hover {
+    text-decoration: underline;
+  }
+  
+  .tracker-progress {
+    margin-bottom: 24px;
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .tracker-progress-text {
+    font-weight: bold;
+  }
+  
+  .tracker-progress-positive {
+    color: #10b981;
+  }
+  
+  .tracker-progress-negative {
+    color: #ef4444;
+  }
+  
+  .tracker-history {
+    margin-top: 16px;
+  }
+  
+  .tracker-table-container {
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  
+  .tracker-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tracker-table-header {
+    background-color: #f9fafb;
+  }
+  
+  .tracker-table-row {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .tracker-table-cell {
+    padding: 8px;
+    text-align: right;
+  }
+  
+  .tracker-delete-button {
+    color: #ef4444;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tracker-delete-button:hover {
+    color: #b91c1c;
+  }
+  
+  .tracker-empty {
+    text-align: center;
+    color: #6b7280;
+  }
+  
+  .tracker-disclaimer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+  }

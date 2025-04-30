@@ -1,104 +1,172 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import classNames from 'classnames';
+import React, { useState, useEffect } from 'react';
+import { dbRealtime } from './firebase';
+import { ref, set, get, onValue } from 'firebase/database';
+import UserLogin from './UserLogin';
+import './LikeDislike.css';
 
-const categories = [
-  { key: "ספורט", label: "ספורט" },
-  { key: "דיאטה", label: "דיאטה" },
-  { key: "תזונה", label: "תזונה" },
-  { key: "אורח חיים בריא", label: "אורח חיים בריא" }
-];
+const LikeDislike = ({ slug }) => {
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userAction, setUserAction] = useState(null); // 'like', 'dislike', או null
+  const [userId, setUserId] = useState(null);
+  const [userNickname, setUserNickname] = useState(null);
 
-function CategoryButtons({ selectedCategory, setSelectedCategory }) {
-  return (
-    <div
-      className="sticky top-0 z-10 bg-white py-4 px-4 shadow-sm border-b flex flex-wrap justify-center gap-2"
-      style={{ direction: 'ltr' }}
-    >
-      {categories.map((cat) => (
-        <button
-          key={cat.key}
-          onClick={() => setSelectedCategory(cat.key)}
-          className={classNames('px-4 py-1 rounded-full border text-sm transition', {
-            'bg-blue-600 text-white font-semibold': selectedCategory === cat.key,
-            'bg-gray-100 text-gray-700': selectedCategory !== cat.key
-          })}
-        >
-          {cat.label}
-        </button>
-      ))}
-    </div>
-  );
-}
+  // בדיקה אם המשתמש כבר מזוהה
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('user_id');
+    const storedNickname = localStorage.getItem('user_nickname');
+    
+    if (storedUserId && storedNickname) {
+      setUserId(storedUserId);
+      setUserNickname(storedNickname);
+    }
+  }, []);
 
-export default function LandingPage({ posts, lang }) {
-  const isHebrew = lang === 'he';
-  const [selectedCategory, setSelectedCategory] = useState('תזונה');
-  const [visibleCount, setVisibleCount] = useState(6);
+  // טעינת נתוני לייק/דיסלייק והפעולה של המשתמש הנוכחי
+  useEffect(() => {
+    if (!slug) return;
 
-  const filteredPosts =
-    selectedCategory === 'תזונה'
-      ? posts
-      : posts.filter(post => post.categories?.includes(selectedCategory));
+    // האזנה לשינויים במספר הלייקים והדיסלייקים
+    const likesRef = ref(dbRealtime, `post_reactions/${slug}/likes`);
+    const dislikesRef = ref(dbRealtime, `post_reactions/${slug}/dislikes`);
+    
+    const likesListener = onValue(likesRef, (snapshot) => {
+      setLikes(snapshot.exists() ? snapshot.val() : 0);
+    });
 
-  const visiblePosts = filteredPosts.slice(0, visibleCount);
+    const dislikesListener = onValue(dislikesRef, (snapshot) => {
+      setDislikes(snapshot.exists() ? snapshot.val() : 0);
+    });
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 6);
+    // בדיקה אם המשתמש כבר דירג את הפוסט
+    const checkUserAction = async () => {
+      if (userId) {
+        try {
+          const userActionRef = ref(dbRealtime, `user_reactions/${userId}/${slug}`);
+          const snapshot = await get(userActionRef);
+          
+          if (snapshot.exists()) {
+            setUserAction(snapshot.val());
+          } else {
+            setUserAction(null);
+          }
+        } catch (error) {
+          console.error("Error checking user action:", error);
+        }
+      }
+      setIsLoading(false);
+    };
+
+    checkUserAction();
+
+    return () => {
+      likesListener();
+      dislikesListener();
+    };
+  }, [slug, userId]);
+
+  const handleLike = async () => {
+    if (isLoading || !userId) return;
+
+    try {
+      const userActionRef = ref(dbRealtime, `user_reactions/${userId}/${slug}`);
+      const likesRef = ref(dbRealtime, `post_reactions/${slug}/likes`);
+      const dislikesRef = ref(dbRealtime, `post_reactions/${slug}/dislikes`);
+
+      // אם המשתמש כבר לחץ לייק, מבטל את הלייק
+      if (userAction === 'like') {
+        await set(userActionRef, null);
+        await set(likesRef, Math.max(0, likes - 1));
+        setUserAction(null);
+      } 
+      // אם המשתמש לא דירג או לחץ דיסלייק
+      else {
+        // אם המשתמש לחץ דיסלייק קודם, מבטל את הדיסלייק
+        if (userAction === 'dislike') {
+          await set(dislikesRef, Math.max(0, dislikes - 1));
+        }
+        
+        // שומר את הלייק
+        await set(userActionRef, 'like');
+        await set(likesRef, (likes || 0) + 1);
+        setUserAction('like');
+      }
+    } catch (error) {
+      console.error("Error updating like:", error);
+    }
   };
 
+  const handleDislike = async () => {
+    if (isLoading || !userId) return;
+
+    try {
+      const userActionRef = ref(dbRealtime, `user_reactions/${userId}/${slug}`);
+      const likesRef = ref(dbRealtime, `post_reactions/${slug}/likes`);
+      const dislikesRef = ref(dbRealtime, `post_reactions/${slug}/dislikes`);
+
+      // אם המשתמש כבר לחץ דיסלייק, מבטל את הדיסלייק
+      if (userAction === 'dislike') {
+        await set(userActionRef, null);
+        await set(dislikesRef, Math.max(0, dislikes - 1));
+        setUserAction(null);
+      } 
+      // אם המשתמש לא דירג או לחץ לייק
+      else {
+        // אם המשתמש לחץ לייק קודם, מבטל את הלייק
+        if (userAction === 'like') {
+          await set(likesRef, Math.max(0, likes - 1));
+        }
+        
+        // שומר את הדיסלייק
+        await set(userActionRef, 'dislike');
+        await set(dislikesRef, (dislikes || 0) + 1);
+        setUserAction('dislike');
+      }
+    } catch (error) {
+      console.error("Error updating dislike:", error);
+    }
+  };
+
+  const handleUserLogin = (userData) => {
+    setUserId(userData.userId);
+    setUserNickname(userData.nickname);
+  };
+
+  // אם המשתמש לא מזוהה, מציג את טופס ההזדהות
+  if (!userId) {
+    return <UserLogin onLogin={handleUserLogin} />;
+  }
+
   return (
-    <div dir="rtl" className="max-w-5xl mx-auto px-4">
-      <header className="text-center my-10">
-        <h1 className="text-3xl font-bold">{isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}</h1>
-        <p className="mt-2 text-gray-600">
-          {isHebrew
-            ? 'טיפים, מחקרים ומידע מקצועי על אורח חיים בריא'
-            : 'Tips, research, and professional info about healthy living'}
-        </p>
-      </header>
-
-      <CategoryButtons
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
-
-      <div className="space-y-8 mt-8">
-        {visiblePosts.map(post => (
-          <div
-            key={post.slug}
-            className="flex flex-col md:flex-row gap-4 border-b pb-6 transition-transform hover:scale-[1.01] duration-150"
-          >
-            <img
-              src={post.image}
-              alt={post.he}
-              className="w-full md:w-48 h-auto rounded-md object-cover"
-            />
-            <div className="flex-1 text-right">
-              <h2 className="text-xl font-semibold mb-2">{post.he}</h2>
-              <p className="text-sm text-gray-500 mb-1">מאת צוות התזונה | 2024</p>
-              <p className="text-gray-700 text-sm mb-2">{post.summary}</p>
-              <Link
-                to={`/${lang}/${post.slug}`}
-                className="text-blue-600 text-sm hover:underline"
-              >
-                לפוסט המלא...
-              </Link>
-            </div>
-          </div>
-        ))}
+    <div className="like-dislike-container">
+      <div className="like-dislike-header">
+        <div className="like-dislike-text">האם הפוסט הזה היה מועיל?</div>
+        <div className="user-info">מחובר כ: {userNickname}</div>
       </div>
-
-      {visibleCount < filteredPosts.length && (
-        <div className="text-center mt-8">
-          <button
-            onClick={handleLoadMore}
-            className="px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm transition"
-          >
-            טען עוד
-          </button>
-        </div>
-      )}
+      
+      <div className="like-dislike-buttons">
+        <button 
+          className={`like-button ${userAction === 'like' ? 'active' : ''}`} 
+          onClick={handleLike}
+          disabled={isLoading}
+        >
+          <span className="like-icon">👍</span>
+          <span className="like-count">{likes || 0}</span>
+        </button>
+        <button 
+          className={`dislike-button ${userAction === 'dislike' ? 'active' : ''}`} 
+          onClick={handleDislike}
+          disabled={isLoading}
+        >
+          <span className="dislike-icon">👎</span>
+          <span className="dislike-count">{dislikes || 0}</span>
+        </button>
+      </div>
+      
+      {isLoading && <div className="like-dislike-loading">טוען...</div>}
     </div>
   );
-}
+};
+
+export default LikeDislike;

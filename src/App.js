@@ -5,14 +5,15 @@
   import Contact from './contact';
   import classNames from 'classnames';
   import LikeDislike from './LikeDislike';
-  import LikeDisplay from "./LikeDisplay";
+  import LikeDisplay from './LikeDisplay';
   import AnimatedBanner from './AnimatedBanner';
   import SubmitPost from './SubmitPost'; // 👈 add this at the top
   import Share from './share';
   import TdeeCalculator from './TdeeCalculator';
   import PrintTips from './PrintTips';
   import BMICalculator from './BMICalculator';
-  import RotatingTips from './RotatingTips'
+  // import RotatingTips from './RotatingTips'
+  // import ProgressTracker from './ProgressTracker'
 
   // import Comments from './Comments';
 
@@ -137,11 +138,9 @@
     const bannerText = "🔥ליווי אישי לאורח חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
 
-    const filteredPosts = (
-      selectedCategory === 'תזונה'
-        ? posts
-        : posts.filter((post) => post.categories?.includes(selectedCategory))
-    ).sort((a, b) => new Date(b.date) - new Date(a.date));
+    const filteredPosts = posts
+    .filter((post) => post.categories?.includes(selectedCategory))
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
     
     return (
       
@@ -178,6 +177,9 @@
       <Link to="/BMICalculator" className="menu-item">
         {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
       </Link>
+      {/* <Link to="/ProgressTracker" className="menu-item">
+        {isHebrew ? ' מערכת מעקב אישית ': "ProgressTracker"}
+      </Link> */}
       <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
 
       <Link to="/about" className="menu-item">
@@ -213,9 +215,11 @@
                 <Link to="/contact" style={{ textDecoration: 'none' }}>
                 <AnimatedBanner text={bannerText} /></Link>
                 </div>
-                <div className="rotating-tips-wrapper">
+                {/* <div className="rotating-tips-wrapper">
             <RotatingTips />
-          </div>
+            
+          </div> */}
+          
         {/* <hr className="border-gray-300 mx-4" /> */}
         </div>
         <div className="posts-container">
@@ -253,9 +257,9 @@
     <span className="post-date">{formatDate(post.date)}</span>
     <span className="post-author">· {post.author}</span>
   </div>
-  {/* <div className="post-meta-likes">
-    <LikeDisplay slug={post.slug} />
-  </div> */}
+  <div className="post-meta-likes">
+  <LikeDisplay slug={post.slug} />
+</div>
 </div>
 
 <p className="post-summary">
@@ -316,8 +320,10 @@
           <Route path="/submit" element={<SubmitPost />} />
           <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
           <Route path="/print-tips" element={<PrintTips />} />
-          <Route path="/BMICalculator" element={<BMICalculator />} />
-
+          <Route path="/BMICalculator" element={<BMICalculator />}/>
+          {/* <Route path="/ProgressTracker" element={<ProgressTracker />} */}
+           />
+          
 
 
           {posts.map((post) => (

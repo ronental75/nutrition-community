@@ -1,121 +1,194 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { dbRealtime } from './firebase';
+import { ref, set, get } from 'firebase/database';
+import UserLogin from './UserLogin';
+import './LikeDislike.css';
 
+const LikeDislike = ({ slug }) => {
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState(localStorage.getItem('user_id') || null);
+  const [userNickname, setUserNickname] = useState(localStorage.getItem('user_nickname') || null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [userAction, setUserAction] = useState(null); // 'like' או 'dislike'
 
-import { dbRealtime } from './firebase'; // Correct import for likes
-import { ref, set, get, onValue } from "firebase/database";
-
-
-export default function LikeDislike({ slug }) {
-  const [userIP, setUserIP] = useState('');
-  const [status, setStatus] = useState(null);
-  const [counts, setCounts] = useState({ like: 0, dislike: 0 });
-
+  // טעינת נתוני לייק/דיסלייק והפעולה הקודמת של המשתמש
   useEffect(() => {
-    fetch('https://api.ipify.org?format=json')
-      .then(res => res.json())
-      .then(data => {
-        const sanitizedIP = data.ip.split('.').join('_');
-        setUserIP(sanitizedIP);
-      });
-  }, []);
+    if (!slug) return;
 
-  useEffect(() => {
-    if (!userIP) return;
-    const countRef = ref(dbRealtime, `likes/${slug}`);
-    const userRef = ref(dbRealtime, `likes/${slug}/users/${userIP}`);
+    const fetchData = async () => {
+      try {
+        // קריאת מספר הלייקים והדיסלייקים
+        const likesRef = ref(dbRealtime, `post_reactions/${slug}/likes`);
+        const dislikesRef = ref(dbRealtime, `post_reactions/${slug}/dislikes`);
+        
+        const [likesSnapshot, dislikesSnapshot] = await Promise.all([
+          get(likesRef),
+          get(dislikesRef)
+        ]);
+        
+        setLikes(likesSnapshot.exists() ? likesSnapshot.val() : 0);
+        setDislikes(dislikesSnapshot.exists() ? dislikesSnapshot.val() : 0);
+        
+        // בדיקה אם המשתמש כבר הצביע
+        if (userId) {
+          const userReactionsRef = ref(dbRealtime, `user_reactions/${userId}/${slug}`);
+          const userReactionsSnapshot = await get(userReactionsRef);
+          
+          if (userReactionsSnapshot.exists()) {
+            setUserAction(userReactionsSnapshot.val());
+          }
+        }
+        
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error loading post reactions:", error);
+        setIsLoading(false);
+      }
+    };
 
-    get(countRef).then((snapshot) => {
-      const data = snapshot.val() || {};
-      setCounts({
-        like: data.likeCount || 0,
-        dislike: data.dislikeCount || 0
-      });
-    });
+    fetchData();
+  }, [slug, userId]);
 
-    get(userRef).then((snapshot) => {
-      setStatus(snapshot.val() ?? null);
-    });
-  }, [userIP, slug]);
-
-  const updateReaction = async (newStatus) => {
-    if (!userIP) return;
-
-    const countRef = ref(dbRealtime, `likes/${slug}`);
-    const userRef = ref(dbRealtime, `likes/${slug}/users/${userIP}`);
-
-    const snapshot = await get(countRef);
-    const data = snapshot.val() || { likeCount: 0, dislikeCount: 0 };
-
-    let newCounts = { ...data };
-
-    if (status === 'like') newCounts.likeCount--;
-    if (status === 'dislike') newCounts.dislikeCount--;
-
-    if (newStatus === status) {
-      newStatus = null;
-    } else {
-      if (newStatus === 'like') newCounts.likeCount++;
-      if (newStatus === 'dislike') newCounts.dislikeCount++;
-    }
-
-    await set(countRef, {
-      likeCount: newCounts.likeCount,
-      dislikeCount: newCounts.dislikeCount
-    });
-
-    await set(userRef, newStatus);
-    setStatus(newStatus);
-    setCounts({
-      like: newCounts.likeCount,
-      dislike: newCounts.dislikeCount
-    });
+  // פונקציה להתנתקות
+  const handleLogout = () => {
+    // מחיקת נתוני המשתמש מהאחסון המקומי
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_nickname');
+    
+    // איפוס מצב המשתמש ברכיב
+    setUserId(null);
+    setUserNickname(null);
+    setUserAction(null);
   };
-  const animateButton = (type) => {
-    const btn = document.getElementById(`${type}-button`);
-    if (btn) {
-      btn.classList.add('scale-bounce');
-      setTimeout(() => btn.classList.remove('scale-bounce'), 200);
+
+  // הפונקציה שתיקרא כשמשתמש מנסה ללחוץ לייק/דיסלייק ללא הזדהות
+  const handleActionWithoutLogin = () => {
+    if (!userId) {
+      setShowLogin(true);
     }
   };
+
+  // הפונקציה שתיקרא אחרי הזדהות מוצלחת
+  const handleUserLogin = (userData) => {
+    setUserId(userData.userId);
+    setUserNickname(userData.nickname);
+    setShowLogin(false);
+  };
+
+  // פונקציות עבור לייק ודיסלייק
+  const handleLike = async () => {
+    if (!userId) {
+      handleActionWithoutLogin();
+      return;
+    }
+
+    try {
+      const userReactionsRef = ref(dbRealtime, `user_reactions/${userId}/${slug}`);
+      const likesRef = ref(dbRealtime, `post_reactions/${slug}/likes`);
+      const dislikesRef = ref(dbRealtime, `post_reactions/${slug}/dislikes`);
+      
+      // אם המשתמש כבר לחץ לייק, מבטלים
+      if (userAction === 'like') {
+        await set(userReactionsRef, null);
+        await set(likesRef, Math.max(0, likes - 1));
+        setLikes(Math.max(0, likes - 1));
+        setUserAction(null);
+      } 
+      // אם המשתמש לא לחץ כלום או לחץ דיסלייק
+      else {
+        // אם המשתמש לחץ דיסלייק קודם, מבטלים
+        if (userAction === 'dislike') {
+          await set(dislikesRef, Math.max(0, dislikes - 1));
+          setDislikes(Math.max(0, dislikes - 1));
+        }
+        
+        await set(userReactionsRef, 'like');
+        await set(likesRef, (likes || 0) + 1);
+        setLikes((likes || 0) + 1);
+        setUserAction('like');
+      }
+    } catch (error) {
+      console.error("Error handling like:", error);
+    }
+  };
+
+  const handleDislike = async () => {
+    if (!userId) {
+      handleActionWithoutLogin();
+      return;
+    }
+
+    try {
+      const userReactionsRef = ref(dbRealtime, `user_reactions/${userId}/${slug}`);
+      const likesRef = ref(dbRealtime, `post_reactions/${slug}/likes`);
+      const dislikesRef = ref(dbRealtime, `post_reactions/${slug}/dislikes`);
+      
+      // אם המשתמש כבר לחץ דיסלייק, מבטלים
+      if (userAction === 'dislike') {
+        await set(userReactionsRef, null);
+        await set(dislikesRef, Math.max(0, dislikes - 1));
+        setDislikes(Math.max(0, dislikes - 1));
+        setUserAction(null);
+      } 
+      // אם המשתמש לא לחץ כלום או לחץ לייק
+      else {
+        // אם המשתמש לחץ לייק קודם, מבטלים
+        if (userAction === 'like') {
+          await set(likesRef, Math.max(0, likes - 1));
+          setLikes(Math.max(0, likes - 1));
+        }
+        
+        await set(userReactionsRef, 'dislike');
+        await set(dislikesRef, (dislikes || 0) + 1);
+        setDislikes((dislikes || 0) + 1);
+        setUserAction('dislike');
+      }
+    } catch (error) {
+      console.error("Error handling dislike:", error);
+    }
+  };
+
+  // מציג טופס הזדהות אם הפעילו אותו
+  if (showLogin) {
+    return <UserLogin onLogin={handleUserLogin} />;
+  }
+
   return (
-    <div
-  className="flex gap-4 items-center justify-center animate-fade-in"
-  style={{
-    fontFamily: '"Segoe UI", "Helvetica Neue", sans-serif',
-    fontSize: '1.1rem',
-    color: '#1f2937'
-  }}
->
-
-<button
-  onClick={() => {
-    updateReaction('like');
-    animateButton('like');
-  }}
-  id="like-button"
-  className={`like-btn px-4 py-1 rounded-full transition border text-sm ${
-    status === 'like'
-      ? 'bg-blue-600 text-white font-bold'
-      : 'bg-gray-100 text-gray-800'
-  }`}
->
-  <span role="img" aria-label="like">👍</span> אהבתי ({counts.like})
-</button>
-
-{/* <button
-  onClick={() => {
-    updateReaction('dislike');
-    animateButton('dislike');
-  }}
-  id="dislike-button"
-  className={`dislike-btn px-4 py-1 rounded-full transition border text-sm ${
-    status === 'dislike'
-      ? 'bg-red-600 text-white font-bold'
-      : 'bg-gray-100 text-gray-800'
-  }`}
->
-  <span role="img" aria-label="dislike">👎</span> לא אהבתי ({counts.dislike})
-</button> */}
+    <div className="like-dislike-container">
+      <div className="like-dislike-header">
+        <div className="like-dislike-text">האם הפוסט הזה היה מועיל?</div>
+        {userId && (
+          <div className="user-info">
+            <span className="user-nickname">מחובר כ: {userNickname}</span>
+            <button onClick={handleLogout} className="logout-button">התנתק</button>
+          </div>
+        )}
+      </div>
+      
+      <div className="like-dislike-buttons">
+        <button 
+          className={`like-button ${userAction === 'like' ? 'active' : ''}`}
+          onClick={handleLike}
+          disabled={isLoading}
+        >
+          <span className="like-icon">👍</span>
+          <span className="like-count">{likes}</span>
+        </button>
+        <button 
+          className={`dislike-button ${userAction === 'dislike' ? 'active' : ''}`}
+          onClick={handleDislike}
+          disabled={isLoading}
+        >
+          <span className="dislike-icon">👎</span>
+          <span className="dislike-count">{dislikes}</span>
+        </button>
+      </div>
+      
+      {isLoading && <div className="like-dislike-loading">טוען...</div>}
     </div>
   );
-}
+};
+
+export default LikeDislike;
