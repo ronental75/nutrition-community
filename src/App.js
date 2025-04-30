@@ -12,6 +12,7 @@
   import TdeeCalculator from './TdeeCalculator';
   import PrintTips from './PrintTips';
   import BMICalculator from './BMICalculator';
+  import SuccessStories from './components/SuccessStories';
   // import RotatingTips from './RotatingTips'
   // import ProgressTracker from './ProgressTracker'
 
@@ -177,9 +178,10 @@
       <Link to="/BMICalculator" className="menu-item">
         {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
       </Link>
-      {/* <Link to="/ProgressTracker" className="menu-item">
-        {isHebrew ? ' מערכת מעקב אישית ': "ProgressTracker"}
-      </Link> */}
+       {/* הוספת קישור חדש לסיפורי הצלחה */}
+    <Link to="/success-stories" className="menu-item">
+      {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
+    </Link>
       <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
 
       <Link to="/about" className="menu-item">
@@ -321,8 +323,18 @@
           <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
           <Route path="/print-tips" element={<PrintTips />} />
           <Route path="/BMICalculator" element={<BMICalculator />}/>
+          {/* נתיב חדש לדף סיפורי הצלחה */}
+          <Route path="/success-stories" element={<SuccessStories />} />
+          
+          {posts.map((post) => (
+            <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
+          ))}
+          {posts.map((post) => (
+            <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
+          ))}
+
           {/* <Route path="/ProgressTracker" element={<ProgressTracker />} */}
-           />
+           
           
 
 
