@@ -408,3 +408,192 @@
 .success-story-description {
   grid-column: 1 / -1;  /* משתרע על כל הרוחב */
 }
+
+/* תוספת לקובץ SuccessStories.css עבור גרף אימונים משופר */
+
+/* עיצוב טולטיפ משופר לגרף אימונים */
+.tooltip-strength {
+  margin: 2px 0;
+  font-weight: 500;
+  color: #8884d8;
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-cardio {
+  margin: 2px 0;
+  font-weight: 500;
+  color: #82ca9d;
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-total {
+  margin: 5px 0;
+  font-weight: 700;
+  color: #333;
+  border-top: 1px dashed #ddd;
+  padding-top: 5px;
+}
+
+.tooltip-strength-color,
+.tooltip-cardio-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+  border-radius: 2px;
+}
+
+.tooltip-strength-color {
+  background-color: #8884d8;
+}
+
+.tooltip-cardio-color {
+  background-color: #82ca9d;
+}
+
+.tooltip-details {
+  margin-top: 8px;
+  padding-top: 5px;
+  border-top: 1px dashed #ddd;
+}
+
+.tooltip-details-title {
+  margin: 0 0 5px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #555;
+}
+
+.tooltip-details-list {
+  margin: 0;
+  padding-right: 15px;
+  font-size: 11px;
+  color: #666;
+  list-style-type: disc;
+}
+
+.tooltip-details-list li {
+  margin-bottom: 2px;
+}
+
+/* כותרת גרף אימונים */
+.workouts-chart-wrapper .chart-title {
+  font-weight: 600;
+  color: #4a5568;
+  position: relative;
+}
+
+.workouts-chart-wrapper .chart-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 40px;
+  height: 2px;
+  background-color: #8884d8;
+}
+
+/* אנימציה לגרף */
+.recharts-bar-rectangle {
+  transition: opacity 0.3s;
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.8;
+}
+
+/* עיצוב השוואתי לטבלת אימונים */
+.workout-table {
+  margin-top: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.workout-table-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr;
+  background-color: #f3f4f6;
+  font-weight: bold;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.workout-table-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.workout-table-row:last-child {
+  border-bottom: none;
+}
+
+.workout-table-row:nth-child(odd) {
+  background-color: #f9fafb;
+}
+
+.workout-table-cell {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workout-table-cell.strength {
+  color: #8884d8;
+  font-weight: 500;
+}
+
+.workout-table-cell.cardio {
+  color: #82ca9d;
+  font-weight: 500;
+}
+
+.workout-table-cell.total {
+  font-weight: 700;
+  color: #333;
+}
+
+/* התאמה למובייל */
+@media (max-width: 768px) {
+  .chart-tooltip {
+    max-width: 220px;
+    font-size: 12px;
+  }
+  
+  .tooltip-details-list {
+    padding-right: 10px;
+    font-size: 10px;
+  }
+  
+  .recharts-legend-wrapper {
+    bottom: -40px !important;
+  }
+  
+  .recharts-legend-item {
+    margin-left: 10px !important;
+  }
+  
+  .recharts-legend-item-text {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-tooltip {
+    max-width: 180px;
+  }
+  
+  .workout-table-header,
+  .workout-table-row {
+    grid-template-columns: 60px 1fr 1fr;
+  }
+  
+  .workout-table-cell:last-child {
+    display: none;
+  }
+}

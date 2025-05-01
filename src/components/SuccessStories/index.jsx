@@ -28,9 +28,9 @@ const SuccessStories = () => {
   return (
     <div className="success-stories-container" dir="rtl">
       <div className="success-stories-header">
-        <h1 className="success-stories-title">סיפורי הצלחה אמיתיים</h1>
+        <h1 className="success-stories-title">סיפורי הצלחה </h1>
         <p className="success-stories-subtitle">
-          הלקוחות שלנו מספרים על השינוי האמיתי שעברו בתהליך הליווי שלנו
+          לקוחות  מספרים על השינוי האמיתי שעברו בתהליך הליווי 
         </p>
       </div>
       
