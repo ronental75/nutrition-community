@@ -113,130 +113,147 @@ const SuccessStoryCard = ({ story }) => {
         <h3>מעקב התקדמות</h3>
         
         <div className="chart-container">
-    {/* Replace the existing weight chart section with this code */}
-<div className="weight-chart-wrapper">
-  <h4 className="chart-title">התקדמות במשקל</h4>
-  <div className="chart-scroll-container">
-    <div className="chart-inner-container">
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart
-          data={story.weightData}
-          margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis 
-            dataKey="date" 
-            tick={{ fontSize: 12 }} 
-            tickFormatter={(value) => {
-              const parts = value.split('/');
-              return `${parts[0]}/${parts[1]}`;
-            }}
-          />
-          <YAxis 
-            domain={['dataMin - 1', 'dataMax + 1']} 
-            tick={{ fontSize: 12 }}
-          />
-          <Tooltip content={<CustomWeightTooltip />} />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="weight"
-            stroke="#0d9488"
-            strokeWidth={2}
-            name="משקל (ק״ג)"
-            activeDot={{ r: 6 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  </div>
-</div>  
+          <div className="weight-chart-wrapper">
+            <h4 className="chart-title">התקדמות במשקל</h4>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={story.weightData}
+                margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis 
+                  dataKey="date" 
+                  tick={{ fontSize: 12 }} 
+                  tickFormatter={(value) => {
+                    const parts = value.split('/');
+                    return `${parts[0]}/${parts[1]}`;
+                  }}
+                />
+                <YAxis 
+                  domain={['dataMin - 1', 'dataMax + 1']} 
+                  tick={{ fontSize: 12 }}
+                />
+                <Tooltip content={<CustomWeightTooltip />} />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="weight"
+                  stroke="#0d9488"
+                  strokeWidth={2}
+                  name="משקל (ק״ג)"
+                  activeDot={{ r: 6 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
 
-{/* Replace the existing workout chart section with this code */}
+
+{/* תצוגת נתוני אימונים אם קיימים */}
 {story.workoutData && story.workoutData.length > 0 && (
   <div className="workouts-chart-wrapper">
     <h4 className="chart-title">מעקב אימונים שבועי - כוח ואירובי</h4>
-    <div className="chart-scroll-container">
-      <div className="chart-inner-container">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart
-            data={story.workoutData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis 
-              dataKey="date" 
-              tick={{ fontSize: 12 }}
-              label={{ 
-                value: 'שבוע', 
-                position: 'insideBottom', 
-                offset: -5,
-                style: { fontSize: '14px', fill: '#374151' }
-              }}
-            />
-            <YAxis 
-              tick={{ fontSize: 12 }}
-              domain={[0, 'dataMax + 1']}
-              label={{ 
-                value: 'מספר אימונים', 
-                angle: -90, 
-                position: 'insideLeft',
-                style: { fontSize: '14px', fill: '#374151' }
-              }}
-            />
-            <Legend 
-              verticalAlign="top"
-              align="right"
-              wrapperStyle={{ paddingBottom: 10 }}
-              payload={[
-                { value: 'אימוני כוח', type: 'square', color: '#8884d8' },
-                { value: 'אימוני אירובי', type: 'square', color: '#82ca9d' },
-              ]}
-            />
-            
-            <Bar 
-              dataKey="strengthWorkouts" 
-              name="אימוני כוח" 
-              stackId="a"
-              fill="#8884d8"
-              radius={[4, 4, 0, 0]}
-            >
-              <LabelList 
-                dataKey="strengthWorkouts" 
-                position="inside" 
-                fill="#ffffff"
-                fontSize={11}
-                fontWeight="bold"
-              />
-            </Bar>
-            <Bar 
-              dataKey="cardioWorkouts" 
-              name="אימוני אירובי" 
-              stackId="a"
-              fill="#82ca9d"
-              radius={[4, 4, 0, 0]}
-            >
-              <LabelList 
-                dataKey="cardioWorkouts" 
-                position="inside" 
-                fill="#ffffff"
-                fontSize={11}
-                fontWeight="bold"
-              />
-            </Bar>
-            <text 
-              x="50%" 
-              y="95%" 
-              textAnchor="middle" 
-              dominantBaseline="hanging"
-              style={{ fontSize: '12px', fill: '#666' }}
-            >
-              * הגרף כולל פירוט מלא של האימונים השבועיים בכל שבוע 
-            </text>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart
+        data={story.workoutData}
+        margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+        <XAxis 
+          dataKey="date" 
+          tick={{ fontSize: 12 }}
+          label={{ 
+            value: 'שבוע', 
+            position: 'insideBottom', 
+            offset: -5,
+            style: { fontSize: '14px', fill: '#374151' }
+          }}
+        />
+        <YAxis 
+          tick={{ fontSize: 12 }}
+          domain={[0, 'dataMax + 1']}
+          label={{ 
+            value: 'מספר אימונים', 
+            angle: -90, 
+            position: 'insideLeft',
+            style: { fontSize: '14px', fill: '#374151' }
+          }}
+        />
+       
+        {/* <Tooltip 
+          content={({ active, payload, label }) => {
+            if (active && payload && payload.length) {
+              const workoutData = story.workoutData.find(item => item.week === parseInt(label));
+              
+              return (
+                <div className="chart-tooltip">
+                  <p className="tooltip-date">שבוע {label} ({workoutData?.date})</p>
+                  <p className="tooltip-strength">
+                    <span className="tooltip-strength-color"></span>
+                    אימוני כוח: {payload[0].value}
+                  </p>
+                  <p className="tooltip-cardio">
+                    <span className="tooltip-cardio-color"></span>
+                    אימוני אירובי: {payload[1].value}
+                  </p>
+                  <p className="tooltip-total">סה"כ: {workoutData?.totalWorkouts} אימונים</p>
+                </div>
+              );
+            }
+            return null;
+          }}
+          wrapperStyle={{ zIndex: 1000 }}
+        /> */}
+        <Legend 
+          verticalAlign="top"
+          align="right"
+          wrapperStyle={{ paddingBottom: 10 }}
+          payload={[
+            { value: 'אימוני כוח', type: 'square', color: '#8884d8' },
+            { value: 'אימוני אירובי', type: 'square', color: '#82ca9d' },
+          ]}
+        />
+        
+        <Bar 
+          dataKey="strengthWorkouts" 
+          name="אימוני כוח" 
+          stackId="a"
+          fill="#8884d8"
+          radius={[4, 4, 0, 0]}
+        >
+          <LabelList 
+            dataKey="strengthWorkouts" 
+            position="inside" 
+            fill="#ffffff"
+            fontSize={11}
+            fontWeight="bold"
+          />
+        </Bar>
+        <Bar 
+          dataKey="cardioWorkouts" 
+          name="אימוני אירובי" 
+          stackId="a"
+          fill="#82ca9d"
+          radius={[4, 4, 0, 0]}
+        >
+          <LabelList 
+            dataKey="cardioWorkouts" 
+            position="inside" 
+            fill="#ffffff"
+            fontSize={11}
+            fontWeight="bold"
+          />
+        </Bar>
+        <text 
+          x="50%" 
+          y="95%" 
+          textAnchor="middle" 
+          dominantBaseline="hanging"
+          style={{ fontSize: '12px', fill: '#666' }}
+        >
+          * הגרף כולל פירוט מלא של האימונים השבועיים בכל שבוע 
+        </text>
+      </BarChart>
+    </ResponsiveContainer>
   </div>
 )}
 
@@ -290,7 +307,7 @@ const SuccessStoryCard = ({ story }) => {
           <a href="/contact" className="contact-link">צרו קשר לתיאום שיחה &larr;</a>
         </div>
       </div>
-      <div className="button-container" style={{ 
+       <div className="button-container" style={{ 
         textAlign: 'center',
         margin: '2rem auto',
         width: '100%'
