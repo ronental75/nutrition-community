@@ -55,7 +55,7 @@ export default {
       { week: 19, date: "20/04/2025", strengthWorkouts: 4, cardioWorkouts: 1, totalWorkouts: 5, details: "שחיה: 1, כח: 4, ריצה: 0" }
     ],
    
-    image: null, // אם אין תמונה
+    image: '/images/success-stories/yoram.jpg', // Update with the correct path to your image
     highlights: [
       'ירידה של 12.5 ק"ג (12.6% ממשקל ההתחלה)',
       'ירידה מ-BMI 30.0 (השמנה) ל-BMI 26.2 (עודף משקל)',
