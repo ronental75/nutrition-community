@@ -213,7 +213,7 @@
   
   /* Progress chart and table */
   .success-story-progress {
-    padding: 30px;
+    padding: 20px;
   }
   
   .success-story-progress h3 {
@@ -226,7 +226,7 @@
   .chart-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 60px;
   }
   
   .weight-chart-wrapper {
@@ -512,7 +512,7 @@
   transform: translateX(50%);
   width: 40px;
   height: 2px;
-  background-color: #8884d8;
+  /* background-color: #8884d8; */
 }
 
 /* אנימציה לגרף */
@@ -580,7 +580,7 @@
 /* התאמה למובייל */
 @media (max-width: 768px) {
   .chart-tooltip {
-    max-width: 220px;
+    max-width: 250px;
     font-size: 12px;
   }
   
@@ -635,7 +635,7 @@
   }
   
   .stat-value {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   
   /* Adjust weight chart to start closer to left edge */
