@@ -170,9 +170,9 @@
         
     <div className="menu-dropdown"  >
       
-      {/* <Link to="/success-stories" className="menu-item">
+      <Link to="/success-stories" className="menu-item">
       {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
-    </Link> */}
+    </Link>
       <Link to="/TdeeCalculator" className="menu-item">
         {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
       </Link>
