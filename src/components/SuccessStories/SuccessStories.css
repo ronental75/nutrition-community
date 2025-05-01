@@ -630,12 +630,12 @@
   }
   
   .stat-box h3 {
-    font-size: 0.75rem;
+    font-size: 1rem;
     margin-bottom: 0.25rem;
   }
   
   .stat-value {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
   
   /* Adjust weight chart to start closer to left edge */
@@ -683,8 +683,8 @@
   }
   
   /* Add horizontal separators for mobile instead */
-  .stat-box:not(:first-child) {
-    border-bottom: 1px solid #e5e7eb;
+  .stat-box:not(:last-child) {
+    border-bottom: 2px solid #e5e7eb;
   }
 
   /* Weight table adjustments */
