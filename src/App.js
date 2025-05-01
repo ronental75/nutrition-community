@@ -169,23 +169,24 @@
   </div>      {menuOpen && (
         
     <div className="menu-dropdown"  >
-      <Link to="/submit" className="menu-item">
-        {isHebrew ? 'שלחו פוסט' : 'About'}
-      </Link>
+      
+      <Link to="/success-stories" className="menu-item">
+      {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
+    </Link>
       <Link to="/TdeeCalculator" className="menu-item">
         {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
       </Link>
       <Link to="/BMICalculator" className="menu-item">
         {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
       </Link>
-       {/* הוספת קישור חדש לסיפורי הצלחה */}
-    <Link to="/success-stories" className="menu-item">
-      {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
-    </Link>
+   
       <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
 
       <Link to="/about" className="menu-item">
         {isHebrew ? 'אודות' : 'About'}
+      </Link>
+      <Link to="/submit" className="menu-item">
+        {isHebrew ? 'שלחו פוסט' : 'About'}
       </Link>
       <Link to="/contact" className="menu-item">
         {isHebrew ? 'צור קשר' : 'Contact'}

@@ -307,6 +307,35 @@ const SuccessStoryCard = ({ story }) => {
           <a href="/contact" className="contact-link">צרו קשר לתיאום שיחה &larr;</a>
         </div>
       </div>
+      <div className="button-container" style={{ 
+        textAlign: 'center',
+        margin: '2rem auto',
+        width: '100%'
+      }}>
+        <a 
+          href="#" 
+          className="return-button" 
+          onClick={(e) => {
+            e.preventDefault(); 
+            window.history.back(); 
+            return false;
+          }}
+          style={{
+            display: 'inline-block',
+            padding: '0.75rem 1.5rem',
+            backgroundColor: '#0d9488',
+            color: 'white',
+            borderRadius: '0.25rem',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            transition: 'background-color 0.3s'
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#0f766e'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#0d9488'}
+        >
+          חזרה לדף הראשי
+        </a>
+      </div>
     </div>
   );
 };
