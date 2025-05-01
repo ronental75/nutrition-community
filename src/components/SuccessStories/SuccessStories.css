@@ -602,3 +602,72 @@
     display: none;
   }
 }
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  /* Hide workout chart on mobile */
+  .workouts-chart-wrapper {
+    display: none;
+  }
+   /* Make stat boxes smaller on mobile */
+   .stat-box {
+    padding: 0.5rem;
+    min-width: auto;
+  }
+  
+  .stat-box h3 {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .stat-value {
+    font-size: 1.1rem;
+  }
+  
+  /* Adjust weight chart to start closer to left edge */
+  .weight-chart-wrapper {
+    padding: 0.0;
+  }
+  
+  .chart-title {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  /* Remove left margin from chart to get closer to edge */
+  .recharts-wrapper {
+    margin-left: 0;
+  }
+  
+  /* Make left axis take less space */
+  .recharts-yAxis .recharts-cartesian-axis-tick {
+    font-size: 10px;
+  }
+  
+  /* Make quote section smaller */
+  .success-story-quote {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+  
+  .quote-text {
+    font-size: 2rem;
+  }
+  
+  /* Adjust contact section */
+  .success-story-contact {
+    padding: 1rem;
+  }
+  
+  .contact-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 1rem;
+  }
+  
+  /* Weight table adjustments */
+  .weight-table-cell {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}
