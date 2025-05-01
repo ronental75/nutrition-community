@@ -107,13 +107,27 @@
   }
   
   .stat-box h3 {
-    font-size: 14px;
+    font-size: 18px;
     color: #64748b;
     margin-bottom: 5px;
   }
+  .stat-box {
+    position: relative;
+  }
+  
+  .stat-box:not(:first-child)::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    right: -0.5rem;
+    height: 90%;
+    width: 2px;
+    background-color: #e5e7eb;
+  }
+  
   
   .stat-value {
-    font-size: 20px;
+    font-size: 23px;
     font-weight: bold;
     color: #334155;
   }
@@ -664,7 +678,15 @@
     height: 2.5rem;
     margin-left: 1rem;
   }
+  .stat-box:not(:last-child)::after {
+    display: none; /* Remove vertical separators on mobile when boxes stack */
+  }
   
+  /* Add horizontal separators for mobile instead */
+  .stat-box:not(:first-child) {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
   /* Weight table adjustments */
   .weight-table-cell {
     padding: 0.5rem;
