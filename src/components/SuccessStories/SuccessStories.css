@@ -564,7 +564,7 @@
 }
 
 /* התאמה למובייל */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
   .chart-tooltip {
     max-width: 220px;
     font-size: 12px;
@@ -603,475 +603,74 @@
   }
 }
 
-/* Success Stories Component Styles */
-.success-story-card {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  direction: rtl;
-  font-family: 'Rubik', sans-serif;
-}
+/* Add these styles to your SuccessStories.css file */
 
-/* Header Stats */
-.success-story-header-stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background-color: #f3f4f6;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-}
-
-.stat-box {
-  flex: 1;
-  min-width: 120px;
-  text-align: center;
-  padding: 0.75rem;
-  border-radius: 0.25rem;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-.stat-box h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 0.875rem;
-  color: #6b7280;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #374151;
-}
-
-.stat-value.highlight {
-  color: #0d9488;
-}
-
-/* Story Intro */
-.success-story-intro {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 768px) {
-  .success-story-intro {
-    flex-direction: row;
-  }
-  
-  .success-story-image {
-    flex: 0 0 40%;
-  }
-  
-  .success-story-description {
-    flex: 0 0 60%;
-  }
-}
-
-.success-story-image {
-  max-width: 300px; /* Adjust this value to control the image size */
-  margin: 0 auto 1.5rem;
-}
-
-.success-story-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
-}
-
-.success-story-description h2 {
-  color: #111827;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.success-story-description p {
-  color: #4b5563;
-  line-height: 1.6;
-}
-
-.success-story-highlights {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #f8fafc;
-  border-radius: 0.25rem;
-  border-right: 4px solid #0d9488;
-}
-
-.success-story-highlights h3 {
-  margin-top: 0;
-  color: #0d9488;
-  font-size: 1.125rem;
-}
-
-.highlights-list {
-  padding-right: 1.25rem;
-  margin: 0.5rem 0 0 0;
-}
-
-.highlight-item {
-  margin-bottom: 0.5rem;
-  color: #4b5563;
-}
-
-/* Quote */
-.success-story-quote {
-  position: relative;
-  padding: 2rem;
-  margin: 2.5rem 0;
-  background-color: #f0fdfa;
-  border-radius: 0.5rem;
-  color: #0f766e;
-  text-align: center;
-}
-
-.quote-mark {
-  font-size: 3rem;
-  line-height: 1;
-  position: absolute;
-  color: #0d9488;
-  opacity: 0.2;
-}
-
-.quote-mark.left {
-  top: 1rem;
-  right: 1rem;
-}
-
-.quote-mark.right {
-  bottom: 1rem;
-  left: 1rem;
-}
-
-.quote-text {
-  margin: 0;
-  font-size: 1.25rem;
-  font-style: italic;
-  line-height: 1.6;
-}
-
-.quote-author {
-  margin-top: 1rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-}
-
-/* Chart Containers for Mobile Scrolling */
-.chart-scroll-container {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #0d9488 #f9fafb; /* Firefox */
-  margin-bottom: 1rem;
-}
-
-.chart-scroll-container::-webkit-scrollbar {
-  height: 8px; /* Height of horizontal scrollbar */
-}
-
-.chart-scroll-container::-webkit-scrollbar-track {
-  background: #f9fafb;
-  border-radius: 4px;
-}
-
-.chart-scroll-container::-webkit-scrollbar-thumb {
-  background-color: #0d9488;
-  border-radius: 4px;
-}
-
-.chart-inner-container {
-  min-width: 600px; /* Minimum width to ensure readability */
-  height: 100%;
-}
-
-/* Progress Section */
-.success-story-progress {
-  margin-bottom: 2rem;
-}
-
-.success-story-progress h3 {
-  color: #111827;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.chart-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.weight-chart-wrapper,
-.workouts-chart-wrapper {
-  padding: 1.5rem;
-  background-color: #f9fafb;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-.chart-title {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  color: #374151;
-  font-size: 1.25rem;
-  text-align: center;
-}
-
-/* Chart Tooltip */
-.chart-tooltip {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 0.75rem;
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  border: 1px solid #e5e7eb;
-  min-width: 150px;
-}
-
-.tooltip-date {
-  margin: 0 0 0.5rem 0;
-  font-weight: 600;
-  color: #374151;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.25rem;
-}
-
-.tooltip-weight, 
-.tooltip-strength,
-.tooltip-cardio,
-.tooltip-total,
-.tooltip-details {
-  margin: 0.25rem 0;
-  font-size: 0.875rem;
-  color: #4b5563;
-}
-
-.tooltip-weight {
-  font-weight: 600;
-}
-
-.tooltip-strength-color, 
-.tooltip-cardio-color {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-left: 5px;
-  border-radius: 50%;
-}
-
-.tooltip-strength-color {
-  background-color: #8884d8;
-}
-
-.tooltip-cardio-color {
-  background-color: #82ca9d;
-}
-
-.weight-gain {
-  color: #ef4444;
-}
-
-/* Data Tables */
-.data-tables-container {
-  margin-top: 2.5rem;
-}
-
-.weight-table {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.table-title {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #374151;
-  font-size: 1.25rem;
-}
-
-.weight-table-header {
-  display: flex;
-  background-color: #0d9488;
-  color: white;
-  font-weight: 600;
-}
-
-.weight-table-row {
-  display: flex;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.weight-table-row:last-child {
-  border-bottom: none;
-}
-
-.weight-table-row:nth-child(even) {
-  background-color: #f9fafb;
-}
-
-.weight-table-cell {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  text-align: center;
-}
-
-.weight-value {
-  font-weight: 600;
-  color: #374151;
-}
-
-/* Contact Section */
-.success-story-contact {
-  display: flex;
-  align-items: center;
-  padding: 1.5rem;
-  margin: 2rem 0;
-  background-color: #f0fdfa;
-  border-radius: 0.5rem;
-  border-right: 4px solid #0d9488;
-}
-
-.contact-icon {
-  flex-shrink: 0;
-  margin-left: 1.5rem;
-  color: #0d9488;
-  background-color: white;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-.contact-text {
-  flex-grow: 1;
-}
-
-.contact-text p {
-  margin: 0 0 0.75rem 0;
-  color: #374151;
-}
-
-.contact-link {
-  display: inline-block;
-  color: #0d9488;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.contact-link:hover {
-  color: #0f766e;
-  text-decoration: underline;
-}
-
-/* Responsive Design */
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
-  .success-story-card {
-    padding: 1.5rem;
+  /* Hide workout chart on mobile */
+  .workouts-chart-wrapper {
+    display: none;
   }
   
-  .success-story-header-stats {
-    flex-direction: column;
-  }
-  
+  /* Make stat boxes smaller on mobile */
   .stat-box {
-    width: 100%;
+    padding: 0.5rem;
+    min-width: auto;
   }
   
+  .stat-box h3 {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .stat-value {
+    font-size: 1.1rem;
+  }
+  
+  /* Adjust weight chart to start closer to left edge */
+  .weight-chart-wrapper {
+    padding: 0.75rem;
+  }
+  
+  .chart-title {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  /* Remove left margin from chart to get closer to edge */
+  .recharts-wrapper {
+    margin-left: 0;
+  }
+  
+  /* Make left axis take less space */
+  .recharts-yAxis .recharts-cartesian-axis-tick {
+    font-size: 10px;
+  }
+  
+  /* Make quote section smaller */
   .success-story-quote {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
   }
   
   .quote-text {
     font-size: 1rem;
   }
   
-  .weight-table-row,
-  .weight-table-header {
-    font-size: 0.875rem;
+  /* Adjust contact section */
+  .success-story-contact {
+    padding: 1rem;
   }
   
+  .contact-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 1rem;
+  }
+  
+  /* Weight table adjustments */
   .weight-table-cell {
     padding: 0.5rem;
+    font-size: 0.8rem;
   }
-}
-
-/* Return Button */
-.button-container {
-  margin: 2rem 0;
-  text-align: center;
-}
-
-.return-button {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: #0d9488;
-  color: white;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  font-weight: 600;
-  transition: background-color 0.3s;
-}
-
-.return-button:hover {
-  background-color: #0f766e;
-}
-
-/* Chart Containers for Mobile Scrolling */
-.chart-scroll-container {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #0d9488 #f9fafb; /* Firefox */
-  margin-bottom: 1rem;
-}
-
-.chart-scroll-container::-webkit-scrollbar {
-  height: 8px; /* Height of horizontal scrollbar */
-}
-
-.chart-scroll-container::-webkit-scrollbar-track {
-  background: #f9fafb;
-  border-radius: 4px;
-}
-
-.chart-scroll-container::-webkit-scrollbar-thumb {
-  background-color: #0d9488;
-  border-radius: 4px;
-}
-
-.chart-inner-container {
-  min-width: 600px; /* Minimum width to ensure readability */
-  height: 100%;
-}
-
-/* Image size control */
-.success-story-image {
-  max-width: 300px; /* Adjust this value to control the image size */
-  margin: 0 auto 1.5rem;
-}
-
-.success-story-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
 }
