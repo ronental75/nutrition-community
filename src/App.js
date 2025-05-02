@@ -334,7 +334,7 @@ function PostPage({ slug }) {
         {/* Sticky title section */}
         <div className="post-title-container">
           <h1 className="post-page-title">{post.he}</h1>
-          <div className="post-meta">
+          {/* <div className="post-meta">
             <span className="post-date">{formatDate(post.date)}</span>
             <span className="post-author">· {post.author}</span>
             <div className="post-categories">
@@ -344,7 +344,7 @@ function PostPage({ slug }) {
                 </span>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       

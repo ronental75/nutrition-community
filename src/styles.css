@@ -1041,24 +1041,7 @@ body {
   margin: 0 auto;
 }
 
-/* עיצוב כפתור חזרה */
-.back-button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.back-button-wrapper {
-  order: -1;
-  margin-left: auto;
-}
 
 /* כותרת קבועה */
 .post-title-container {
@@ -1214,23 +1197,7 @@ body {
 }
 
 /* עיצוב כפתור חזרה */
-.back-button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.back-button-wrapper {
-  order: -1;
-  margin-left: auto;
-}
 
 /* כותרת קבועה - ממורכזת עם אותו רוחב כמו ה-iframe */
 .post-title-container {
@@ -1387,23 +1354,7 @@ html {
 }
 
 /* עיצוב כפתור חזרה */
-.back-button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  height: 40px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.back-button-wrapper {
-  order: -1;
-  margin-left: auto;
-}
 
 /* כותרת קבועה - ממורכזת עם אותו רוחב כמו ה-iframe */
 .post-title-container {
@@ -1574,7 +1525,7 @@ html, body {
   background-color: transparent;
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: 23px;
   cursor: pointer;
   height: 40px;
   width: 40px;
