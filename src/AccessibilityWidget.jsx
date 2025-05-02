@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// אין צורך לייבא את קובץ accessibility.css - כל הסגנונות יהיו ב-styles.css
+import './accessibility.css';
 
 export default function AccessibilityWidget() {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export default function AccessibilityWidget() {
   };
 
   return (
-    <div className="accessibility-widget">
+    <div className="accessibility-widget" dir="rtl">
       <button className="accessibility-toggle" onClick={() => setOpen(!open)}>
         נגישות
       </button>
