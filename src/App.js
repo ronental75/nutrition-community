@@ -166,12 +166,13 @@
       &#9776;
     </button> 
      </div>
+     <div className="accessibility-wrapper" style={{ margin: '0 10px' }}>
+    <AccessibilityWidget />
+  </div>
     <div className="share-wrapper">
  
     <Share />
-    <div className="accessibility-wrapper">
-    <AccessibilityWidget />
-  </div>
+   
   </div>      {menuOpen && (
         
     <div className="menu-dropdown"  >

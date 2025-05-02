@@ -863,3 +863,34 @@ body {
 .accessibility-toggle:hover {
   background: #2563eb;
 }
+/* Add these styles to your styles.css file */
+
+
+
+/* Make sure all wrappers have consistent styling */
+.menu-wrapper,
+.share-wrapper,
+.accessibility-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure buttons have sufficient tap targets for mobile */
+.menu-button,
+.share-wrapper button,
+.accessibility-wrapper button {
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* For mobile screens, ensure proper spacing and sizing */
+@media (max-width: 768px) {
+  .top-bar-buttons {
+    gap: 8px;
+    padding: 8px;
+  }
+}
