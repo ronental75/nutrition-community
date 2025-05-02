@@ -14,5 +14,14 @@
 html, body {
   overflow-x: hidden;
 }
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
+html {
+  scroll-behavior: smooth; /* גלילה חלקה */
+  scroll-padding-top: 120px; /* מרווח גלילה חשוב */
+}
 

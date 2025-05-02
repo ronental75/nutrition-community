@@ -298,7 +298,6 @@
 function PostPage({ slug }) {
   const post = posts.find((p) => p.slug === slug);
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   if (!post) return <div className="p-6 text-center">Post not found</div>;
 
@@ -330,18 +329,21 @@ function PostPage({ slug }) {
         </div>
       </div>
       
-      {/* Sticky title section */}
-      <div className="post-title-container">
-        <h1 className="post-page-title">{post.he}</h1>
-        <div className="post-meta">
-          <span className="post-date">{formatDate(post.date)}</span>
-          <span className="post-author">· {post.author}</span>
-          <div className="post-categories">
-            {post.categories.map(cat => (
-              <span key={cat} className="post-category">
-                {categoryIcons[cat]} {cat}
-              </span>
-            ))}
+      {/* מעטפת חדשה לכותרת עם מרווח מהחלק העליון */}
+      <div className="title-wrapper">
+        {/* Sticky title section */}
+        <div className="post-title-container">
+          <h1 className="post-page-title">{post.he}</h1>
+          <div className="post-meta">
+            <span className="post-date">{formatDate(post.date)}</span>
+            <span className="post-author">· {post.author}</span>
+            <div className="post-categories">
+              {post.categories.map(cat => (
+                <span key={cat} className="post-category">
+                  {categoryIcons[cat]} {cat}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -362,7 +364,6 @@ function PostPage({ slug }) {
     </div>
   );
 }
-
 export default function App() {
   return (
     <Router>

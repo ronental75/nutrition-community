@@ -1068,9 +1068,15 @@ body {
   padding: 15px;
   z-index: 900;
   border-bottom: 1px solid #e5e7eb;
-  max-width: 960px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   margin-top: 80px; /* מרווח למעלה כדי שלא יכסה את הסרגל העליון */
+  left: 0;
+  right: 0;
+  
+  /* חשוב - הוספת צל מסביב לכותרת */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .post-page-title {
@@ -1089,7 +1095,18 @@ body {
   font-size: 0.9rem;
   color: #6b7280;
 }
+.post-title-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
 
+.post-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #111827;
+}
 .post-categories {
   display: flex;
   gap: 8px;
@@ -1150,5 +1167,519 @@ body {
   
   .post-iframe {
     height: calc(100vh - 180px);
+  }
+}
+
+/* CSS מעודכן לכותרת ממורכזת באותו רוחב כמו ה-iframe */
+
+/* עיצוב מיכל עמוד הפוסט */
+.post-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* מרכז את כל התוכן */
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* מונע גלילה אופקית */
+  width: 100%;
+}
+
+/* עיצוב סרגל עליון קבוע */
+.post-top-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 10px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center; /* מרכז את התוכן */
+}
+
+.post-top-bar-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  background-color: #2563eb;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 960px; /* אותו רוחב כמו ה-iframe */
+}
+
+/* עיצוב כפתור חזרה */
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button-wrapper {
+  order: -1;
+  margin-left: auto;
+}
+
+/* כותרת קבועה - ממורכזת עם אותו רוחב כמו ה-iframe */
+.post-title-container {
+  position: sticky;
+  top: 70px; /* מתחת לסרגל העליון */
+  background-color: white;
+  padding: 15px;
+  z-index: 900;
+  border-bottom: 1px solid #e5e7eb;
+  width: 100%;
+  max-width: 960px; /* אותו רוחב כמו ה-iframe */
+  box-sizing: border-box;
+  margin-top: 80px; /* מרווח למעלה כדי שלא יכסה את הסרגל העליון */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.post-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #111827;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.post-categories {
+  display: flex;
+  gap: 8px;
+}
+
+.post-category {
+  background-color: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* מיכל תוכן הפוסט */
+.post-content-container {
+  flex: 1;
+  max-width: 960px; /* אותו רוחב כמו הכותרת */
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.post-iframe {
+  width: 100%;
+  height: calc(100vh - 200px); /* גובה מותאם כדי להשאיר מקום לסרגל עליון, כותרת וכפתורי לייק */
+  border: none;
+  margin-bottom: 70px; /* מרווח למטה עבור איזור הלייקים */
+}
+
+/* איזור לייק/דיסלייק קבוע */
+.post-actions-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 10px 0;
+  z-index: 900;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* צל עליון להפרדה חזותית */
+  display: flex;
+  justify-content: center; /* מרכז את התוכן */
+}
+
+.post-actions-container > div {
+  max-width: 960px;
+  width: 100%;
+  padding: 0 15px;
+}
+
+/* התאמות למסך מובייל */
+@media (max-width: 768px) {
+  .post-title-container {
+    top: 60px;
+    margin-top: 70px;
+    padding: 10px;
+  }
+  
+  .post-page-title {
+    font-size: 1.5rem;
+  }
+  
+  .post-iframe {
+    height: calc(100vh - 180px);
+  }
+}
+
+/* CSS מעודכן לתיקון בעיית הסקרולר */
+
+/* עיצוב גלובלי ואתחול */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth; /* גלילה חלקה */
+  scroll-padding-top: 120px; /* מרווח גלילה לחלק העליון - חשוב! */
+}
+
+/* עיצוב מיכל עמוד הפוסט */
+.post-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+  padding: 0; 
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* עיצוב סרגל עליון קבוע */
+.post-top-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 10px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.post-top-bar-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px;
+  background-color: #2563eb;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 960px;
+}
+
+/* עיצוב כפתור חזרה */
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button-wrapper {
+  order: -1;
+  margin-left: auto;
+}
+
+/* כותרת קבועה - ממורכזת עם אותו רוחב כמו ה-iframe */
+.post-title-container {
+  position: sticky;
+  top: 70px;
+  background-color: white;
+  padding: 15px;
+  z-index: 900;
+  border-bottom: 1px solid #e5e7eb;
+  width: 100%;
+  max-width: 960px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-top: 0; /* שינוי חשוב! */
+}
+
+/* מעטפת לעזור במיקום הכותרת */
+.title-wrapper {
+  margin-top: 80px; /* השתמש במרווח פה במקום */
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  justify-content: center;
+}
+
+.post-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #111827;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.post-categories {
+  display: flex;
+  gap: 8px;
+}
+
+.post-category {
+  background-color: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* מיכל תוכן הפוסט */
+.post-content-container {
+  flex: 1;
+  max-width: 960px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 70px; /* מרווח למטה עבור איזור הלייקים */
+}
+
+.post-iframe {
+  width: 100%;
+  height: calc(100vh - 200px);
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* איזור לייק/דיסלייק קבוע */
+.post-actions-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 10px 0;
+  z-index: 900;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.post-actions-container > div {
+  max-width: 960px;
+  width: 100%;
+  padding: 0 15px;
+}
+
+/* התאמות למסך מובייל */
+@media (max-width: 768px) {
+  .post-top-bar {
+    padding: 5px;
+  }
+
+  .title-wrapper {
+    margin-top: 65px;
+  }
+  
+  .post-title-container {
+    top: 60px;
+    padding: 10px;
+  }
+  
+  .post-page-title {
+    font-size: 1.5rem;
+  }
+  
+  .post-iframe {
+    height: calc(100vh - 170px);
+  }
+}
+
+/* הגדרות גלובליות */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overscroll-behavior: none; /* מונע "משיכה לרענון" */
+}
+
+/* מיכל העמוד */
+.post-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 0; /* חשוב - אין מרווח עליון */
+  overflow-x: hidden;
+}
+
+/* סרגל עליון קבוע */
+.post-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.post-top-bar-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #2563eb;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* כפתורים בסרגל העליון */
+.back-button-wrapper {
+  order: -1;
+  margin-left: auto;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* חלק הכותרת */
+.post-title-outer {
+  width: 100%;
+  background-color: white;
+  margin-top: 70px; /* מרווח מהסרגל העליון */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.post-title-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  position: sticky;
+  top: 70px;
+  z-index: 900;
+}
+
+.post-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #111827;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.post-categories {
+  display: flex;
+  gap: 8px;
+}
+
+.post-category {
+  background-color: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* חלק התוכן */
+.post-content-container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 60px; /* מרווח לחלק התחתון */
+}
+
+.post-iframe {
+  width: 100%;
+  height: calc(100vh - 200px);
+  border: none;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* חשוב למכשירי iOS */
+}
+
+/* חלק הלייקים קבוע בתחתית */
+.post-actions-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 10px 0;
+  z-index: 900;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-actions-container > div {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* התאמות למובייל */
+@media (max-width: 768px) {
+  .post-title-outer {
+    margin-top: 60px;
+  }
+  
+  .post-title-container {
+    top: 60px;
+    padding: 10px;
+  }
+  
+  .post-page-title {
+    font-size: 1.5rem;
   }
 }
