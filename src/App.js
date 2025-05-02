@@ -166,14 +166,8 @@
       &#9776;
     </button> 
      </div>
-     <div className="accessibility-wrapper" style={{ margin: '0 10px' }}>
-    <AccessibilityWidget />
-  </div>
-    <div className="share-wrapper">
- 
-    <Share />
-   
-  </div>      {menuOpen && (
+    
+        {menuOpen && (
         
     <div className="menu-dropdown"  >
       
@@ -198,12 +192,21 @@
       <Link to="/contact" className="menu-item">
         {isHebrew ? 'צור קשר' : 'Contact'}
       </Link>
-      
+
     </div>
+    
   
   )
 
   }
+        <div className="share-wrapper">
+ 
+ <Share />
+
+</div> 
+      <div className="accessibility-wrapper" style={{ margin: '0 10px' }}>
+    <AccessibilityWidget />
+  </div>
 
     </div>
 

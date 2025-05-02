@@ -1,8 +1,7 @@
 .accessibility-widget {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 9999;
+    /* Remove the fixed positioning */
+    position: relative;
+    z-index: 1000;
   }
   
   .accessibility-toggle {
@@ -13,9 +12,16 @@
     padding: 8px 12px;
     cursor: pointer;
     font-weight: bold;
+    white-space: nowrap;
+    font-size: 14px;
+    /* Make sure the button doesn't exceed its container */
+    max-width: 100%;
   }
   
   .accessibility-panel {
+    position: absolute;
+    top: 100%;
+    right: 0; /* For RTL alignment */
     margin-top: 8px;
     background: white;
     border: 1px solid #ccc;
@@ -25,24 +31,25 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 160px;
+    z-index: 1001; /* Higher than the widget itself */
   }
   
-  /* מצב ניגודיות גבוהה */
+  /* High contrast mode */
   .high-contrast {
     filter: contrast(180%) invert(100%);
     background-color: black !important;
     color: yellow !important;
   }
   
-  /* הדגשת קישורים */
+  /* Highlight links */
   .highlight-links a {
     text-decoration: underline !important;
     color: #ff0000 !important;
     font-weight: bold;
   }
   
-  /* מסגרות */
+  /* Show outlines */
   .show-outline *:focus {
     outline: 2px dashed #ff9800 !important;
   }
-  
