@@ -1,0 +1,48 @@
+.accessibility-widget {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+  }
+  
+  .accessibility-toggle {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .accessibility-panel {
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  /* מצב ניגודיות גבוהה */
+  .high-contrast {
+    filter: contrast(180%) invert(100%);
+    background-color: black !important;
+    color: yellow !important;
+  }
+  
+  /* הדגשת קישורים */
+  .highlight-links a {
+    text-decoration: underline !important;
+    color: #ff0000 !important;
+    font-weight: bold;
+  }
+  
+  /* מסגרות */
+  .show-outline *:focus {
+    outline: 2px dashed #ff9800 !important;
+  }
+  

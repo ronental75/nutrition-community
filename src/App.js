@@ -13,6 +13,8 @@
   import PrintTips from './PrintTips';
   import BMICalculator from './BMICalculator';
   import SuccessStories from './components/SuccessStories';
+  import AccessibilityWidget from './AccessibilityWidget';
+
   // import RotatingTips from './RotatingTips'
   // import ProgressTracker from './ProgressTracker'
 
@@ -303,6 +305,7 @@
         >
           <LikeDislike slug={post.slug} />
           {/* <Comments slug={post.slug} /> */}
+          <AccessibilityWidget />
 
         </div>
 </div>
