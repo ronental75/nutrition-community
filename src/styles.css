@@ -1608,6 +1608,7 @@ html {
   right: 0;
   background-color: white;
   border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
   padding: 10px 0;
   z-index: 900;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);

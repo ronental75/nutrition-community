@@ -347,7 +347,7 @@ function PostPage({ slug }) {
           title={post.slug}
         />
       </div>
-      
+      <br></br>
       {/* Fixed like/dislike section at the bottom */}
       <div className="post-actions-container">
         <LikeDislike slug={post.slug} />
