@@ -842,3 +842,24 @@ body {
   border-radius: 9999px;
   vertical-align: middle;
 }
+.accessibility-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 8px; /* רווח קטן בין האיקונים */
+}
+
+.accessibility-toggle {
+  background: #1e40af;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.accessibility-toggle:hover {
+  background: #2563eb;
+}

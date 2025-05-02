@@ -154,8 +154,7 @@
       <div className="top-section">
 
       <div className="top-bar-buttons">
-      {/* <AccessibilityWidget /> */}
-
+     
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
       <div className="menu-wrapper">
@@ -168,9 +167,11 @@
     </button> 
      </div>
     <div className="share-wrapper">
-    
+ 
     <Share />
-
+    <div className="accessibility-wrapper">
+    <AccessibilityWidget />
+  </div>
   </div>      {menuOpen && (
         
     <div className="menu-dropdown"  >
@@ -237,7 +238,10 @@
               key={post.slug}
               to={`/${lang}/${post.slug}`}
               className="post-link"
+              
             >
+                      
+
               <div>
                 <img
                   src={post.image}
@@ -319,7 +323,6 @@
   export default function App() {
     return (
       <Router>
-        <AccessibilityWidget />
 
         <Routes>
           <Route path="/" element={<LandingPage lang="he" />} />
