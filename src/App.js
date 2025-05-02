@@ -27,9 +27,9 @@
   const categories = [
     // { key: "all", label: "הכל" },
     { key: "אורח חיים בריא", label: "אורח חיים בריא" },
-    { key: "ספורט", label: "ספורט" },
+    { key: "ספורט", label: "תזונה וספורט" },
     // { key: "דיאטה", label: "דיאטה" },
-    { key: "תזונה", label: "תזונה" }
+    { key: "תזונה", label: "דיאטה" }
   ];
 
   const categoryIcons = {
