@@ -67,11 +67,11 @@ body {
     margin: 0 0 0.5rem 0;
     font-weight: 400;
   }
-  .top-bar {
+  /* .top-bar {
     background-color: #f9f9f9;
     border-bottom: 1px solid #ddd;
     padding: 0;
-  }
+  } */
   
   .welcome-text {
     font-size: 1.1rem;
@@ -117,7 +117,7 @@ body {
     margin-bottom: 1rem;
     border-radius: 0 0 0 0;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.05);
-    position: relative;
+    position: sticky;
     z-index: 50;
   }
   
@@ -1634,3 +1634,4 @@ html, body {
     font-size: 1.5rem;
   }
 }
+
