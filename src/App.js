@@ -149,10 +149,12 @@
     return (
       
     <div className="top-bar-wrapper" dir="rtl" >
+
             <div className="top-screen">
       <div className="top-section">
 
       <div className="top-bar-buttons">
+      <AccessibilityWidget />
 
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
@@ -305,7 +307,6 @@
         >
           <LikeDislike slug={post.slug} />
           {/* <Comments slug={post.slug} /> */}
-          <AccessibilityWidget />
 
         </div>
 </div>
