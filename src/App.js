@@ -1,5 +1,5 @@
   import React, { useState } from "react";
-  import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+  import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
   import './styles.css';
   import About from './About';
   import Contact from './contact';
@@ -295,72 +295,96 @@
   );
 }
 
-  function PostPage({ slug }) {
-    const post = posts.find((p) => p.slug === slug);
+function PostPage({ slug }) {
+  const post = posts.find((p) => p.slug === slug);
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    if (!post) return <div className="p-6 text-center">Post not found</div>;
+  if (!post) return <div className="p-6 text-center">Post not found</div>;
 
-    return (
-      <div dir="rtl" className="w-full px-4 sm:px-6 py-6 text-right">
-        <div className="w-full max-w-7xl mx-auto">
-          <iframe
-            src={post.file}
-            className="w-full rounded-lg"
-            style={{ height: "95vh", width: "100%", border: "none" }}
-            title={post.slug}
-          />
-        <div
-          className="w-full mt-4 pr-6"
-          dir="rtl"
-        >
-          <LikeDislike slug={post.slug} />
-          {/* <Comments slug={post.slug} /> */}
+  const goBack = () => {
+    navigate('/');
+  };
 
-        </div>
-</div>
-
-
-        </div>
-    );
-  }
-
-  export default function App() {
-    return (
-      <Router>
-
-        <Routes>
-          <Route path="/" element={<LandingPage lang="he" />} />
-          <Route path="/he" element={<LandingPage lang="he" />} />
-          <Route path="/en" element={<LandingPage lang="en" />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/submit" element={<SubmitPost />} />
-          <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
-          <Route path="/print-tips" element={<PrintTips />} />
-          <Route path="/BMICalculator" element={<BMICalculator />}/>
-          {/* נתיב חדש לדף סיפורי הצלחה */}
-          <Route path="/success-stories" element={<SuccessStories />} />
+  return (
+    <div dir="rtl" className="post-page-container">
+      {/* Top blue bar fixed at the top */}
+      <div className="post-top-bar">
+        <div className="post-top-bar-buttons">
+          {/* Back button */}
+          <div className="back-button-wrapper">
+            <button className="back-button" onClick={goBack}>
+              &#8592; {/* Left arrow */}
+            </button>
+          </div>
           
-          {posts.map((post) => (
-            <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
-          ))}
-          {posts.map((post) => (
-            <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
-          ))}
-
-          {/* <Route path="/ProgressTracker" element={<ProgressTracker />} */}
-           
+          {/* Share button */}
+          <div className="share-wrapper">
+            <Share />
+          </div>
           
+          {/* Accessibility button */}
+          <div className="accessibility-wrapper">
+            <AccessibilityWidget />
+          </div>
+        </div>
+      </div>
+      
+      {/* Sticky title section */}
+      <div className="post-title-container">
+        <h1 className="post-page-title">{post.he}</h1>
+        <div className="post-meta">
+          <span className="post-date">{formatDate(post.date)}</span>
+          <span className="post-author">· {post.author}</span>
+          <div className="post-categories">
+            {post.categories.map(cat => (
+              <span key={cat} className="post-category">
+                {categoryIcons[cat]} {cat}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Main content area */}
+      <div className="post-content-container">
+        <iframe
+          src={post.file}
+          className="post-iframe"
+          title={post.slug}
+        />
+      </div>
+      
+      {/* Fixed like/dislike section at the bottom */}
+      <div className="post-actions-container">
+        <LikeDislike slug={post.slug} />
+      </div>
+    </div>
+  );
+}
 
-
-          {posts.map((post) => (
-            <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
-          ))}
-          {posts.map((post) => (
-            <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
-          ))}
-        </Routes>
-      </Router>
-    );
-  }
-
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage lang="he" />} />
+        <Route path="/he" element={<LandingPage lang="he" />} />
+        <Route path="/en" element={<LandingPage lang="en" />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/submit" element={<SubmitPost />} />
+        <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
+        <Route path="/print-tips" element={<PrintTips />} />
+        <Route path="/BMICalculator" element={<BMICalculator />}/>
+        <Route path="/success-stories" element={<SuccessStories />} />
+        
+        {posts.map((post) => (
+          <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
+        ))}
+        {posts.map((post) => (
+          <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
+        ))}
+      </Routes>
+    </Router>
+  );
+}
