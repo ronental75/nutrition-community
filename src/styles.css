@@ -117,7 +117,7 @@ body {
     margin-bottom: 1rem;
     border-radius: 0 0 0 0;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.05);
-    position: sticky;
+    /* position: sticky; */
     z-index: 50;
   }
   
@@ -1474,12 +1474,12 @@ html {
 }
 
 /* הגדרות גלובליות */
-html, body {
+/* html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   overscroll-behavior: none; /* מונע "משיכה לרענון" */
-}
+/* } */ */
 
 /* מיכל העמוד */
 .post-page-container {
@@ -1562,7 +1562,7 @@ html, body {
   color: #111827;
 }
 
-.post-meta {
+/* .post-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1570,7 +1570,7 @@ html, body {
   margin-bottom: 10px;
   font-size: 0.9rem;
   color: #6b7280;
-}
+} */
 
 .post-categories {
   display: flex;

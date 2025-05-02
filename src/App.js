@@ -1,4 +1,4 @@
-  import React, { useState } from "react";
+  import React, { useState,useEffect} from "react";
   import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
   import './styles.css';
   import About from './About';
@@ -141,127 +141,118 @@
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
     const bannerText = "🔥ליווי אישי לאורח חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
-
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.style.overscrollBehavior = 'none';
+      return () => {
+        document.documentElement.style.overscrollBehavior = '';
+      };
+    }, []);
     const filteredPosts = posts
     .filter((post) => post.categories?.includes(selectedCategory))
     .sort((a, b) => new Date(b.date) - new Date(a.date));
     
     return (
       
-    <div className="top-bar-wrapper" dir="rtl" >
+      <div className="top-bar-wrapper" dir="rtl">
+      <div className="top-screen">
+        <div className="top-section">
+          <div className="top-bar-buttons">
+            <div className="menu-wrapper">        
+              <button
+                className="menu-button"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+              &#9776;
+              </button> 
+            </div>
+            {menuOpen && (        
+            <div className="menu-dropdown"  >
+              <Link to="/success-stories" className="menu-item">
+                {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
+              </Link>
+                <Link to="/TdeeCalculator" className="menu-item">
+                  {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
+                </Link>
+                <Link to="/BMICalculator" className="menu-item">
+                  {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
+                </Link>
+                <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
+                <Link to="/about" className="menu-item">
+                  {isHebrew ? 'אודות' : 'About'}
+                </Link>
+                <Link to="/submit" className="menu-item">
+                  {isHebrew ? 'שלחו פוסט' : 'About'}
+                </Link>
+                <Link to="/contact" className="menu-item">
+                  {isHebrew ? 'צור קשר' : 'Contact'}
+                </Link>
 
-            <div className="top-screen">
-      <div className="top-section">
-
-      <div className="top-bar-buttons">
-     
-
-      {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
-      <div className="menu-wrapper">
-        
-    <button
-      className="menu-button"
-      onClick={() => setMenuOpen(!menuOpen)}
-    >
-      &#9776;
-    </button> 
-     </div>
-    
-        {menuOpen && (
-        
-    <div className="menu-dropdown"  >
-      
-      <Link to="/success-stories" className="menu-item">
-      {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
-    </Link>
-      <Link to="/TdeeCalculator" className="menu-item">
-        {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
-      </Link>
-      <Link to="/BMICalculator" className="menu-item">
-        {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
-      </Link>
-   
-      <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
-
-      <Link to="/about" className="menu-item">
-        {isHebrew ? 'אודות' : 'About'}
-      </Link>
-      <Link to="/submit" className="menu-item">
-        {isHebrew ? 'שלחו פוסט' : 'About'}
-      </Link>
-      <Link to="/contact" className="menu-item">
-        {isHebrew ? 'צור קשר' : 'Contact'}
-      </Link>
-
-    </div>
-    
-  
-  )
-
-  }
-        <div className="share-wrapper">
- 
- <Share />
-
-</div> 
-      <div className="accessibility-wrapper" style={{ margin: '0 10px' }}>
-    <AccessibilityWidget />
-  </div>
-
-    </div>
-
-
-    <header className="flex-col items-center text-center mb-10">
-  <h1 className="page-title" >
-    {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
-  </h1>
-  <p className="page-subtitle mt-2">
-    {isHebrew
-      ? 'טיפים, מחקרים ומידע מקצועי על אורח חיים בריא'
-      : 'Tips, research, and professional info about healthy living'}
-  </p>
-</header>
-        <CategoryButtons
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-                <Link to="/contact" style={{ textDecoration: 'none' }}>
-                <AnimatedBanner text={bannerText} /></Link>
-                </div>
-                {/* <div className="rotating-tips-wrapper">
-            <RotatingTips />
-            
-          </div> */}
-          
-        {/* <hr className="border-gray-300 mx-4" /> */}
-        </div>
-        <div className="posts-container">
-        <div className="space-y-4">
-          {filteredPosts.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/${lang}/${post.slug}`}
-              className="post-link"
-              
-            >
-                      
-
-              <div>
-                <img
-                  src={post.image}
-                  alt={post.he}
-                  className="post-image"
-                  loading="lazy"
-                />
+            </div>
+              )
+               }
+            <div className="share-wrapper">
+              <Share />
+            </div> 
+            <div className="accessibility-wrapper" style={{ margin: '0 10px' }}>
+              <AccessibilityWidget />
+            </div>
+          </div>
+          <header className="flex-col items-center text-center mb-10">
+        <h1 className="page-title" >
+          {isHebrew ? 'Eat smart , Live strong' : 'Nutrition Community Content'}
+        </h1>
+        <p className="page-subtitle mt-2">
+          {isHebrew
+            ? 'טיפים, מחקרים ומידע מקצועי על אורח חיים בריא'
+            : 'Tips, research, and professional info about healthy living'}
+        </p>
+      </header>
+              <CategoryButtons
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+                      <Link to="/contact" style={{ textDecoration: 'none' }}>
+                      <AnimatedBanner text={bannerText} /></Link>
+                      </div>
+                      {/* <div className="rotating-tips-wrapper">
+                  <RotatingTips />
+                  
+                </div> */}
+                
+              {/* <hr className="border-gray-300 mx-4" /> */}
               </div>
-              <div className="post-content">
-              <div className="post-tags">
-  {post.categories.map(cat => (
-    <span key={cat} >
-      {/* {categoryIcons[cat]} {cat} */}
-    </span>
-  ))}
-</div>
+                          
+
+
+
+              <div className="posts-container">
+              <div className="space-y-4">
+                {filteredPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    to={`/${lang}/${post.slug}`}
+                    className="post-link"
+                    
+                  >
+                            
+
+                    <div>
+                      <img
+                        src={post.image}
+                        alt={post.he}
+                        className="post-image"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="post-content">
+                    <div className="post-tags">
+        {post.categories.map(cat => (
+          <span key={cat} >
+            {/* {categoryIcons[cat]} {cat} */}
+          </span>
+        ))}
+      </div>
 <h2 className="post-title">
   {post.categories?.map((cat) => categoryIcons[cat]).join(' ')} {post.he}
   {isNewPost(post.date) && <span className="new-badge">חדש!</span>}
