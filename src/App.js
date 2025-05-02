@@ -154,7 +154,7 @@
       <div className="top-section">
 
       <div className="top-bar-buttons">
-      <AccessibilityWidget />
+      {/* <AccessibilityWidget /> */}
 
 
       {/* dir={isHebrew ? 'rtl' : 'ltr'} */}
@@ -319,6 +319,8 @@
   export default function App() {
     return (
       <Router>
+        <AccessibilityWidget />
+
         <Routes>
           <Route path="/" element={<LandingPage lang="he" />} />
           <Route path="/he" element={<LandingPage lang="he" />} />
