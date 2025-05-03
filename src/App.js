@@ -27,16 +27,21 @@
   
   const categories = [
     // { key: "all", label: "הכל" },
+
     { key: "אורח חיים בריא", label: "אורח חיים בריא" },
     { key: "ספורט", label: "תזונה וספורט" },
     // { key: "דיאטה", label: "דיאטה" },
-    { key: "תזונה", label: "דיאטה" }
+    { key: "תזונה", label: "דיאטה" },
+    { key: "חדש", label: "חדש" } // Added new category
+
   ];
 
   const categoryIcons = {
     'תזונה': '🥗',
     'ספורט': '🏋️',
-    'אורח חיים בריא': '🌿'
+    'אורח חיים בריא': '🌿',
+    'חדש': '🔥' // Added icon for the new category
+
   };
 
   async function extractSummaryFromHTML(filePath) {
@@ -138,7 +143,7 @@
 
   function LandingPage({ lang }) {
     const isHebrew = lang === 'he';
-    const [selectedCategory, setSelectedCategory] = useState('תזונה');
+    const [selectedCategory, setSelectedCategory] = useState('חדש');
     const [menuOpen, setMenuOpen] = useState(false); // <-- Required for dropdown toggle
     const bannerText = "🔥ליווי אישי לאורח חיים בריא - הנחה מיוחדת לזוגות - מוזמנים ליצור קשר ⏰";
 
@@ -149,9 +154,17 @@
         document.documentElement.style.overscrollBehavior = '';
       };
     }, []);
-    const filteredPosts = posts
-    .filter((post) => post.categories?.includes(selectedCategory))
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const latestPosts = [...posts]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 4);
+
+
+    const filteredPosts = selectedCategory === 'חדש'
+    ? latestPosts
+    : posts
+        .filter((post) => post.categories?.includes(selectedCategory))
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
     
     return (
       
