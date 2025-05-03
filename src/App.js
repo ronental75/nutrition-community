@@ -383,7 +383,7 @@ export default function App() {
       const timer = setTimeout(() => {
         setShowTipsPopup(true);
         sessionStorage.setItem('hasSeenTipsPopup', 'true');
-      }, 1000);
+      }, 1300);
       
       return () => clearTimeout(timer);
     }
