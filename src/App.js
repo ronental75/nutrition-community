@@ -14,6 +14,8 @@
   import BMICalculator from './BMICalculator';
   import SuccessStories from './components/SuccessStories';
   import AccessibilityWidget from './AccessibilityWidget';
+  import TipsPopupModal from './TipsPopupModal'; // Import the new component
+
   
 
   // import RotatingTips from './RotatingTips'
@@ -370,6 +372,26 @@ function PostPage({ slug }) {
   );
 }
 export default function App() {
+  const [showTipsPopup, setShowTipsPopup] = useState(false);
+  
+  useEffect(() => {
+    // Check if the popup has been shown in this session
+    const hasSeenPopup = sessionStorage.getItem('hasSeenTipsPopup');
+    
+    if (!hasSeenPopup) {
+      // Show popup after a short delay to let the page load first
+      const timer = setTimeout(() => {
+        setShowTipsPopup(true);
+        sessionStorage.setItem('hasSeenTipsPopup', 'true');
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, []);
+  
+  const closeTipsPopup = () => {
+    setShowTipsPopup(false);
+  };
   return (
     <Router>
       <Routes>
@@ -391,6 +413,9 @@ export default function App() {
           <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
         ))}
       </Routes>
+      {showTipsPopup && <TipsPopupModal onClose={closeTipsPopup} />}
+
     </Router>
+
   );
 }
