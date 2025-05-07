@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 // import { getDatabase } from 'firebase/database';
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database"; // only if using Realtime DB
+import { getAuth } from "firebase/auth"; // הוסף שורה זו
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,7 +27,10 @@ const app = initializeApp(firebaseConfig);
 // const    analytics = getAnalytics(app);
 const dbFirestore = getFirestore();
 const dbRealtime = getDatabase();
+const auth = getAuth(); // הוסף שורה זו
 
-export { dbFirestore, dbRealtime };
+// export { dbFirestore, dbRealtime };
+export { dbFirestore, dbRealtime, auth };
+
 
 // export { db };

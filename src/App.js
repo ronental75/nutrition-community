@@ -15,6 +15,10 @@
   import SuccessStories from './components/SuccessStories';
   import AccessibilityWidget from './AccessibilityWidget';
   import TipsPopupModal from './TipsPopupModal'; // Import the new component
+  import './styles/auth-styles.css';
+  import { AuthProvider, UserIcon, LoginModal, DietTrackerCalendar, AdminPanel, UnauthorizedAccess } from './components/auth/AuthComponents';
+
+
 
   
 
@@ -198,6 +202,9 @@
                 <Link to="/BMICalculator" className="menu-item">
                   {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
                 </Link>
+                <Link to="/diet-tracker" className="menu-item">
+                {isHebrew ? 'מעקב תפריט' : 'Diet Tracker'}
+              </Link>
                 <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
                 <Link to="/about" className="menu-item">
                   {isHebrew ? 'אודות' : 'About'}
@@ -217,6 +224,9 @@
             </div> 
             <div className="accessibility-wrapper" style={{ margin: '0 10px' }}>
               <AccessibilityWidget />
+            </div>
+            <div className="user-icon-wrapper" style={{ margin: '0 10px' }}>
+              <UserIcon />
             </div>
           </div>
           <header className="flex-col items-center text-center mb-10">
@@ -398,7 +408,10 @@ export default function App() {
     setShowTipsPopup(false);
   };
   return (
+    <AuthProvider>
     <Router>
+    <LoginModal />
+
       <Routes>
         <Route path="/" element={<LandingPage lang="he" />} />
         <Route path="/he" element={<LandingPage lang="he" />} />
@@ -410,7 +423,9 @@ export default function App() {
         <Route path="/print-tips" element={<PrintTips />} />
         <Route path="/BMICalculator" element={<BMICalculator />}/>
         <Route path="/success-stories" element={<SuccessStories />} />
-        
+        <Route path="/diet-tracker" element={<DietTrackerCalendar />} />
+        <Route path="/admin-panel" element={<AdminPanel />} />
+        <Route path="/unauthorized" element={<UnauthorizedAccess />} />
         {posts.map((post) => (
           <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
         ))}
@@ -421,6 +436,8 @@ export default function App() {
       {showTipsPopup && <TipsPopupModal onClose={closeTipsPopup} />}
 
     </Router>
+    </AuthProvider>
+
 
   );
 }
