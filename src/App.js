@@ -107,6 +107,8 @@
 
   function CategoryButtons({ selectedCategory, setSelectedCategory }) {
     return (
+      <div className="overflow-x-auto scrollbar-hide">
+
       <div
         className="flex justify-center flex-wrap gap-2 my-6"
         style={{ direction: 'ltr' }}
@@ -126,7 +128,9 @@
           );
         })}
       </div>
+      </div>
     );
+  
   }
 
   function isNewPost(dateStr) {
