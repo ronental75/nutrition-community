@@ -16,7 +16,16 @@
   import AccessibilityWidget from './AccessibilityWidget';
   import TipsPopupModal from './TipsPopupModal'; // Import the new component
   import './styles/auth-styles.css';
-  import { AuthProvider, UserIcon, LoginModal, DietTrackerCalendar, AdminPanel, UnauthorizedAccess } from './components/auth/AuthComponents';
+  import { 
+    AuthProvider, 
+    UserIcon, 
+    LoginModal, 
+    DietTrackerCalendar, 
+    UnauthorizedAccess 
+  } from './components/auth/AuthComponents';
+  import AdminPanel from './components/admin/AdminPanel';
+  import './styles/auth-styles.css';
+  import './styles/admin-panel.css';
 
 
 
@@ -425,6 +434,7 @@ export default function App() {
         <Route path="/success-stories" element={<SuccessStories />} />
         <Route path="/diet-tracker" element={<DietTrackerCalendar />} />
         <Route path="/admin-panel" element={<AdminPanel />} />
+        
         <Route path="/unauthorized" element={<UnauthorizedAccess />} />
         {posts.map((post) => (
           <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />

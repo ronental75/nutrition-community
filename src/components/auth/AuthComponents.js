@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Calendar, CheckCircle, XCircle, BarChart, User, Mail, Lock, LogOut, X } from 'lucide-react';
 import * as firebaseConfig from '../../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, collection, getDocs } from 'firebase/firestore';
 // יצירת קונטקסט לאותנטיקציה שיהיה זמין בכל המערכת
 const AuthContext = createContext(null);
 const auth = firebaseConfig.auth;
@@ -1068,33 +1068,33 @@ export const DietTrackerCalendar = () => {
   return (
     <div dir="rtl" className="diet-tracker-container">
     <div className="calendar-header">
-  <div className="title-with-back">
-    <button onClick={() => navigate('/')} className="inline-back-button">
-      <span className="back-arrow">←</span>
-    </button>
-    <h2 className="calendar-title">
-      <Calendar className="calendar-icon" />
-      מעקב תפריט חודשי
-    </h2>
-  </div>
-        <div className="month-navigation">
-          <button 
-            onClick={() => changeMonth(-1)}
-            className="month-nav-button"
-          >
-            &lt; הקודם
-          </button>
-          <h3 className="current-month">
-            {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-          </h3>
-          <button 
-            onClick={() => changeMonth(1)}
-            className="month-nav-button"
-          >
-            הבא &gt;
-          </button>
-        </div>
+      <div className="title-with-back">
+        <button onClick={() => navigate('/')} className="inline-back-button">
+          <span className="back-arrow">←</span>
+        </button>
+        <h2 className="calendar-title">
+          <Calendar className="calendar-icon" />
+          מעקב תפריט חודשי
+        </h2>
       </div>
+      <div className="month-navigation">
+        <button 
+          onClick={() => changeMonth(-1)}
+          className="month-nav-button"
+        >
+          &lt; הקודם
+        </button>
+        <h3 className="current-month">
+          {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+        </h3>
+        <button 
+          onClick={() => changeMonth(1)}
+          className="month-nav-button"
+        >
+          הבא &gt;
+        </button>
+      </div>
+    </div>
       
       {/* הסבר */}
       <div className="calendar-instructions">
@@ -1163,163 +1163,6 @@ export const DietTrackerCalendar = () => {
           </p>
         </div>
       )}
-    </div>
-  );
-};
-
-// קומפוננטת ניהול משתמשים (לאדמין)
-export const AdminPanel = () => {
-  const { currentUser } = useAuth();
-  const [users, setUsers] = useState([]);
-  const [pendingApprovals, setPendingApprovals] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    // בדוק אם המשתמש הוא אדמין
-    if (!currentUser || currentUser.role !== 'admin') {
-      alert('אין לך הרשאות לצפות בדף זה');
-      navigate('/');
-      return;
-    }
-    
-    const loadAdminData = async () => {
-      try {
-        setLoading(true);
-        // const db = getFirestore();
-        
-        // טען את כל המשתמשים
-        const usersSnapshot = await getDocs(collection(db, 'users'));
-        const usersData = [];
-        
-        usersSnapshot.forEach((doc) => {
-          const user = doc.data();
-          usersData.push({
-            uid: doc.id,
-            ...user
-          });
-        });
-        
-        // מיין משתמשים למאושרים ולא מאושרים
-        const approved = usersData.filter(user => user.approved);
-        const pending = usersData.filter(user => !user.approved);
-        
-        setUsers(approved);
-        setPendingApprovals(pending);
-      } catch (error) {
-        console.error('Error loading admin data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    loadAdminData();
-  }, [currentUser, navigate]);
-  
-  // אישור או דחיית משתמש
-  const handleUserApproval = async (userId, approved) => {
-    try {
-      // const db = getFirestore();
-      const userDocRef = doc(db, 'users', userId);
-      
-      await updateDoc(userDocRef, {
-        approved
-      });
-      
-      // עדכון הרשימות המקומיות
-      if (approved) {
-        // העבר את המשתמש לרשימת המאושרים
-        const userToApprove = pendingApprovals.find(u => u.uid === userId);
-        setPendingApprovals(pendingApprovals.filter(u => u.uid !== userId));
-        setUsers([...users, {...userToApprove, approved: true}]);
-      } else {
-        // הסר את המשתמש מרשימת הבקשות
-        setPendingApprovals(pendingApprovals.filter(u => u.uid !== userId));
-      }
-    } catch (error) {
-      console.error('Error updating user approval:', error);
-      alert('אירעה שגיאה בעדכון סטטוס המשתמש');
-    }
-  };
-  
-  if (loading) {
-    return <div className="loading-container">טוען נתונים...</div>;
-  }
-  
-  return (
-    <div dir="rtl" className="admin-panel-container">
-      <h2 className="admin-panel-title">פאנל ניהול משתמשים</h2>
-      
-      {/* בקשות הרשמה */}
-      <div className="admin-section">
-        <h3 className="admin-section-title">בקשות הרשמה ממתינות לאישור</h3>
-        
-        {pendingApprovals.length === 0 ? (
-          <p className="empty-message">אין בקשות הרשמה ממתינות לאישור</p>
-        ) : (
-          <div className="approval-requests">
-            {pendingApprovals.map((user) => (
-              <div key={user.uid} className="user-card">
-                <div className="user-info">
-                  <h4 className="user-name">{user.name}</h4>
-                  <div className="user-email">{user.email}</div>
-                  <div className="user-created-at">
-                    נרשם: {new Date(user.createdAt).toLocaleString('he-IL')}
-                  </div>
-                </div>
-                <div className="user-actions">
-                  <button
-                    onClick={() => handleUserApproval(user.uid, false)}
-                    className="reject-button"
-                  >
-                    <X className="action-icon" />
-                    דחה
-                  </button>
-                  <button
-                    onClick={() => handleUserApproval(user.uid, true)}
-                    className="approve-button"
-                  >
-                    <CheckCircle className="action-icon" />
-                    אשר
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      
-      {/* משתמשים מאושרים */}
-      <div className="admin-section">
-        <h3 className="admin-section-title">משתמשים מאושרים</h3>
-        
-        {users.length === 0 ? (
-          <p className="empty-message">אין משתמשים מאושרים במערכת</p>
-        ) : (
-          <div className="users-table-container">
-            <table className="users-table">
-              <thead>
-                <tr>
-                  <th>שם</th>
-                  <th>אימייל</th>
-                  <th>תפקיד</th>
-                  <th>תאריך הרשמה</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user.uid}>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.role === 'admin' ? 'מנהל' : 'משתמש'}</td>
-                    <td>{user.createdAt ? new Date(user.createdAt).toLocaleDateString('he-IL') : '-'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
     </div>
   );
 };
