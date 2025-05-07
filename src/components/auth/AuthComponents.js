@@ -1067,19 +1067,16 @@ export const DietTrackerCalendar = () => {
   
   return (
     <div dir="rtl" className="diet-tracker-container">
-      <div className="back-button-container">
-        <button 
-          onClick={() => navigate('/')}
-          className="back-button"
-        >
-          &larr; חזרה לדף הראשי
-        </button>
-      </div>
-      <div className="calendar-header">
-        <h2 className="calendar-title">
-          <Calendar className="calendar-icon" />
-          מעקב תפריט חודשי
-        </h2>
+    <div className="calendar-header">
+  <div className="title-with-back">
+    <button onClick={() => navigate('/')} className="inline-back-button">
+      <span className="back-arrow">←</span>
+    </button>
+    <h2 className="calendar-title">
+      <Calendar className="calendar-icon" />
+      מעקב תפריט חודשי
+    </h2>
+  </div>
         <div className="month-navigation">
           <button 
             onClick={() => changeMonth(-1)}
