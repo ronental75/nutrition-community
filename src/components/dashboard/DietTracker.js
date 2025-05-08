@@ -1,10 +1,7 @@
-// src/components/dashboard/DietTracker.js
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, BarChart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { dbFirestore as db } from '../../firebase';
-
-// ייבוא סגנונות מעקב תפריט
 import './diet-tracker.css';
 
 const DietTracker = ({ trackedDays, updateData, userId }) => {
@@ -177,7 +174,20 @@ const DietTracker = ({ trackedDays, updateData, userId }) => {
         </div>
       </div>
       
-      {/* סטטיסטיקה */}
+      {/* לוח שנה - הועבר לפני הסטטיסטיקה */}
+      <div className="calendar-grid">
+        {/* שמות ימים */}
+        {dayNames.map((day) => (
+          <div key={day} className="day-name">
+            {day}
+          </div>
+        ))}
+        
+        {/* ימים בחודש */}
+        {renderCalendarDays()}
+      </div>
+      
+      {/* סטטיסטיקה - הועברה אחרי לוח השנה */}
       <div className="stats-container">
         <div className="stats-header">
           <BarChart className="stats-icon" />
@@ -199,19 +209,6 @@ const DietTracker = ({ trackedDays, updateData, userId }) => {
             <div className="stat-label">אחוז הצלחה</div>
           </div>
         </div>
-      </div>
-      
-      {/* לוח שנה */}
-      <div className="calendar-grid">
-        {/* שמות ימים */}
-        {dayNames.map((day) => (
-          <div key={day} className="day-name">
-            {day}
-          </div>
-        ))}
-        
-        {/* ימים בחודש */}
-        {renderCalendarDays()}
       </div>
       
       {/* הודעת עידוד */}
