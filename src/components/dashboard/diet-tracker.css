@@ -1,0 +1,294 @@
+/* Diet Tracker Styles */
+.diet-tracker-section {
+    width: 100%;
+  }
+  
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .title-with-back {
+    display: flex;
+    align-items: center;
+  }
+  
+  .inline-back-button {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 10px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+  }
+  
+  .inline-back-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .back-arrow {
+    font-size: 1.4rem;
+  }
+  
+  .month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 10px 15px;
+  }
+  
+  .current-month {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+  }
+  
+  .month-nav-button {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #3498db;
+    transition: background-color 0.2s;
+  }
+  
+  .month-nav-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .nav-icon {
+    margin: 0 5px;
+  }
+  
+  /* Calendar Instructions */
+  .calendar-instructions {
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  
+  .calendar-instructions p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .status-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .status-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-legend-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+  }
+  
+  .success-icon {
+    color: #27ae60;
+  }
+  
+  .fail-icon {
+    color: #e74c3c;
+  }
+  
+  .empty-icon {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+  }
+  
+  /* Stats Container */
+  .stats-container {
+    background-color: #f1f8ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .stats-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .stats-icon {
+    margin-left: 8px;
+    color: #3498db;
+  }
+  
+  .stats-title {
+    font-weight: bold;
+  }
+  
+  .stats-data {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  .stat-item {
+    flex: 1;
+  }
+  
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .success-value {
+    color: #27ae60;
+  }
+  
+  .fail-value {
+    color: #e74c3c;
+  }
+  
+  .high-success-rate {
+    color: #27ae60;
+  }
+  
+  .medium-success-rate {
+    color: #f39c12;
+  }
+  
+  .low-success-rate {
+    color: #e74c3c;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+  }
+  
+  /* Calendar Grid */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .day-name {
+    text-align: center;
+    font-weight: bold;
+    color: #7f8c8d;
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+  
+  .calendar-day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+  }
+  
+  .empty-day {
+    height: 40px;
+  }
+  
+  .regular-day {
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+  }
+  
+  .regular-day:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .success-day {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+  }
+  
+  .success-day:hover {
+    background-color: #c8e6c9;
+  }
+  
+  .fail-day {
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+  }
+  
+  .fail-day:hover {
+    background-color: #ffcdd2;
+  }
+  
+  .day-number {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    font-size: 0.7rem;
+    color: #555;
+  }
+  
+  .status-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Motivation Message */
+  .motivation-message {
+    background-color: #fff8e1;
+    border-radius: 8px;
+    padding: 15px;
+    color: #f57f17;
+    text-align: center;
+  }
+  
+  .motivation-message p {
+    margin: 0;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .calendar-grid {
+      grid-template-columns: repeat(7, 1fr);
+      font-size: 0.8rem;
+    }
+    
+    .calendar-day {
+      height: 35px;
+    }
+    
+    .stats-data {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .status-legend {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }

@@ -1,0 +1,204 @@
+/* Weight Tracker Styles */
+.weight-tracker {
+    width: 100%;
+  }
+  
+  .weight-input-section {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .weight-input-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+  
+  .weight-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .weight-submit-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+  
+  .weight-submit-btn:hover {
+    background-color: #219653;
+  }
+  
+  .weight-submit-btn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .cancel-edit-btn {
+    background-color: #e0e0e0;
+    color: #555;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+    margin-top: 10px;
+  }
+  
+  .cancel-edit-btn:hover {
+    background-color: #d0d0d0;
+  }
+  
+  .weight-chart {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .weight-chart h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+  
+  .weight-history {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .weight-history h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+  
+  .weight-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .weight-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+  
+  .weight-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .weight-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .weight-date {
+    min-width: 80px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  .weight-value {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1.1rem;
+  }
+  
+  .weight-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .edit-weight-btn,
+  .delete-weight-btn {
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-weight-btn {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .edit-weight-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .delete-weight-btn {
+    background-color: #ffebee;
+    color: #e53935;
+  }
+  
+  .delete-weight-btn:hover {
+    background-color: #ffcdd2;
+  }
+  
+  .no-weight-data {
+    text-align: center;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #7f8c8d;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .weight-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    
+    .weight-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .weight-actions {
+      margin-top: 10px;
+      align-self: flex-end;
+    }
+  }

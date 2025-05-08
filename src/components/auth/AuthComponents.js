@@ -1,14 +1,16 @@
-// AuthComponents.js - קובץ חדש עם כל קומפוננטות ההתחברות והניהול
+// AuthComponents.js - קובץ עם קומפוננטות ההתחברות והניהול בלבד
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, CheckCircle, XCircle, BarChart, User, Mail, Lock, LogOut, X } from 'lucide-react';
+import { User, Mail, Lock, LogOut, X } from 'lucide-react';
 import * as firebaseConfig from '../../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
+
 // יצירת קונטקסט לאותנטיקציה שיהיה זמין בכל המערכת
 const AuthContext = createContext(null);
 const auth = firebaseConfig.auth;
 const db = firebaseConfig.dbFirestore;
+
 // Provider קומפוננטת
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -17,9 +19,6 @@ export const AuthProvider = ({ children }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   
   useEffect(() => {
-    // const auth = getAuth();
-    // const db = dbFirestore;
-    
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setLoading(true);
       if (user) {
@@ -39,7 +38,9 @@ export const AuthProvider = ({ children }) => {
               displayName: userData.name || user.displayName,
               role: userData.role || 'user',
               approved: userData.approved || false,
-              trackedDays: userData.trackedDays || {}
+              trackedDays: userData.trackedDays || {},
+              weightData: userData.weightData || [],
+              workouts: userData.workouts || [] // הוספת נתוני אימונים
             });
           } else {
             // אם אין מסמך, צור חדש עם נתוני ברירת מחדל
@@ -48,7 +49,9 @@ export const AuthProvider = ({ children }) => {
               email: user.email,
               role: 'user',
               approved: false,
-              trackedDays: {}
+              trackedDays: {},
+              weightData: [],
+              workouts: [] 
             });
             
             setUserRole('user');
@@ -58,7 +61,9 @@ export const AuthProvider = ({ children }) => {
               displayName: user.displayName || '',
               role: 'user',
               approved: false,
-              trackedDays: {}
+              trackedDays: {},
+              weightData: [],
+              workouts: []
             });
           }
         } catch (error) {
@@ -106,7 +111,6 @@ export const UserIcon = () => {
   
   const handleLogout = async () => {
     try {
-      // const auth = getAuth();
       await signOut(auth);
       setIsMenuOpen(false);
     } catch (error) {
@@ -176,7 +180,7 @@ export const UserIcon = () => {
             
             <div style={{padding: '8px 0'}}>
               <button 
-                onClick={() => navigateTo('/diet-tracker')}
+                onClick={() => navigateTo('/dashboard')}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -188,8 +192,8 @@ export const UserIcon = () => {
                   cursor: 'pointer'
                 }}
               >
-                <Calendar style={{marginLeft: '8px', width: '18px', height: '18px'}} />
-                מעקב תפריט
+                <span style={{marginLeft: '8px', fontSize: '18px'}}>📊</span>
+                דאשבורד אישי
               </button>
               
               {currentUser.role === 'admin' && (
@@ -343,9 +347,6 @@ const LoginForm = ({ switchToRegister }) => {
     setError('');
     
     try {
-      // const auth = getAuth();
-      // const db = getFirestore();
-      
       // התחברות עם Firebase Auth
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -590,9 +591,6 @@ const RegisterForm = ({ switchToLogin }) => {
     setLoading(true);
     
     try {
-      // const auth = getAuth();
-      // const db = getFirestore();
-      
       // יצירת משתמש חדש
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -604,10 +602,12 @@ const RegisterForm = ({ switchToLogin }) => {
         role: 'user',
         approved: false,
         trackedDays: {},
+        weightData: [],
+        workouts: [],
         createdAt: new Date().toISOString()
       });
       
-      // שליחת הודעה למנהל (בפרויקט אמיתי זה יהיה בצד שרת)
+      // שליחת הודעה למנהל
       const adminNotificationRef = doc(collection(db, 'adminNotifications'));
       await setDoc(adminNotificationRef, {
         type: 'newUser',
@@ -884,303 +884,73 @@ const RegisterForm = ({ switchToLogin }) => {
   );
 };
 
-// קומפוננטת לוח שנה למעקב תפריט
-export const DietTrackerCalendar = () => {
-  const { currentUser } = useAuth();
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [trackedDays, setTrackedDays] = useState({});
-  const [loading, setLoading] = useState(true);
+// דף השגיאה כשמנסים לגשת לתוכן ללא הרשאה
+export const UnauthorizedAccess = () => {
+  // הוספת useNavigate כדי שנוכל לנווט לדף הבית
   const navigate = useNavigate();
   
-  useEffect(() => {
-    // אם אין משתמש מחובר, נווט לדף התחברות
-    if (!currentUser) {
-      navigate('/');
-      return;
-    }
-    
-    const loadUserData = async () => {
-      try {
-        setLoading(true);
-        // const db = getFirestore();
-        const userDocRef = doc(db, 'users', currentUser.uid);
-        const userDoc = await getDoc(userDocRef);
-        
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          
-          // בדוק אם המשתמש מאושר
-          if (!userData.approved) {
-            alert('החשבון שלך עדיין לא אושר על ידי מנהל המערכת');
-            navigate('/contact');
-            return;
-          }
-          
-          // טען את נתוני מעקב התפריט
-          setTrackedDays(userData.trackedDays || {});
-        }
-      } catch (error) {
-        console.error('Error loading user data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    loadUserData();
-  }, [currentUser, navigate]);
-  
-  // שמירת נתוני מעקב ב-Firestore
-  const updateTrackedDays = async (newTrackedDays) => {
-    if (!currentUser) return;
-    
-    try {
-      // const db = getFirestore();
-      const userDocRef = doc(db, 'users', currentUser.uid);
-      
-      // עדכון נתוני המשתמש
-      await updateDoc(userDocRef, {
-        trackedDays: newTrackedDays
-      });
-      
-      setTrackedDays(newTrackedDays);
-    } catch (error) {
-      console.error('Error updating tracked days:', error);
-      alert('אירעה שגיאה בשמירת הנתונים');
-    }
-  };
-  
-  // Get days in month for the calendar
-  const getDaysInMonth = (year, month) => {
-    return new Date(year, month + 1, 0).getDate();
-  };
-  
-  // Get the day of week (0-6) for the first day of the month
-  const getFirstDayOfMonth = (year, month) => {
-    return new Date(year, month, 1).getDay();
-  };
-  
-  // Format date to string key for storage
-  const formatDateKey = (year, month, day) => {
-    return `${year}-${month + 1}-${day}`;
-  };
-  
-  // Toggle tracking status for a day
-  const toggleDayStatus = (day) => {
-    const dateKey = formatDateKey(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      day
-    );
-    
-    const newTrackedDays = {...trackedDays};
-    
-    if (!newTrackedDays[dateKey]) {
-      newTrackedDays[dateKey] = 'success';
-    } else if (newTrackedDays[dateKey] === 'success') {
-      newTrackedDays[dateKey] = 'fail';
-    } else {
-      delete newTrackedDays[dateKey];
-    }
-    
-    updateTrackedDays(newTrackedDays);
-  };
-  
-  // Change month
-  const changeMonth = (delta) => {
-    const newDate = new Date(currentDate);
-    newDate.setMonth(newDate.getMonth() + delta);
-    setCurrentDate(newDate);
-  };
-  
-  // Calculate statistics
-  const getStats = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
-    let successCount = 0;
-    let failCount = 0;
-    
-    for (let day = 1; day <= getDaysInMonth(year, month); day++) {
-      const dateKey = formatDateKey(year, month, day);
-      if (trackedDays[dateKey] === 'success') {
-        successCount++;
-      } else if (trackedDays[dateKey] === 'fail') {
-        failCount++;
-      }
-    }
-    
-    const totalTracked = successCount + failCount;
-    const successRate = totalTracked ? Math.round((successCount / totalTracked) * 100) : 0;
-    
-    return { successCount, failCount, successRate };
-  };
-  
-  // Render the calendar grid
-  const renderCalendarDays = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const daysInMonth = getDaysInMonth(year, month);
-    const firstDayOfMonth = getFirstDayOfMonth(year, month);
-    
-    const days = [];
-    
-    // Add empty cells for days before the 1st of the month
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      days.push(<div key={`empty-${i}`} className="empty-day"></div>);
-    }
-    
-    // Add cells for each day of the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dateKey = formatDateKey(year, month, day);
-      const status = trackedDays[dateKey];
-      
-      days.push(
-        <div 
-          key={day} 
-          onClick={() => toggleDayStatus(day)}
-          className={`calendar-day ${status === 'success' ? 'success-day' : status === 'fail' ? 'fail-day' : 'regular-day'}`}
-        >
-          <span className="day-number">{day}</span>
-          {status === 'success' && (
-            <CheckCircle className="status-icon success-icon" />
-          )}
-          {status === 'fail' && (
-            <XCircle className="status-icon fail-icon" />
-          )}
-        </div>
-      );
-    }
-    
-    return days;
-  };
-  
-  const { successCount, failCount, successRate } = getStats();
-  const monthNames = [
-    "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני",
-    "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"
-  ];
-  const dayNames = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
-
-  if (loading) {
-    return <div className="loading-container">טוען נתונים...</div>;
-  }
-  
   return (
-    <div dir="rtl" className="diet-tracker-container">
-    <div className="calendar-header">
-      <div className="title-with-back">
-        <button onClick={() => navigate('/')} className="inline-back-button">
-          <span className="back-arrow">←</span>
-        </button>
-        <h2 className="calendar-title">
-          <Calendar className="calendar-icon" />
-          מעקב תפריט חודשי
-        </h2>
-      </div>
-      <div className="month-navigation">
-        <button 
-          onClick={() => changeMonth(-1)}
-          className="month-nav-button"
-        >
-          &lt; הקודם
-        </button>
-        <h3 className="current-month">
-          {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-        </h3>
-        <button 
-          onClick={() => changeMonth(1)}
-          className="month-nav-button"
-        >
-          הבא &gt;
-        </button>
-      </div>
-    </div>
+    <div dir="rtl" className="unauthorized-container" style={{
+      maxWidth: '500px',
+      margin: '50px auto',
+      padding: '20px',
+      backgroundColor: '#fff8e1',
+      borderRadius: '8px',
+      textAlign: 'center',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+    }}>
+      <h2 style={{
+        color: '#e65100',
+        marginTop: '0'
+      }}>גישה מוגבלת</h2>
       
-      {/* הסבר */}
-      <div className="calendar-instructions">
-        <p>לחץ על כל יום כדי לסמן האם עמדת בתפריט:</p>
-        <div className="status-legend">
-          <div className="status-item">
-            <CheckCircle className="status-legend-icon success-icon" />
-            <span>עמדתי בתפריט</span>
-          </div>
-          <div className="status-item">
-            <XCircle className="status-legend-icon fail-icon" />
-            <span>לא עמדתי בתפריט</span>
-          </div>
-          <div className="status-item">
-            <div className="status-legend-icon empty-icon"></div>
-            <span>לא מסומן</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* סטטיסטיקה */}
-      <div className="stats-container">
-        <div className="stats-header">
-          <BarChart className="stats-icon" />
-          <span className="stats-title">סיכום החודש:</span>
-        </div>
-        <div className="stats-data">
-          <div className="stat-item">
-            <div className="stat-value success-value">{successCount}</div>
-            <div className="stat-label">ימי הצלחה</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value fail-value">{failCount}</div>
-            <div className="stat-label">ימי פספוס</div>
-          </div>
-          <div className="stat-item">
-            <div className={`stat-value ${successRate > 70 ? 'high-success-rate' : successRate > 40 ? 'medium-success-rate' : 'low-success-rate'}`}>
-              {successRate}%
-            </div>
-            <div className="stat-label">אחוז הצלחה</div>
-          </div>
-        </div>
-      </div>
-      
-      {/* לוח שנה */}
-      <div className="calendar-grid">
-        {/* שמות ימים */}
-        {dayNames.map((day) => (
-          <div key={day} className="day-name">
-            {day}
-          </div>
-        ))}
-        
-        {/* ימים בחודש */}
-        {renderCalendarDays()}
-      </div>
-      
-      {/* הודעת עידוד */}
-      {successCount > 0 && (
-        <div className="motivation-message">
-          <p>
-            {successRate > 80 ? '🎉 מצוין! אתה מתמיד ועומד ביעדים בצורה מרשימה!' :
-             successRate > 60 ? '👍 כל הכבוד! אתה בדרך הנכונה להשגת המטרות שלך.' :
-             successRate > 40 ? '💪 המשך להתאמץ, אתה מתקדם!' :
-             '🌱 כל התחלה היא טובה! המשך לנסות ותראה שיפור.'}
-          </p>
-        </div>
-      )}
-    </div>
-  );
-};
-
-// דף השגיאה כשמנסים לגשת למעקב תפריט ללא הרשאה
-export const UnauthorizedAccess = () => {
-  return (
-    <div dir="rtl" className="unauthorized-container">
-      <h2 className="unauthorized-title">גישה מוגבלת</h2>
-      <p className="unauthorized-message">
-        מעקב התפריט זמין רק ללקוחות רשומים.
+      <p style={{
+        fontSize: '1.1rem',
+        color: '#333',
+        marginBottom: '20px'
+      }}>
+        התוכן זמין רק למשתמשים רשומים ומאושרים.
       </p>
-      <div className="unauthorized-actions">
+      
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        alignItems: 'center'
+      }}>
         <button 
           onClick={() => window.location.href = '/contact'}
-          className="contact-button"
+          style={{
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            padding: '10px 20px',
+            fontSize: '1rem',
+            fontWeight: '500',
+            cursor: 'pointer',
+            width: '200px'
+          }}
         >
           צור קשר לפרטים נוספים
+        </button>
+        
+        {/* הוספת כפתור חזרה לעמוד הבית */}
+        <button 
+          onClick={() => navigate('/')}
+          style={{
+            backgroundColor: '#f0f0f0',
+            color: '#333',
+            border: 'none',
+            borderRadius: '6px',
+            padding: '10px 20px',
+            fontSize: '1rem',
+            fontWeight: '500',
+            cursor: 'pointer',
+            width: '200px'
+          }}
+        >
+          חזור לעמוד הבית
         </button>
       </div>
     </div>
