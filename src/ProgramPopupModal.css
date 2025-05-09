@@ -1,0 +1,214 @@
+.program-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+  }
+  
+  .program-popup-modal {
+    background-color: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: popup-slide-in 0.4s ease-out;
+    direction: rtl;
+  }
+  
+  @keyframes popup-slide-in {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .program-popup-content {
+    padding: 20px;
+    position: relative;
+  }
+  
+  .program-popup-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #777;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  
+  .program-popup-close:hover {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .program-popup-title {
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  .program-popup-details {
+    margin: 15px 0;
+  }
+  
+  .program-popup-highlight {
+    background-color: #ebf7ff;
+    border-right: 4px solid #3182ce;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 0 6px 6px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  .program-popup-duration {
+    color: #2b6cb0;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  
+  .program-popup-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .program-popup-features li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .program-popup-checkmark {
+    color: #38a169;
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 1.1rem;
+  }
+  
+  .program-popup-cta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .program-popup-button {
+    background-color: #38a169;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    width: 80%;
+    box-shadow: 0 3px 10px rgba(56, 161, 105, 0.3);
+  }
+  
+  .program-popup-button:hover {
+    background-color: #2f855a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(56, 161, 105, 0.4);
+  }
+  
+  .program-popup-link {
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .program-popup-link:hover {
+    color: #2b6cb0;
+    text-decoration: underline;
+  }
+  
+  .program-popup-timer {
+    font-size: 0.8rem;
+    color: #718096;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    .program-popup-modal {
+      width: 95%;
+    }
+    
+    .program-popup-title {
+      font-size: 1.3rem;
+    }
+    
+    .program-popup-highlight {
+      font-size: 1rem;
+    }
+    
+    .program-popup-button {
+      width: 100%;
+    }
+  }
+
+  /* הוסף את הסגנונות האלה לקובץ ProgramPopupModal.css */
+
+.program-popup-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .program-popup-link-separator {
+    margin: 0 10px;
+    color: #ccc;
+  }
+  
+  .program-popup-share-link {
+    background: none;
+    border: none;
+    color: #4299e1;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  
+  .program-popup-share-link:hover {
+    color: #2b6cb0;
+    text-decoration: underline;
+  }
+  
+  /* עדכון הכפתור הראשי */
+  .program-popup-button {
+    margin-bottom: 5px; /* הקטנת המרווח התחתון */
+  }

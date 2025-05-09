@@ -14,7 +14,9 @@ import PrintTips from './PrintTips';
 import BMICalculator from './BMICalculator';
 import SuccessStories from './components/SuccessStories';
 import AccessibilityWidget from './AccessibilityWidget';
-import TipsPopupModal from './TipsPopupModal';
+// import TipsPopupModal from './TipsPopupModal';
+import ProgramPopupModal from './ProgramPopupModal'; // וודא שהנתיב נכון
+import './ProgramPopupModal.css'
 import './styles/auth-styles.css';
 import { AuthProvider, useAuth, UserIcon, LoginModal, UnauthorizedAccess } from './components/auth/AuthComponents';
 import AdminPanel from './components/admin/AdminPanel';
@@ -357,7 +359,9 @@ export default function App() {
             <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
           ))}
         </Routes>
-        {showTipsPopup && <TipsPopupModal onClose={closeTipsPopup} />}
+        {/* {showTipsPopup && <TipsPopupModal onClose={closeTipsPopup} />} */}
+        {showTipsPopup && <ProgramPopupModal onClose={closeTipsPopup} />}
+
       </Router>
     </AuthProvider>
   );
