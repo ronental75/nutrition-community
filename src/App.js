@@ -135,16 +135,48 @@ const posts = [
 ];
 
 function CategoryButtons({ selectedCategory, setSelectedCategory }) {
-  // ... הקוד הקיים ...
+  return (
+    <div className="overflow-x-auto scrollbar-hide">
+
+    <div
+      className="flex justify-center flex-wrap gap-2 my-6"
+      style={{ direction: 'ltr' }}
+    >
+      {categories.map((cat) => {
+        const isActive = selectedCategory === cat.key;
+        return (
+          <button
+            key={cat.key}
+            onClick={() => setSelectedCategory(cat.key)}
+            className={classNames('button text-sm px-3 py-1', {
+              'button-active': isActive
+            })}
+          >
+            {cat.label}
+          </button>
+        );
+      })}
+    </div>
+    </div>
+  );
+
 }
 
+
+
 function isNewPost(dateStr) {
-  // ... הקוד הקיים ...
+const postDate = new Date(dateStr);
+const now = new Date();
+const diffInDays = (now - postDate) / (1000 * 60 * 60 * 24);
+return diffInDays <= 7;
 }
 
 function formatDate(dateStr) {
-  // ... הקוד הקיים ...
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const dateObj = new Date(dateStr);
+return dateObj.toLocaleDateString('he-IL', options);
 }
+
 
 function LandingPage({ lang }) {
   const isHebrew = lang === 'he';
@@ -301,7 +333,73 @@ function LandingPage({ lang }) {
 }
 
 function PostPage({ slug }) {
-  // ... הקוד הקיים ...
+  const post = posts.find((p) => p.slug === slug);
+  const navigate = useNavigate();
+
+  if (!post) return <div className="p-6 text-center">Post not found</div>;
+
+  const goBack = () => {
+    navigate('/');
+  };
+
+  return (
+    <div dir="rtl" className="post-page-container">
+      {/* Top blue bar fixed at the top */}
+      <div className="post-top-bar">
+        <div className="post-top-bar-buttons">
+          {/* Back button */}
+          <div className="back-button-wrapper">
+            <button className="back-button" onClick={goBack}>
+              &#8592; {/* Left arrow */}
+            </button>
+          </div>
+          
+          {/* Share button */}
+          <div className="share-wrapper">
+            <Share />
+          </div>
+          
+          {/* Accessibility button */}
+          <div className="accessibility-wrapper">
+            <AccessibilityWidget />
+          </div>
+        </div>
+      </div>
+      
+      {/* מעטפת חדשה לכותרת עם מרווח מהחלק העליון */}
+      <div className="title-wrapper">
+        {/* Sticky title section */}
+        <div className="post-title-container">
+          <h1 className="post-page-title">{post.he}</h1>
+          {/* <div className="post-meta">
+            <span className="post-date">{formatDate(post.date)}</span>
+            <span className="post-author">· {post.author}</span>
+            <div className="post-categories">
+              {post.categories.map(cat => (
+                <span key={cat} className="post-category">
+                  {categoryIcons[cat]} {cat}
+                </span>
+              ))}
+            </div>
+          </div> */}
+        </div>
+      </div>
+      
+      {/* Main content area */}
+      <div className="post-content-container">
+        <iframe
+          src={post.file}
+          className="post-iframe"
+          title={post.slug}
+        />
+      </div>
+      <br></br>
+      {/* Fixed like/dislike section at the bottom */}
+      <div className="post-actions-container">
+        <LikeDislike slug={post.slug} />
+      </div>
+    </div>
+  );
 }
 
 export default function App() {
@@ -360,8 +458,6 @@ export default function App() {
           ))}
         </Routes>
         {/* {showTipsPopup && <TipsPopupModal onClose={closeTipsPopup} />} */}
-        {showTipsPopup && <ProgramPopupModal onClose={closeTipsPopup} />}
-
       </Router>
     </AuthProvider>
   );
