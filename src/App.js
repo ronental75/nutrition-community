@@ -180,8 +180,14 @@ function LandingPage({ lang }) {
             </div>
             {menuOpen && (        
             <div className="menu-dropdown">
+              <Link to="/about" className="menu-item">
+                {isHebrew ? 'תוכנית ליווי תזונה וספורט' : 'About'}
+              </Link>
               <Link to="/success-stories" className="menu-item">
-                {isHebrew ? 'סיפורי הצלחה' : 'Success Stories'}
+                {isHebrew ? 'סיפורי לקוחות' : 'Success Stories'}
+              </Link>
+              <Link to="/dashboard" className="menu-item">
+                {isHebrew ? 'דאשבורד מעקב' : 'Personal Dashboard'}
               </Link>
               <Link to="/TdeeCalculator" className="menu-item">
                 {isHebrew ? 'מחשבון הוצאה קלורית יומית ': "TdeeCalculator"}
@@ -189,13 +195,9 @@ function LandingPage({ lang }) {
               <Link to="/BMICalculator" className="menu-item">
                 {isHebrew ? 'מחשבון BMI ': "BMICalculator"}
               </Link>
-              <Link to="/dashboard" className="menu-item">
-                {isHebrew ? 'דאשבורד אישי' : 'Personal Dashboard'}
-              </Link>
+              
               <Link to="/print-tips" className="menu-item">הדפס ותלה</Link>
-              <Link to="/about" className="menu-item">
-                {isHebrew ? 'אודות' : 'About'}
-              </Link>
+              
               <Link to="/submit" className="menu-item">
                 {isHebrew ? 'שלחו פוסט' : 'About'}
               </Link>
@@ -231,6 +233,15 @@ function LandingPage({ lang }) {
           <Link to="/contact" style={{ textDecoration: 'none' }}>
             <AnimatedBanner text={bannerText} />
           </Link>
+          <div className="subtle-links-container">
+            <Link to="/about" className="subtle-link">
+              <strong>תוכנית ליווי תזונה וספורט</strong>
+            </Link>
+            <span className="link-separator">|</span>
+            <Link to="/success-stories" className="subtle-link">
+              <strong>סיפורי לקוחות</strong>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="posts-container">
