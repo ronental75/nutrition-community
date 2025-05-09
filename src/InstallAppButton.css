@@ -1,0 +1,29 @@
+/* עיצובים לכפתור התקנת האפליקציה */
+.menu-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .install-button {
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .install-button:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+  }
+  
+  @media (max-width: 480px) {
+    .install-button {
+      font-size: 0.8rem;
+      padding: 3px 6px;
+    }
+  }

@@ -21,6 +21,9 @@ import AdminPanel from './components/admin/AdminPanel';
 import './styles/auth-styles.css';
 import './styles/admin-panel.css';
 import PersonalDashboard from './components/dashboard/PersonalDashboard';
+import InstallAppButton from './InstallAppButton'; // נדרש לייבא את הרכיב
+import './InstallAppButton.css'; // נדרש לייבא את הרכיב
+
 
 // קומפוננטת עטיפה להגנה על נתיבים שדורשים התחברות
 const ProtectedRoute = ({ children }) => {
@@ -177,6 +180,7 @@ function LandingPage({ lang }) {
               >
               &#9776;
               </button> 
+              <InstallAppButton />
             </div>
             {menuOpen && (        
             <div className="menu-dropdown">
