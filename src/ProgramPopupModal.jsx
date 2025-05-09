@@ -68,7 +68,7 @@ const ProgramPopupModal = ({ onClose }) => {
               rel="noopener noreferrer" 
               className="program-popup-button"
             >
-              דבר איתי עכשיו
+              דבר\י איתי עכשיו
             </a>
             <a 
               href="/about" 
@@ -82,7 +82,7 @@ const ProgramPopupModal = ({ onClose }) => {
                 onClick={shareWithFriend}
                 className="program-popup-share-link"
               >
-                מכיר מישהו שזקוק לשינוי?
+                מכיר\ה מישהו שזקוק לשינוי?
               </button>
           </div>
           
