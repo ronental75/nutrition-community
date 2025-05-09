@@ -231,52 +231,65 @@ const AdminPanel = () => {
           </div>
           
           {/* תוכן הלשוניות */}
-          {activeTab === 'users' && (
-            <div className="admin-section">
-              <h3 className="admin-section-title">משתמשים מאושרים במערכת</h3>
-              
-              {users.length === 0 ? (
-                <p className="empty-message">אין משתמשים מאושרים במערכת</p>
-              ) : (
-                <div className="users-table-container">
-                  <table className="users-table">
-                    <thead>
-                      <tr>
-                        <th>שם</th>
-                        <th>אימייל</th>
-                        <th>תפקיד</th>
-                        <th>תאריך הרשמה</th>
-                        <th>פעולות</th> {/* עמודה חדשה */}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users.map((user) => (
-                        <tr key={user.uid}>
-                          <td>{user.name}</td>
-                          <td>{user.email}</td>
-                          <td>
-                            <span className={`role-badge ${user.role === 'admin' ? 'admin-role' : 'user-role'}`}>
-                              {user.role === 'admin' ? 'מנהל' : 'משתמש'}
-                            </span>
-                          </td>
-                          <td>{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
-                          <td>
-                            <button 
-                              onClick={() => viewUserDashboard(user)}
-                              className="view-dashboard-button"
-                            >
-                              <Eye className="button-icon" />
-                              צפה בדשבורד
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
-          )}
+
+
+{activeTab === 'users' && (
+  <div className="admin-section">
+    <h3 className="admin-section-title">משתמשים מאושרים במערכת</h3>
+    
+    {users.length === 0 ? (
+      <p className="empty-message">אין משתמשים מאושרים במערכת</p>
+    ) : (
+      <div className="users-table-container">
+        {/* סינון משתמשים - רק משתמשים רגילים יוצגו בטבלה */}
+        {(() => {
+          const regularUsers = users.filter(user => user.role !== 'admin');
+          
+          if (regularUsers.length === 0) {
+            return <p className="empty-message">אין משתמשים רגילים מאושרים במערכת</p>;
+          }
+          
+          return (
+            <table className="users-table">
+              <thead>
+                <tr>
+                  <th>שם</th>
+                  <th>אימייל</th>
+                  <th>תפקיד</th>
+                  <th>תאריך הרשמה</th>
+                  <th>פעולות</th>
+                </tr>
+              </thead>
+              <tbody>
+                {regularUsers.map((user) => (
+                  <tr key={user.uid}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <span className="role-badge user-role">
+                        משתמש
+                      </span>
+                    </td>
+                    <td>{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
+                    <td>
+                      <button 
+                        onClick={() => viewUserDashboard(user)}
+                        className="view-dashboard-button"
+                      >
+                        <Eye className="button-icon" />
+                        צפה בדשבורד
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          );
+        })()}
+      </div>
+    )}
+  </div>
+)}
           
           {activeTab === 'approvals' && (
             <div className="admin-section">
@@ -319,130 +332,143 @@ const AdminPanel = () => {
           )}
           
           {/* לשונית סטטיסטיקות */}
-          {activeTab === 'statistics' && !selectedUser && (
-            <div className="statistics-tab">
-              <h3 className="admin-section-title">סטטיסטיקות מעקב תפריט של כל המשתמשים</h3>
-              
-              {users.length === 0 ? (
-                <p className="empty-message">אין משתמשים מאושרים במערכת</p>
-              ) : (
-                <div className="stats-summary">
-                  <div className="stats-cards">
-                    <div className="stats-card">
-                      <div className="stats-card-icon users-icon">
-                        <Users size={24} />
-                      </div>
-                      <div className="stats-card-content">
-                        <div className="stats-card-value">{users.length}</div>
-                        <div className="stats-card-label">סה"כ משתמשים</div>
-                      </div>
-                    </div>
-                    
-                    <div className="stats-card">
-                      <div className="stats-card-icon active-icon">
-                        <Calendar size={24} />
-                      </div>
-                      <div className="stats-card-content">
-                        <div className="stats-card-value">
-                          {users.filter(user => user.trackedDays && Object.keys(user.trackedDays).length > 0).length}
-                        </div>
-                        <div className="stats-card-label">משתמשים פעילים</div>
-                      </div>
-                    </div>
-                    
-                    <div className="stats-card">
-                      <div className="stats-card-icon success-icon">
-                        <Award size={24} />
-                      </div>
-                      <div className="stats-card-content">
-                        <div className="stats-card-value">
-                          {users.reduce((total, user) => {
-                            const { successCount } = calculateUserStats(user.trackedDays);
-                            return total + successCount;
-                          }, 0)}
-                        </div>
-                        <div className="stats-card-label">סה"כ ימי הצלחה</div>
-                      </div>
-                    </div>
-                    
-                    <div className="stats-card">
-                      <div className="stats-card-icon rate-icon">
-                        <TrendingUp size={24} />
-                      </div>
-                      <div className="stats-card-content">
-                        <div className="stats-card-value">
-                          {(() => {
-                            let totalSuccess = 0;
-                            let totalDays = 0;
-                            
-                            users.forEach(user => {
-                              const { successCount, totalDays: days } = calculateUserStats(user.trackedDays);
-                              totalSuccess += successCount;
-                              totalDays += days;
-                            });
-                            
-                            return totalDays ? Math.round((totalSuccess / totalDays) * 100) : 0;
-                          })()}%
-                        </div>
-                        <div className="stats-card-label">אחוז הצלחה כללי</div>
-                      </div>
-                    </div>
+          // עדכון לקוד בחלק הסטטיסטיקות באדמין פאנל
+// חלק זה ימוקם בתוך קומפוננטת AdminPanel, בחלק שמציג את הסטטיסטיקות
+
+{activeTab === 'statistics' && !selectedUser && (
+  <div className="statistics-tab">
+    <h3 className="admin-section-title">סטטיסטיקות מעקב תפריט של כל המשתמשים</h3>
+    
+    {users.length === 0 ? (
+      <p className="empty-message">אין משתמשים מאושרים במערכת</p>
+    ) : (
+      <div className="stats-summary">
+        {/* חישוב וסינון רק משתמשים רגילים (ללא מנהלים) */}
+        {(() => {
+          // סינון משתמשים - רק משתמשים רגילים, ללא מנהלים
+          const regularUsers = users.filter(user => user.role !== 'admin');
+          
+          return (
+            <>
+              <div className="stats-cards">
+                <div className="stats-card">
+                  <div className="stats-card-icon users-icon">
+                    <Users size={24} />
                   </div>
-                  
-                  <div className="users-table-container">
-                    <table className="users-table">
-                      <thead>
-                        <tr>
-                          <th>שם</th>
-                          <th>אימייל</th>
-                          <th>ימי הצלחה</th>
-                          <th>ימי כישלון</th>
-                          <th>אחוז הצלחה</th>
-                          <th>פעילות אחרונה</th>
-                          <th>פעולות</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {users.map((user) => {
-                          const { successCount, failCount, successRate, lastActivity } = calculateUserStats(user.trackedDays || {});
-                          return (
-                            <tr key={user.uid}>
-                              <td>{user.name}</td>
-                              <td>{user.email}</td>
-                              <td className="success-cell">{successCount}</td>
-                              <td className="fail-cell">{failCount}</td>
-                              <td className={`rate-cell ${successRate > 70 ? 'high-rate' : successRate > 40 ? 'medium-rate' : 'low-rate'}`}>
-                                {successRate}%
-                              </td>
-                              <td>{lastActivity ? formatDate(lastActivity) : 'לא פעיל'}</td>
-                              <td>
-                                <button 
-                                  onClick={() => viewUserDashboard(user)}
-                                  className="view-dashboard-button"
-                                  style={{ marginLeft: '8px' }}
-                                >
-                                  <Eye className="button-icon" />
-                                  צפה בדשבורד
-                                </button>
-                                
-                                <button 
-                                  onClick={() => viewUserDetails(user)}
-                                  className="view-details-button"
-                                  disabled={successCount === 0 && failCount === 0}
-                                >
-                                  צפה בפרטים
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                  <div className="stats-card-content">
+                    <div className="stats-card-value">{regularUsers.length}</div>
+                    <div className="stats-card-label">סה"כ משתמשים</div>
                   </div>
                 </div>
-              )}
-            </div>
-          )}
+                
+                <div className="stats-card">
+                  <div className="stats-card-icon active-icon">
+                    <Calendar size={24} />
+                  </div>
+                  <div className="stats-card-content">
+                    <div className="stats-card-value">
+                      {regularUsers.filter(user => user.trackedDays && Object.keys(user.trackedDays).length > 0).length}
+                    </div>
+                    <div className="stats-card-label">משתמשים פעילים</div>
+                  </div>
+                </div>
+                
+                <div className="stats-card">
+                  <div className="stats-card-icon success-icon">
+                    <Award size={24} />
+                  </div>
+                  <div className="stats-card-content">
+                    <div className="stats-card-value">
+                      {regularUsers.reduce((total, user) => {
+                        const { successCount } = calculateUserStats(user.trackedDays);
+                        return total + successCount;
+                      }, 0)}
+                    </div>
+                    <div className="stats-card-label">סה"כ ימי הצלחה</div>
+                  </div>
+                </div>
+                
+                <div className="stats-card">
+                  <div className="stats-card-icon rate-icon">
+                    <TrendingUp size={24} />
+                  </div>
+                  <div className="stats-card-content">
+                    <div className="stats-card-value">
+                      {(() => {
+                        let totalSuccess = 0;
+                        let totalDays = 0;
+                        
+                        regularUsers.forEach(user => {
+                          const { successCount, totalDays: days } = calculateUserStats(user.trackedDays);
+                          totalSuccess += successCount;
+                          totalDays += days;
+                        });
+                        
+                        return totalDays ? Math.round((totalSuccess / totalDays) * 100) : 0;
+                      })()}%
+                    </div>
+                    <div className="stats-card-label">אחוז הצלחה כללי</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="users-table-container">
+                <table className="users-table">
+                  <thead>
+                    <tr>
+                      <th>שם</th>
+                      <th>אימייל</th>
+                      <th>ימי הצלחה</th>
+                      <th>ימי כישלון</th>
+                      <th>אחוז הצלחה</th>
+                      <th>פעילות אחרונה</th>
+                      <th>פעולות</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {regularUsers.map((user) => {
+                      const { successCount, failCount, successRate, lastActivity } = calculateUserStats(user.trackedDays || {});
+                      return (
+                        <tr key={user.uid}>
+                          <td>{user.name}</td>
+                          <td>{user.email}</td>
+                          <td className="success-cell">{successCount}</td>
+                          <td className="fail-cell">{failCount}</td>
+                          <td className={`rate-cell ${successRate > 70 ? 'high-rate' : successRate > 40 ? 'medium-rate' : 'low-rate'}`}>
+                            {successRate}%
+                          </td>
+                          <td>{lastActivity ? formatDate(lastActivity) : 'לא פעיל'}</td>
+                          <td>
+                            <button 
+                              onClick={() => viewUserDashboard(user)}
+                              className="view-dashboard-button"
+                              style={{ marginLeft: '8px' }}
+                            >
+                              <Eye className="button-icon" />
+                              צפה בדשבורד
+                            </button>
+                            
+                            <button 
+                              onClick={() => viewUserDetails(user)}
+                              className="view-details-button"
+                              disabled={successCount === 0 && failCount === 0}
+                            >
+                              צפה בפרטים
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          );
+        })()}
+      </div>
+    )}
+  </div>
+)}
           
           {/* צפייה מפורטת במשתמש ספציפי */}
           {activeTab === 'statistics' && selectedUser && (

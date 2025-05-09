@@ -25,6 +25,7 @@ import './components/admin/AdminPanel.css';
 import PersonalDashboard from './components/dashboard/PersonalDashboard';
 import InstallAppButton from './InstallAppButton'; // נדרש לייבא את הרכיב
 import './InstallAppButton.css'; // נדרש לייבא את הרכיב
+import { getAuth } from 'firebase/auth';
 
 
 // קומפוננטת עטיפה להגנה על נתיבים שדורשים התחברות
@@ -401,28 +402,46 @@ function PostPage({ slug }) {
     </div>
   );
 }
-
+// const { currentUser, loading } = useAuth(); // הוק אימות קיים
 export default function App() {
   const [showTipsPopup, setShowTipsPopup] = useState(false);
   
   useEffect(() => {
-    // Check if the popup has been shown in this session
+    // בדיקה אם הפופאפ כבר הוצג בסשן זה
     const hasSeenPopup = sessionStorage.getItem('hasSeenTipsPopup');
+    if (hasSeenPopup) return; // אם כבר ראה, לא צריך להמשיך
     
-    if (!hasSeenPopup) {
-      // Show popup after a short delay to let the page load first
-      const timer = setTimeout(() => {
-        setShowTipsPopup(true);
-        sessionStorage.setItem('hasSeenTipsPopup', 'true');
-      }, 1300);
+    try {
+      // קבלת האובייקט auth - אם יש בעיה, נתפוס אותה ב-catch
+      const auth = getAuth();
       
-      return () => clearTimeout(timer);
+      // בדיקה פשוטה אם המשתמש מחובר - בדיקה חד פעמית
+      const isLoggedIn = !!auth.currentUser;
+      
+      console.log("מצב התחברות:", isLoggedIn ? "מחובר" : "לא מחובר");
+      
+      // אם המשתמש לא מחובר, מציגים את הפופאפ
+      if (!isLoggedIn) {
+        const timer = setTimeout(() => {
+          console.log("מציג פופאפ - המשתמש לא מחובר");
+          setShowTipsPopup(true);
+          sessionStorage.setItem('hasSeenTipsPopup', 'true');
+        }, 1300);
+        
+        return () => clearTimeout(timer);
+      } else {
+        console.log("לא מציג פופאפ - המשתמש מחובר");
+      }
+    } catch (error) {
+      // במקרה של שגיאה, נרשום אותה ולא נציג את הפופאפ
+      console.error("שגיאה בבדיקת מצב התחברות:", error);
     }
-  }, []);
+  }, []); // ריצה פעם אחת בלבד
   
   const closeTipsPopup = () => {
     setShowTipsPopup(false);
   };
+  
   
   return (
     <AuthProvider>
