@@ -21,7 +21,7 @@ import './styles/auth-styles.css';
 import { AuthProvider, useAuth, UserIcon, LoginModal, UnauthorizedAccess } from './components/auth/AuthComponents';
 import AdminPanel from './components/admin/AdminPanel';
 import './styles/auth-styles.css';
-import './styles/admin-panel.css';
+import './components/admin/AdminPanel.css';
 import PersonalDashboard from './components/dashboard/PersonalDashboard';
 import InstallAppButton from './InstallAppButton'; // נדרש לייבא את הרכיב
 import './InstallAppButton.css'; // נדרש לייבא את הרכיב

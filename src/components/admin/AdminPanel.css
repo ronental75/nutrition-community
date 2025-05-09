@@ -1,0 +1,1416 @@
+/* AdminPanel.css - קובץ סגנונות משודרג */
+
+/* === סגנונות כלליים === */
+.admin-panel-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 25px;
+  font-family: 'Rubik', 'Assistant', sans-serif;
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.admin-panel-title {
+  font-size: 1.8rem;
+  color: #1a365d;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.inline-back-button {
+  background-color: #edf2f7;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 15px;
+  color: #4a5568;
+  transition: all 0.2s ease;
+}
+
+.inline-back-button:hover {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.back-arrow {
+  font-size: 1.2rem;
+}
+
+.admin-icon {
+  color: #4a6fa5;
+}
+
+/* === לשוניות === */
+.admin-tabs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.admin-tab {
+  padding: 12px 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.admin-tab:hover {
+  color: #2d3748;
+  background-color: #f7fafc;
+}
+
+.admin-tab.active-tab {
+  color: #4a6fa5;
+  border-bottom-color: #4a6fa5;
+  font-weight: 600;
+}
+
+.admin-tab.active-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #4a6fa5;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.approval-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 8px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(229, 62, 62, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
+  }
+}
+
+/* === סגנונות כלליים לתוכן === */
+.admin-section {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.admin-section-title {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.admin-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #4a6fa5;
+  border-radius: 2px;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 45px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #718096;
+  font-size: 1.1rem;
+  border: 1px dashed #cbd5e0;
+}
+
+/* === טבלאות === */
+.users-table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  overflow: hidden;
+}
+
+.users-table th {
+  background-color: #f7fafc;
+  color: #4a5568;
+  font-weight: 600;
+  padding: 14px 16px;
+  text-align: right;
+  border-bottom: 2px solid #e2e8f0;
+  position: relative;
+}
+
+.users-table th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: #e2e8f0;
+}
+
+.users-table td {
+  padding: 14px 16px;
+  text-align: right;
+  border-bottom: 1px solid #edf2f7;
+  color: #2d3748;
+}
+
+.users-table tr:last-child td {
+  border-bottom: none;
+}
+
+.users-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.user-role {
+  background-color: #e6f6ff;
+  color: #0366d6;
+}
+
+.admin-role {
+  background-color: #ffefd6;
+  color: #c05621;
+}
+
+.success-cell {
+  color: #38a169;
+  font-weight: 600;
+}
+
+.fail-cell {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.rate-cell {
+  font-weight: 600;
+}
+
+.high-rate {
+  color: #38a169;
+}
+
+.medium-rate {
+  color: #d69e2e;
+}
+
+.low-rate {
+  color: #e53e3e;
+}
+
+/* === בקשות אישור === */
+.approval-requests {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.user-info {
+  padding: 18px;
+  flex-grow: 1;
+}
+
+.user-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.user-email {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+
+.user-created-at {
+  font-size: 0.8rem;
+  color: #a0aec0;
+  margin-top: auto;
+}
+
+.user-actions {
+  display: flex;
+  border-top: 1px solid #edf2f7;
+}
+
+.approve-button, .reject-button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.approve-button {
+  background-color: #f0fff4;
+  color: #38a169;
+  border-left: 1px solid #edf2f7;
+}
+
+.approve-button:hover {
+  background-color: #c6f6d5;
+}
+
+.reject-button {
+  background-color: #fff5f5;
+  color: #e53e3e;
+}
+
+.reject-button:hover {
+  background-color: #fed7d7;
+}
+
+.action-icon {
+  margin-left: 6px;
+}
+
+/* === סטטיסטיקות === */
+.statistics-tab {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stats-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  display: flex;
+  transition: transform 0.2s;
+  overflow: hidden;
+  position: relative;
+}
+
+.stats-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.stats-card:nth-child(1)::before {
+  background-color: #4299e1;
+}
+
+.stats-card:nth-child(2)::before {
+  background-color: #48bb78;
+}
+
+.stats-card:nth-child(3)::before {
+  background-color: #ed8936;
+}
+
+.stats-card:nth-child(4)::before {
+  background-color: #9f7aea;
+}
+
+.stats-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.users-icon {
+  background-color: rgba(66, 153, 225, 0.15);
+  color: #4299e1;
+}
+
+.active-icon {
+  background-color: rgba(72, 187, 120, 0.15);
+  color: #48bb78;
+}
+
+.success-icon {
+  background-color: rgba(237, 137, 54, 0.15);
+  color: #ed8936;
+}
+
+.rate-icon {
+  background-color: rgba(159, 122, 234, 0.15);
+  color: #9f7aea;
+}
+
+.stats-card-content {
+  flex-grow: 1;
+}
+
+.stats-card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.2;
+}
+
+.stats-card-label {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-top: 5px;
+}
+
+/* === צפייה במשתמש ספציפי === */
+.user-details-view {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+.user-details-header {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.back-to-list-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  color: #4a6fa5;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.back-to-list-button:hover {
+  color: #3a5983;
+  text-decoration: underline;
+}
+
+.back-icon {
+  margin-left: 6px;
+}
+
+.user-details-title {
+  font-size: 1.4rem;
+  color: #2d3748;
+  margin: 15px 0 8px;
+}
+
+/* === סגנונות משותפים לדשבורד משתמש === */
+.view-dashboard-button {
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.view-dashboard-button:hover {
+  background-color: #3a5983;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.view-details-button {
+  background-color: #edf2f7;
+  color: #4a5568;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.view-details-button:hover:not(:disabled) {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.view-details-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.button-icon {
+  margin-left: 6px;
+}
+
+/* === דשבורד משתמש === */
+.admin-user-dashboard {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 20px;
+}
+
+.dashboard-title {
+  font-size: 1.7rem;
+  color: #1a365d;
+  margin: 15px 0 8px;
+  font-weight: 700;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  color: #4a6fa5;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+
+.back-button:hover {
+  color: #3a5983;
+  background-color: #f1f5f9;
+}
+
+/* לשוניות דשבורד */
+.dashboard-tabs {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 5px;
+}
+
+.dashboard-tab {
+  padding: 12px 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #4a5568;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dashboard-tab.active-tab {
+  color: #4a6fa5;
+  border-bottom-color: #4a6fa5;
+  font-weight: 600;
+}
+
+.dashboard-tab.active-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #4a6fa5;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.dashboard-tab:hover {
+  color: #3a5983;
+  background-color: #f1f5f9;
+}
+
+.tab-icon {
+  margin-left: 10px;
+}
+
+/* תצוגת מעקב תפריט */
+.diet-tracking-section, .weight-tracking-section, .workouts-section {
+  margin-top: 25px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 3px;
+  background-color: #4a6fa5;
+  border-radius: 2px;
+}
+
+.section-icon {
+  margin-left: 10px;
+  color: #4a6fa5;
+}
+
+/* כרטיסי סיכום */
+.diet-summary-card, .weight-goals-card, .workouts-summary-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 25px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.diet-summary-card:hover, .weight-goals-card:hover, .workouts-summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  border-bottom: 1px solid #edf2f7;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.card-header h4 {
+  font-size: 1.2rem;
+  color: #2d3748;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* סטטיסטיקות */
+.diet-stats, .workout-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.stat-item {
+  flex: 1;
+  min-width: 120px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+  border: 1px solid #edf2f7;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.stat-value.success {
+  color: #38a169;
+}
+
+.stat-value.fail {
+  color: #e53e3e;
+}
+
+/* טבלאות */
+.tracked-days-table-container, .weight-table-container, .workouts-table-container {
+  margin-top: 25px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 25px;
+  overflow-x: auto;
+}
+
+.tracked-days-table-container h4, .weight-table-container h4, .workouts-table-container h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.tracked-days-table, .weight-table, .workouts-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tracked-days-table th, .weight-table th, .workouts-table th,
+.tracked-days-table td, .weight-table td, .workouts-table td {
+  padding: 12px 15px;
+  text-align: right;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.tracked-days-table th, .weight-table th, .workouts-table th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  color: #4a5568;
+  position: relative;
+}
+
+.tracked-days-table th:not(:last-child)::after, 
+.weight-table th:not(:last-child)::after, 
+.workouts-table th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: #e2e8f0;
+}
+
+.tracked-days-table tr:last-child td, 
+.weight-table tr:last-child td,
+.workouts-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tracked-days-table tr:hover td, 
+.weight-table tr:hover td,
+.workouts-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+.success-row {
+  background-color: rgba(56, 161, 105, 0.05);
+}
+
+.fail-row {
+  background-color: rgba(229, 62, 62, 0.05);
+}
+
+.status-icon {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.status-icon.success {
+  color: #38a169;
+}
+
+.status-icon.fail {
+  color: #e53e3e;
+}
+
+/* מדידות משקל */
+.weight-increase {
+  color: #e53e3e;
+}
+
+.weight-decrease {
+  color: #38a169;
+}
+
+.weight-goals-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.weight-goal-item {
+  flex: 1;
+  min-width: 120px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+  border: 1px solid #edf2f7;
+}
+
+.weight-goal-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* התקדמות במשקל */
+.weight-progress {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #edf2f7;
+}
+
+.weight-progress h5 {
+  font-size: 1.05rem;
+  color: #4a5568;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  height: 10px;
+  background-color: #edf2f7;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4a6fa5;
+  border-radius: 5px;
+  transition: width 1s ease-in-out;
+}
+
+.progress-text {
+  font-size: 0.95rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* יעדים תזונתיים */
+.diet-goals-section {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.diet-goals-section h4 {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.goals-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.goal-item {
+  flex: 1;
+  min-width: 120px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+  border: 1px solid #edf2f7;
+}
+
+.goal-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.goal-label {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.goal-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+/* הודעות ריקות */
+.empty-data-message {
+  text-align: center;
+  padding: 50px 25px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  color: #718096;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  border: 1px dashed #cbd5e0;
+}
+
+/* טעינה */
+.dashboard-loading, .admin-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(74, 111, 165, 0.1);
+  border-top: 4px solid #4a6fa5;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.dashboard-loading p, .admin-loading p {
+  color: #4a5568;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* רספונסיביות */
+@media (max-width: 992px) {
+  .admin-panel-container {
+    padding: 20px 15px;
+  }
+  
+  .stats-cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+  }
+  
+  .stats-card-value {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .diet-stats, .workout-stats, .weight-goals-container, .goals-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .admin-panel-title {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .stats-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .approval-requests {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item, .goal-item, .weight-goal-item {
+    min-width: unset;
+  }
+  
+  .dashboard-tabs, .admin-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 5px;
+  }
+  
+  .dashboard-tab, .admin-tab {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+  
+  .tab-icon, .back-icon, .section-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .diet-stats, .workout-stats, .weight-goals-container, .goals-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .users-table th, .users-table td, 
+  .tracked-days-table th, .tracked-days-table td, 
+  .weight-table th, .weight-table td, 
+  .workouts-table th, .workouts-table td {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .admin-panel-title {
+    font-size: 1.3rem;
+  }
+  
+  .dashboard-title {
+    font-size: 1.3rem;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+  
+  .view-dashboard-button, .view-details-button {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+  
+  .button-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* === אנימציות וטרנזיציות === */
+.stats-card, .diet-summary-card, .weight-goals-card, .workouts-summary-card,
+.stat-item, .weight-goal-item, .goal-item, .user-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* === שיפורים נוספים === */
+/* צל מיוחד לקישורים ולחצנים בהובר */
+.view-dashboard-button:hover, .view-details-button:hover, .back-button:hover,
+.approve-button:hover, .reject-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* אפקט גל בלחיצה על כפתורים */
+.view-dashboard-button, .view-details-button, .back-button,
+.approve-button, .reject-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.view-dashboard-button:after, .view-details-button:after, .back-button:after,
+.approve-button:after, .reject-button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity .5s;
+}
+
+.view-dashboard-button:active:after, .view-details-button:active:after, .back-button:active:after,
+.approve-button:active:after, .reject-button:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+/* === כרטיסי סיכום לסטטיסטיקות === */
+.stats-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stats-summary-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-summary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stats-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.stats-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+}
+
+.stats-card-title {
+  font-size: 1rem;
+  color: #4a5568;
+  margin: 0;
+  font-weight: 600;
+}
+
+.stats-card-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.success-value {
+  color: #38a169;
+}
+
+.fail-value {
+  color: #e53e3e;
+}
+
+/* === בורר תצוגה === */
+.view-mode-selector {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.view-mode-button {
+  background-color: #edf2f7;
+  color: #4a5568;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.view-mode-button:hover {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.view-mode-button.active-view-mode {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+.view-mode-icon {
+  margin-left: 8px;
+}
+
+/* בורר חודש/שנה */
+.period-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.period-nav-button {
+  background-color: transparent;
+  color: #4a6fa5;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.period-nav-button:hover {
+  color: #3a5983;
+  background-color: #edf2f7;
+}
+
+.current-period-display {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin: 0;
+  font-weight: 600;
+}
+
+.nav-icon {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* === תוספות לתצוגת טבלה חודשית === */
+.days-table-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.days-table-title {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.days-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.days-table th, .days-table td {
+  padding: 12px 15px;
+  text-align: right;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.days-table th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.days-table tr:last-child td {
+  border-bottom: none;
+}
+
+.days-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+.success-status {
+  color: #38a169;
+  display: flex;
+  align-items: center;
+}
+
+.fail-status {
+  color: #e53e3e;
+  display: flex;
+  align-items: center;
+}
+
+.empty-month-message, .empty-year-message {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #718096;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+/* === תצוגה שנתית === */
+.yearly-stats-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.yearly-stats-title {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.monthly-stats-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.monthly-stats-table th, .monthly-stats-table td {
+  padding: 12px 15px;
+  text-align: right;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.monthly-stats-table th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.monthly-stats-table tr:last-child td {
+  border-bottom: none;
+}
+
+.monthly-stats-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* === סקרול הדף חלק === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* קסטומיזציה של סקרולבר */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5c9d1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a8b1;
+}
+
+/* פוקוס סדר נגישות */
+:focus {
+  outline: 2px solid #4a6fa5;
+  outline-offset: 2px;
+}
