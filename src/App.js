@@ -457,7 +457,7 @@ export default function App() {
             <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
           ))}
         </Routes>
-        {/* {showTipsPopup && <TipsPopupModal onClose={closeTipsPopup} />} */}
+        {showTipsPopup && <ProgramPopupModal onClose={closeTipsPopup} />}
       </Router>
     </AuthProvider>
   );
