@@ -332,8 +332,7 @@ const AdminPanel = () => {
           )}
           
           {/* לשונית סטטיסטיקות */}
-          // עדכון לקוד בחלק הסטטיסטיקות באדמין פאנל
-// חלק זה ימוקם בתוך קומפוננטת AdminPanel, בחלק שמציג את הסטטיסטיקות
+
 
 {activeTab === 'statistics' && !selectedUser && (
   <div className="statistics-tab">
