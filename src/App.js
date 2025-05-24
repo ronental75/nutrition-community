@@ -25,7 +25,7 @@ import './components/admin/AdminPanel.css';
 // import PersonalDashboard from './components/dashboard/PersonalDashboard';
 // import InstallAppButton from './InstallAppButton'; // נדרש לייבא את הרכיב
 import './InstallAppButton.css'; // נדרש לייבא את הרכיב
-import { getAuth } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
 
 const About = lazy(() => import('./About'));
 const Contact = lazy(() => import('./contact'));
@@ -467,20 +467,19 @@ export default function App() {
   useEffect(() => {
     const hasSeenPopup = sessionStorage.getItem('hasSeenTipsPopup');
     if (hasSeenPopup) return;
-    try {
-      
+    import('firebase/auth').then(({ getAuth }) => {
       const auth = getAuth();
-    const isLoggedIn = !!auth.currentUser;
-    if (!isLoggedIn) {
-      const timer = setTimeout(() => {
-        setShowTipsPopup(true);
-        sessionStorage.setItem('hasSeenTipsPopup', 'true');
-      }, 1300);
-      return () => clearTimeout(timer);
-    }
-  } catch (error) {
+      const isLoggedIn = !!auth.currentUser;
+      if (!isLoggedIn) {
+        const timer = setTimeout(() => {
+          setShowTipsPopup(true);
+          sessionStorage.setItem('hasSeenTipsPopup', 'true');
+        }, 1300);
+        return () => clearTimeout(timer);
+      }
+    }).catch((error) => {
       console.error("שגיאה בבדיקת מצב התחברות:", error);
-    }
+    });
   }, []);
 
   const closeTipsPopup = () => {
