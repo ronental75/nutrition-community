@@ -1,33 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from "react-router-dom";
 import './styles.css';
-import About from './About';
-import Contact from './contact';
+// import About from './About';
+// import Contact from './contact';
 import classNames from 'classnames';
-import LikeDislike from './LikeDislike';
-import LikeDisplay from './LikeDisplay';
-import AnimatedBanner from './AnimatedBanner';
-import SubmitPost from './SubmitPost';
-import Share from './share';
-import TdeeCalculator from './TdeeCalculator';
-import PrintTips from './PrintTips';
-import BMICalculator from './BMICalculator';
-import SuccessStories from './components/SuccessStories';
-import AccessibilityWidget from './AccessibilityWidget';
+// import LikeDislike from './LikeDislike';
+// import LikeDisplay from './LikeDisplay';
+// import AnimatedBanner from './AnimatedBanner';
+// import SubmitPost from './SubmitPost';
+// import Share from './share';
+// import TdeeCalculator from './TdeeCalculator';
+// import PrintTips from './PrintTips';
+// import BMICalculator from './BMICalculator';
+// import SuccessStories from './components/SuccessStories';
+// import AccessibilityWidget from './AccessibilityWidget';
 // import TipsPopupModal from './TipsPopupModal';
-import ProgramPopupModal from './ProgramPopupModal'; // וודא שהנתיב נכון
+// import ProgramPopupModal from './ProgramPopupModal'; // וודא שהנתיב נכון
 import './ProgramPopupModal.css'
 import './styles/auth-styles.css';
 import { AuthProvider, useAuth, UserIcon, LoginModal, UnauthorizedAccess } from './components/auth/AuthComponents';
-import AdminPanel from './components/admin/AdminPanel';
+// import AdminPanel from './components/admin/AdminPanel';
 import './styles/auth-styles.css';
 import './components/admin/AdminPanel.css';
-import PersonalDashboard from './components/dashboard/PersonalDashboard';
-import InstallAppButton from './InstallAppButton'; // נדרש לייבא את הרכיב
+// import PersonalDashboard from './components/dashboard/PersonalDashboard';
+// import InstallAppButton from './InstallAppButton'; // נדרש לייבא את הרכיב
 import './InstallAppButton.css'; // נדרש לייבא את הרכיב
 import { getAuth } from 'firebase/auth';
 
+const About = lazy(() => import('./About'));
+const Contact = lazy(() => import('./contact'));
+const SubmitPost = lazy(() => import('./SubmitPost'));
+const TdeeCalculator = lazy(() => import('./TdeeCalculator'));
+const PrintTips = lazy(() => import('./PrintTips'));
+const BMICalculator = lazy(() => import('./BMICalculator'));
+const SuccessStories = lazy(() => import('./components/SuccessStories'));
+const AdminPanel = lazy(() => import('./components/admin/AdminPanel'));
+const PersonalDashboard = lazy(() => import('./components/dashboard/PersonalDashboard'));
+const Share = lazy(() => import('./share'));
+const LikeDislike = lazy(() => import('./LikeDislike'));
+const LikeDisplay = lazy(() => import('./LikeDisplay'));
+const AnimatedBanner = lazy(() => import('./AnimatedBanner'));
+const AccessibilityWidget = lazy(() => import('./AccessibilityWidget'));
+const InstallAppButton = lazy(() => import('./InstallAppButton'));
+const ProgramPopupModal = lazy(() => import('./ProgramPopupModal'));
 
+const LazyWrapper = ({ children }) => (
+  <Suspense fallback={<div className="loading-screen">טוען...</div>}>
+    {children}
+  </Suspense>
+);
 // קומפוננטת עטיפה להגנה על נתיבים שדורשים התחברות
 const ProtectedRoute = ({ children }) => {
   const { currentUser, loading } = useAuth();
@@ -403,80 +424,70 @@ function PostPage({ slug }) {
     </div>
   );
 }
+// const posts = [];
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<LazyWrapper><LandingPage lang="he" /></LazyWrapper>} />
+    <Route path="/he" element={<LazyWrapper><LandingPage lang="he" /></LazyWrapper>} />
+    <Route path="/en" element={<LazyWrapper><LandingPage lang="en" /></LazyWrapper>} />
+    <Route path="/about" element={<LazyWrapper><About /></LazyWrapper>} />
+    <Route path="/contact" element={<LazyWrapper><Contact /></LazyWrapper>} />
+    <Route path="/submit" element={<LazyWrapper><SubmitPost /></LazyWrapper>} />
+    <Route path="/TdeeCalculator" element={<LazyWrapper><TdeeCalculator /></LazyWrapper>} />
+    <Route path="/print-tips" element={<LazyWrapper><PrintTips /></LazyWrapper>} />
+    <Route path="/BMICalculator" element={<LazyWrapper><BMICalculator /></LazyWrapper>} />
+    <Route path="/success-stories" element={<LazyWrapper><SuccessStories /></LazyWrapper>} />
+    <Route path="/unauthorized" element={<LazyWrapper><UnauthorizedAccess /></LazyWrapper>} />
+    <Route path="/dashboard" element={
+      <ProtectedRoute>
+        <LazyWrapper><PersonalDashboard /></LazyWrapper>
+      </ProtectedRoute>
+    } />
+    <Route path="/admin-panel" element={
+      <AdminRoute>
+        <LazyWrapper><AdminPanel /></LazyWrapper>
+      </AdminRoute>
+    } />
+    {posts.map((post) => (
+      <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<LazyWrapper><PostPage slug={post.slug} /></LazyWrapper>} />
+    ))}
+    {posts.map((post) => (
+      <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<LazyWrapper><PostPage slug={post.slug} /></LazyWrapper>} />
+    ))}
+  </Routes>
+);
+
 // const { currentUser, loading } = useAuth(); // הוק אימות קיים
 export default function App() {
   const [showTipsPopup, setShowTipsPopup] = useState(false);
-  
+
   useEffect(() => {
-    // בדיקה אם הפופאפ כבר הוצג בסשן זה
     const hasSeenPopup = sessionStorage.getItem('hasSeenTipsPopup');
-    if (hasSeenPopup) return; // אם כבר ראה, לא צריך להמשיך
-    
+    if (hasSeenPopup) return;
     try {
-      // קבלת האובייקט auth - אם יש בעיה, נתפוס אותה ב-catch
-      const auth = getAuth();
-      
-      // בדיקה פשוטה אם המשתמש מחובר - בדיקה חד פעמית
+      const auth = require('firebase/auth').getAuth();
       const isLoggedIn = !!auth.currentUser;
-      
-      console.log("מצב התחברות:", isLoggedIn ? "מחובר" : "לא מחובר");
-      
-      // אם המשתמש לא מחובר, מציגים את הפופאפ
       if (!isLoggedIn) {
         const timer = setTimeout(() => {
-          console.log("מציג פופאפ - המשתמש לא מחובר");
           setShowTipsPopup(true);
           sessionStorage.setItem('hasSeenTipsPopup', 'true');
         }, 1300);
-        
         return () => clearTimeout(timer);
-      } else {
-        console.log("לא מציג פופאפ - המשתמש מחובר");
       }
     } catch (error) {
-      // במקרה של שגיאה, נרשום אותה ולא נציג את הפופאפ
       console.error("שגיאה בבדיקת מצב התחברות:", error);
     }
-  }, []); // ריצה פעם אחת בלבד
-  
+  }, []);
+
   const closeTipsPopup = () => {
     setShowTipsPopup(false);
   };
-  
-  
+
   return (
     <AuthProvider>
       <Router>
         <LoginModal />
-        <Routes>
-          <Route path="/" element={<LandingPage lang="he" />} />
-          <Route path="/he" element={<LandingPage lang="he" />} />
-          <Route path="/en" element={<LandingPage lang="en" />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/submit" element={<SubmitPost />} />
-          <Route path="/TdeeCalculator" element={<TdeeCalculator />} />
-          <Route path="/print-tips" element={<PrintTips />} />
-          <Route path="/BMICalculator" element={<BMICalculator />}/>
-          <Route path="/success-stories" element={<SuccessStories />} />
-          <Route path="/unauthorized" element={<UnauthorizedAccess />} />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <PersonalDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin-panel" element={
-            <AdminRoute>
-              <AdminPanel />
-            </AdminRoute>
-          } />
-          {posts.map((post) => (
-            <Route key={post.slug + "-he"} path={`/he/${post.slug}`} element={<PostPage slug={post.slug} />} />
-          ))}
-          {posts.map((post) => (
-            <Route key={post.slug + "-en"} path={`/en/${post.slug}`} element={<PostPage slug={post.slug} />} />
-          ))}
-        </Routes>
+        <AppRoutes />
         {showTipsPopup && <ProgramPopupModal onClose={closeTipsPopup} />}
       </Router>
     </AuthProvider>
