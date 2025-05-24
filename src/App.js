@@ -427,9 +427,10 @@ function PostPage({ slug }) {
 // const posts = [];
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<LazyWrapper><LandingPage lang="he" /></LazyWrapper>} />
+    {/* <Route path="/" element={<LazyWrapper><LandingPage lang="he" /></LazyWrapper>} />
     <Route path="/he" element={<LazyWrapper><LandingPage lang="he" /></LazyWrapper>} />
-    <Route path="/en" element={<LazyWrapper><LandingPage lang="en" /></LazyWrapper>} />
+    <Route path="/en" element={<LazyWrapper><LandingPage lang="en" /></LazyWrapper>} /> */}
+    <Route path="/" element={<LandingPage lang="he" />} />
     <Route path="/about" element={<LazyWrapper><About /></LazyWrapper>} />
     <Route path="/contact" element={<LazyWrapper><Contact /></LazyWrapper>} />
     <Route path="/submit" element={<LazyWrapper><SubmitPost /></LazyWrapper>} />
