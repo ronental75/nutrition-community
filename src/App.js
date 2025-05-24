@@ -468,16 +468,17 @@ export default function App() {
     const hasSeenPopup = sessionStorage.getItem('hasSeenTipsPopup');
     if (hasSeenPopup) return;
     try {
-      const auth = require('firebase/auth').getAuth();
-      const isLoggedIn = !!auth.currentUser;
-      if (!isLoggedIn) {
-        const timer = setTimeout(() => {
-          setShowTipsPopup(true);
-          sessionStorage.setItem('hasSeenTipsPopup', 'true');
-        }, 1300);
-        return () => clearTimeout(timer);
-      }
-    } catch (error) {
+      
+      const auth = getAuth();
+    const isLoggedIn = !!auth.currentUser;
+    if (!isLoggedIn) {
+      const timer = setTimeout(() => {
+        setShowTipsPopup(true);
+        sessionStorage.setItem('hasSeenTipsPopup', 'true');
+      }, 1300);
+      return () => clearTimeout(timer);
+    }
+  } catch (error) {
       console.error("שגיאה בבדיקת מצב התחברות:", error);
     }
   }, []);
