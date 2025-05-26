@@ -1,78 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://nutrition-community.vercel.app/</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/about</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/contact</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/berlin</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/diet-guide</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/dietary-fiber-guide</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/fat-in-weight-loss</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/fatmuscle</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/garlic-antioxidants-health</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/high-heart-rate-fat-burn</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/holy-triad-nutrition-sleep-fitness</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/mediterranean-diet</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/muscle-growth-tips</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/nutrition-for-runners</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/pre-strength-nutrition</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/pre-workout-strategy</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/protein-guide-full</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/protein</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/psychological-tools-weight-loss</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/quality-sleep-tips</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/setpoint2</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/sports-nutrition-guide</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/stack</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/strength-training-nutrition</loc>
-  </url>
-  <url>
-    <loc>https://nutrition-community.vercel.app/posts/tee-and-weight-loss-plan</loc>
-  </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://nutrition-community.vercel.app/</loc>
+  <lastmod>2025-05-26T16:59:38+00:00</lastmod>
+</url>
+
+
 </urlset>
