@@ -13,6 +13,7 @@
     "classnames": "^2.5.1",
     "firebase": "^11.6.1",
     "lucide-react": "^0.508.0",
+    "next-sitemap": "^4.2.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-helmet": "^6.1.0",
@@ -26,7 +27,9 @@
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "next-sitemap"
+
   },
   "eslintConfig": {
     "extends": [
