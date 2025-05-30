@@ -134,6 +134,7 @@ function createPost(slug, title, categories, date) {
 }
 
 const posts = [
+  createPost('calories','כמה קלוריות אני שורף בספורט?',['תזונה'],'2025-05-30'),
   createPost('protein_veg','למה מיליוני אנשים עוברים לחלבון צמחי - והאם זה באמת עובד?',['תזונה'],'2025-05-24'),
   createPost('psychological-tools-weight-loss','5 כלים פסיכולוגיים שיפילו לך את האסימון – ויגרמו למשקל לרדת באמת', ['תזונה'],'2025-05-16'),
   createPost('fatmuscle', 'אי אפשר להפוך שומן לשריר – אבל הנה מה שכן אפשר לעשות', ['ספורט'],'2025-05-03'),
