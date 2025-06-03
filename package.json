@@ -13,8 +13,10 @@
     "classnames": "^2.5.1",
     "firebase": "^11.6.1",
     "lucide-react": "^0.508.0",
+    "memoize": "^10.1.0",
     "next-sitemap": "^4.2.3",
     "react": "^19.1.0",
+    "react-calendar": "^6.0.0",
     "react-dom": "^19.1.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.30.0",
@@ -29,7 +31,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postbuild": "next-sitemap"
-
   },
   "eslintConfig": {
     "extends": [

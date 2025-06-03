@@ -298,12 +298,17 @@ function LandingPage({ lang }) {
           </Link>
           <div className="subtle-links-container">
             <Link to="/about" className="subtle-link">
-              <strong>תוכנית ליווי תזונה וספורט</strong>
+              <strong>תוכנית ליווי</strong>
             </Link>
             <span className="link-separator">|</span>
             <Link to="/success-stories" className="subtle-link">
               <strong>סיפורי לקוחות</strong>
             </Link>
+            <span className="link-separator">|</span>
+            <Link to="/dashboard" className="subtle-link">
+               <strong>{isHebrew ? 'דאשבורד מעקב' : 'Personal Dashboard'}</strong>
+            </Link>
+
           </div>
         </div>
       </div>
@@ -474,7 +479,7 @@ export default function App() {
       const isLoggedIn = !!auth.currentUser;
       if (!isLoggedIn) {
         const timer = setTimeout(() => {
-          setShowTipsPopup(true);
+          // setShowTipsPopup(true);
           sessionStorage.setItem('hasSeenTipsPopup', 'true');
         }, 1300);
         return () => clearTimeout(timer);
